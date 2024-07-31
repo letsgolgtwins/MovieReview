@@ -3,7 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.movie.Review.mapper.ReviewMapper">
-	<!-- test4 -->
+	<!-- test4 나중에 무시할 것 -->
 	<select id="selectReviewListTest" resultType="map">
 		SELECT 
 			*
