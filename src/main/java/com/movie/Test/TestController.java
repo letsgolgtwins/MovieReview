@@ -53,4 +53,6 @@ public class TestController {
 	public List<Map<String, Object>> test4() {
 		return reviewMapper.selectReviewListTest();
 	}
+	
+	// 깃허브에 잘 올라가나 테스트
 }
