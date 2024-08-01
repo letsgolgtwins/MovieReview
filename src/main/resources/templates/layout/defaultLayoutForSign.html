@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html 
+	lang="ko"
+	xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+	<!-- config 자리 -->
+	<th:block th:replace="fragments/config :: configFragment"></th:block> 
+<body>
+	<div id="wrap">
+		<!-- header -->
+		<header th:replace="fragments/headerForSign :: headerFragmentForSign"></header>
+		
+		<!-- contents 영역 -->
+		<section layout:fragment="content"></section>
+		
+		<!-- JS 문법 써내려갈 script 파트 -> content 조각 안에 있음 -->
+		<th:block layout:fragment="script"></th:block>
+		
+		<!-- footer 자리 -->
+		<footer th:replace="fragments/footerForSign :: footerFragmentForSign"></footer>
+	</div>
+</body>
+</html>
