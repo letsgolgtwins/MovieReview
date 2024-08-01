@@ -21,7 +21,7 @@ public class UserRestController {
 	
 	// 아이디 중복확인 API
 	// http://localhost/user/id-duplicate-check
-	@GetMapping("/user/id-duplicate-check")
+	@GetMapping("/id-duplicate-check")
 	public Map<String, Object> IdDuplicateCheck(
 			@RequestParam("userId") String userId) {
 		// 아이디 중복확인 - db에서 select
