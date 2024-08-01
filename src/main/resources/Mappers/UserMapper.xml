@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.movie.User.mapper.UserMapper">
+	<!-- 아이디 중복확인 - db에서 select -->
+	<select id="selectCountByUserId" resultType="int">
+		SELECT COUNT(*)
+		FROM 
+			`user`
+		WHERE
+			`userId` = #{userId}
+	</select>
+	
+	<!-- 회원가입 - db에 insert -->
+	<insert id="insertUserSignUp" parameterType="map">
+		INSERT INTO `user`
+		(
+			`userId`
+			,`userPassword`
+			,`userName`
+			,`userNickName`
+			,`createdAt`
+			,`updatedAt`
+		)
+		VALUES
+		(
+			#{userId}
+			, #{userPassword}
+			, #{userName}
+			, #{userNickName}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+</mapper>

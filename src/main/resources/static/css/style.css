@@ -1,9 +1,11 @@
 @charset "UTF-8";
 
-header {height: 100px; background-color: #FF0558}
+header {height: 100px; background-color: white;}
+.logoimage {height: 100px}
 .contents {min-height: 600px}
-footer {height: 100px; background-color: #FF0558}
+footer {height: 100px; background-color: white;}
 
 .left, .center, .right {min-height: 600px}
 .signUpBox {margin: 80px 50px}
+.signInBox {margin: 150px 50px}
 .center {background-color: #FF0558}

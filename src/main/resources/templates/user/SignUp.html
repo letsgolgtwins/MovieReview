@@ -9,18 +9,27 @@
 		<div class="signUpBox">
 			<form action="/user/sign-up" method="post">
 				<!-- 회원가입 -->
-				<h3 class="d-flex justify-content-center font-weight-bold mt-5">회원가입</h3>
+				<h3 class="d-flex justify-content-center text-white font-weight-bold mt-5">회원가입</h3>
+				<!-- 아이디 입력칸 그리고 중복확인 버튼 -->
 				<div class="d-flex">
-					<input type="text" name="userId" class="form-control mt-4 col-9" placeholder="아이디">
+					<input type="text" name="userId" id="userId" class="form-control mt-4 col-9" placeholder="아이디">
 					<input type="submit" id="duplicateCheckBtn" class="form-control btn btn-success mt-4 col-3" value="중복확인">
 				</div>
-				<input type="password" name="userPassword" class="form-control mt-4" placeholder="비밀번호">
-				<input type="text" name="userName" class="form-control mt-4" placeholder="이름">
-				<input type="text" name="userNickName" class="form-control mt-4" placeholder="닉네임">
+				<!-- 숨겨진 텍스트 공간 -->
+				<span id="ableToUse" class="text-white font-weight-bold d-none mt-1">사용 가능한 아이디입니다.</span>
+				<span id="NotAbleToUse" class="text-white font-weight-bold d-none mt-1">중복된 아이디입니다.</span>
+
+				<!-- 비밀번호, 이름, 닉네임 -->
+				<input type="password" name="userPassword" id="userPassword" class="form-control mt-4" placeholder="비밀번호">
+				<input type="text" name="userName" id="userName" class="form-control mt-4" placeholder="이름">
+				<input type="text" name="userNickName" id="userNickName" class="form-control mt-4" placeholder="닉네임">
+				<!-- 회원가입 버튼 submit -->
 				<input type="submit" id="signUpBtn" class="form-control btn btn-warning mt-4" value="회원가입">
 			</form>
-			<div class="mt-3">
-				<a href="/user/sign-in-view">로그인 페이지</a>
+			<div class="d-flex justify-content-between mt-4">
+				<a class="text-white" href="/user/sign-in-view">로그인 페이지</a>
+				<div class="text-white font-weight-bold">|</div>
+				<a class="text-white" href="/movie/movie-list-view">비회원으로 둘러보기</a>
 			</div>
 		</div>
 	</div>
@@ -29,6 +38,81 @@
 
 <th:block layout:fragment="script">
     <script>
-
+		$(document).ready(function() {
+			
+			// duplicateCheckBtn 아이디 중복확인 버튼 클릭 이벤트
+			$("#duplicateCheckBtn").on('click', function(e) {
+				e.preventDefault(); 
+				// alert("중간점검");
+				let userId = $("#userId").val().trim();
+				alert(userId);
+				$.ajax({
+					// request
+					type: "get"
+					, url: "/user/id-duplicate-check"
+					, data: {"userId":userId}
+					// response
+					, success:function(data) {
+						if (data.code == 200) { // 아이디 사용 가능
+							$("#ableToUse").removeClass("d-none");
+							$("#NotAbleToUse").addClass("d-none");
+						} else if (data.code == 500) { // 아이디 사용 불가능
+							$("#ableToUse").addClass("d-none");
+							$("#NotAbleToUse").removeClass("d-none");
+						}
+					}
+					, error:function(error) {
+						alert("아이디 중복확인 실패. 코드상 에러");
+					}
+				}); // AJAX 끝.
+			}); // duplicateCheckBtn 아이디 중복확인 버튼 클릭 이벤트 끝.
+			
+			// signUpBtn 회원가입 버튼 클릭 이벤트
+			$("#signUpBtn").on('click', function(e) {
+				e.preventDefault();
+				// validation
+				let userId = $("#userId").val().trim();
+				let userPassword = $("#userPassword").val().trim();
+				let userName = $("#userName").val().trim();
+				let userNickName = $("#userNickName").val(); // 닉네임은 띄어쓰기 허용
+				// 유효성 검사
+				if (!userId) {
+					alert("아이디를 입력하세요.");
+					return false;
+				}
+				if (!userPassword) {
+					alert("비밀번호를 입력하세요.");
+					return false;
+				}
+				if (!userName) {
+					alert("이름을 입력하세요.");
+					return false;
+				}
+				if (!userNickName) {
+					alert("닉네임을 입력하세요.");
+					return false;
+				}
+				$.ajax({
+					// request
+					type: "post"
+					, url: "/user/sign-up"
+					, data: {"userId":userId, "userPassword":userPassword, "userName":userName, "userNickName":userNickName}
+					// response
+					, success:function(data) {
+						if (data.code == 200) { // 회원가입 성공
+							alert("회원가입에 성공하였습니다. 로그인 페이지로 이동합니다.");
+							location.href= "/user/sign-in-view"
+						} else {
+							alert("회원가입 실패.");
+						}
+					} 
+					, error:function(error) {
+						alert("회원가입 실패. 코드상의 에러");
+					}
+					
+				}); // AJAX 끝.
+				
+			}); // signUpBtn 회원가입 버튼 클릭 이벤트 끝.
+		}); // ready 함수 끝.
     </script>
 </th:block>

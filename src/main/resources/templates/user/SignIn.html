@@ -4,25 +4,33 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/defaultLayoutForSign}"> <!-- <- 여기 이름 바꿔줘야 한다 -->
 <section layout:fragment="content" class="contents d-flex justify-content-center">
-	<div class="left bg-warning col-4"></div>
-	<div class="center bg-danger col-4 mt-5 mb-5">
-		<div class="signUpBox">
+	<div class="left col-4"></div>
+	<div class="center col-4 mt-5 mb-5">
+		<div class="signInBox">
 		<form action="/user/sign-in" method="post">
 			<!-- 로그인 -->
-			<h3 class="d-flex justify-content-center font-weight-bold mt-4">회원가입</h3>
+			<h3 class="d-flex justify-content-center text-white font-weight-bold mt-4">로그인</h3>
 			<input type="text" class="form-control mt-4" placeholder="아이디">
-			<input type="text" class="form-control mt-3" placeholder="비밀번호">
-			<input type="text" class="form-control mt-3" placeholder="이름">
-			<input type="text" class="form-control mt-3" placeholder="닉네임">
-			<input type="submit" class="form-control btn btn-warning mt-3" value="회원가입">
+			<input type="password" class="form-control mt-4" placeholder="비밀번호">
+			<div class="d-flex justify-content-between">
+				<button id="MoveTosignUp" class="btn btn-success mt-4 col-5">회원가입</button>
+				<input type="submit" class="form-control btn btn-warning mt-4 col-5" value="로그인">
+			</div>
 		</form>
 		</div>
 	</div>
-	<div class="right bg-warning col-4"></div>
+	<div class="right col-4"></div>
 </section>
 
 <th:block layout:fragment="script">
     <script>
-
+		$(document).ready(function() {
+			// MoveTosignUp 회원가입 페이지로 이동하는 버튼 클릭 이벤트
+			$("#MoveTosignUp").on('click', function(e) {
+				e.preventDefault();
+				alert("회원가입 페이지로 이동합니다.");
+				location.href = "/user/sign-up-view";
+			}); // MoveTosignUp 회원가입 페이지로 이동하는 버튼 클릭 이벤트 끝.
+		}); // ready 함수 끝.
     </script>
 </th:block>

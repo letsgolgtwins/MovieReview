@@ -15,10 +15,11 @@ public class UserController {
 		return "user/SignUp";
 	}
 	
-	// 테스트
-	// http://localhost/user/test
-	@GetMapping("/test")
-	public String test() {
-		return "user/NewFile";
+	// 로그인 페이지로 이동
+	// http://localhost/user/sign-in-view
+	@GetMapping("/sign-in-view")
+	public String SignInView() {
+		return "user/SignIn";
 	}
+	
 }
