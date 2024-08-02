@@ -9,3 +9,5 @@ footer {height: 100px; background-color: white;}
 .signUpBox {margin: 80px 50px}
 .signInBox {margin: 150px 50px}
 .center {background-color: #FF0558}
+
+#moviePoster {width: 245px; height: 350px}

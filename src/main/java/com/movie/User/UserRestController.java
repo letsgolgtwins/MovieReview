@@ -96,5 +96,4 @@ public class UserRestController {
 		}
 		return result;
 	}
-	
 }

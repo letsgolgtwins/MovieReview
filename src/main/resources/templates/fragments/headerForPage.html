@@ -1,8 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<header th:fragment="headerFragmentForPage">
-		<div class="d-flex justify-content-center h-100 align-items-center">
-			<h1 class="font-weight-bold">WATCHA</h1>
+		<div class="d-flex justify-content-start h-100 align-items-center">
+			<!-- 로고 영역 -->
+			<img id="logoimage" class="logoimage mt-4 ml-4" alt="왓챠피디아 로고" src="/image/WATCHA_PEDIA_Logo_Main1.png">
+			<!-- 메뉴 영역 -->
+			<nav class="nav mt-4 ml-4 mr-5">
+				<h4 class="font-weight-bold"><li class="nav-link"><a href="/movie/movie-list-view" class="text-dark">영화</a></li></h4>
+				<h4 class="font-weight-bold"><li class="nav-link"><a href="#" class="text-dark">시리즈</a></li></h4>
+				<h4 class="font-weight-bold"><li class="nav-link"><a href="#" class="text-dark">책</a></li></h4>
+				<h4 class="font-weight-bold"><li class="nav-link"><a href="#" class="text-dark">웹툰</a></li></h4>
+			</nav>
+			<!-- 검색창 영역 form -->
+			<form action="/movie/movie-search" method="get">
+				<div class="d-flex mt-4 ml-5">
+					<div class="input-group-prepend">
+          			<div class="input-group-text">Q</div>
+	        		</div>
+	       			<input type="text" id="searchMovie" name="searchMovie" class="form-control col-12" placeholder="영화, 년도, 장르, 국가, 감독을 검색해보세요.">
+				</div>
+			</form>
+			<!-- 로그인한 유저 정보(닉네임) -->
+			<!-- <div th:if="${session.userId != null}">
+				<h3 th:text="|${session.userNickName} 님 안녕하세요|"></h3>
+				<h3><a href="/user/sign-out">로그아웃</a></h3>
+			</div>
+			<div th:unless="${session.userId != null}">
+				<h3><a href="/user/sign-in-view">로그인</a></h3>
+				<h3><a href="/user/sign-in-view">회원가입</a></h3>
+			</div> -->
 		</div>
+		<hr>
 	</header>
 </html>
+
+<th:block layout:fragment="script">
+    <script>
+		$(document).ready(function() {
+			// logoimage 로고 이미지 클릭 시 홈페이지로 이동하게끔 
+			 
+			// todo 
+			
+		}); // ready 함수 끝
+    </script>
+</th:block>

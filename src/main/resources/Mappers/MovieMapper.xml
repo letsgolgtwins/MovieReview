@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.movie.movie.mapper.MovieMapper">
+	<!-- 영화 정보들 가져오기 - db에서 select -->
+	<select id="selectMovieInfo" resultType="com.movie.movie.domain.Movie">
+		SELECT 
+			`id`
+			,`moviePoster`
+			,`movieName`
+			,`movieYear`
+			,`movieGenre`
+			,`movieNation`
+			,`movieDirector`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`movie`
+		WHERE
+	</select>
+</mapper>
