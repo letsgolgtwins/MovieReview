@@ -9,7 +9,7 @@
 		<div class="signUpBox">
 			<form action="/user/sign-up" method="post">
 				<!-- 회원가입 -->
-				<h3 class="d-flex justify-content-center text-white font-weight-bold mt-5">회원가입</h3>
+				<h1 class="d-flex justify-content-center text-white font-weight-bold mt-5">회원가입</h1>
 				<!-- 아이디 입력칸 그리고 중복확인 버튼 -->
 				<div class="d-flex">
 					<input type="text" name="userId" id="userId" class="form-control mt-4 col-9" placeholder="아이디">
@@ -45,10 +45,10 @@
 				e.preventDefault(); 
 				// alert("중간점검");
 				let userId = $("#userId").val().trim();
-				alert(userId);
+				// alert(userId);
 				$.ajax({
 					// request
-					type: "get"
+					type: "post"
 					, url: "/user/id-duplicate-check"
 					, data: {"userId":userId}
 					// response
@@ -109,9 +109,7 @@
 					, error:function(error) {
 						alert("회원가입 실패. 코드상의 에러");
 					}
-					
 				}); // AJAX 끝.
-				
 			}); // signUpBtn 회원가입 버튼 클릭 이벤트 끝.
 		}); // ready 함수 끝.
     </script>

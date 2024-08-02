@@ -3,6 +3,8 @@ package com.movie.User.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.movie.User.domain.User;
+
 @Mapper
 public interface UserMapper {
 
@@ -12,8 +14,14 @@ public interface UserMapper {
 	// 회원가입 - db에 insert
 	public int insertUserSignUp(
 			@Param("userId") String userId, 
-			@Param("userPassword") String userPassword, 
+			@Param("hashedUserPassword") String hashedUserPassword, 
 			@Param("userName") String userName, 
 			@Param("userNickName") String userNickName
+			);
+	
+	// 로그인 - db에서 select
+	public User selectUserByUserIdAndUserPassword(
+			@Param("userId") String userId, 
+			@Param("userPassword") String userPassword
 			);
 }

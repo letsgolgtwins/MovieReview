@@ -9,13 +9,11 @@
 		<div class="signInBox">
 		<form action="/user/sign-in" method="post">
 			<!-- 로그인 -->
-			<h3 class="d-flex justify-content-center text-white font-weight-bold mt-4">로그인</h3>
-			<input type="text" class="form-control mt-4" placeholder="아이디">
-			<input type="password" class="form-control mt-4" placeholder="비밀번호">
-			<div class="d-flex justify-content-between">
-				<button id="MoveTosignUp" class="btn btn-success mt-4 col-5">회원가입</button>
-				<input type="submit" class="form-control btn btn-warning mt-4 col-5" value="로그인">
-			</div>
+			<h1 class="d-flex justify-content-center text-white font-weight-bold mt-4">로그인</h1>
+			<input type="text" id="userId" name="userId" class="form-control mt-4" placeholder="아이디">
+			<input type="password" id="userPassword" name="userPassword" class="form-control mt-4" placeholder="비밀번호">
+			<input type="submit" id="signInBtn" class="form-control btn btn-warning mt-4" value="로그인">
+			<input type="button" id="MoveTosignUp" class="form-control btn btn-success mt-4" value="아직 비회원이신가요? 회원가입하러 이동">
 		</form>
 		</div>
 	</div>
@@ -31,6 +29,47 @@
 				alert("회원가입 페이지로 이동합니다.");
 				location.href = "/user/sign-up-view";
 			}); // MoveTosignUp 회원가입 페이지로 이동하는 버튼 클릭 이벤트 끝.
+			
+			// signInBtn 로그인 버튼 클릭 이벤트
+			$("#signInBtn").on('click', function(e) {
+				e.preventDefault();
+				// alert("중간점검");
+				
+				// validation
+				let userId = $("#userId").val().trim();
+				let userPassword = $("#userPassword").val().trim();
+				// alert(userId);
+				// alert(userPassword);
+				
+				// 유효성 검사
+				if (!userId) {
+					alert("아이디를 입력해주세요.");
+					return false;
+				}
+				if (!userPassword) {
+					alert("비밀번호를 입력해주세요.");
+					return false;
+				}
+				
+				$.ajax({
+					// request
+					type: "post"
+					, url: "/user/sign-in"
+					, data: {"userId":userId, "userPassword":userPassword}
+					// response
+					, success:function(data) {
+						if (data.code == 200) { // 로그인 성공
+							alert("로그인 성공. 홈페이지로 이동합니다.");
+							location.href = "/movie/movie-list-view";
+						} else if (data.code == 500) { // 로그인 실패(단지 오타나 이런 것들)
+							alert(data.error_message);
+						}
+					}
+					, error:function(error) {
+						alert("로그인 실패. 코드상의 에러");
+					}
+				}); // AJAX 끝.
+			}); // signInBtn 로그인 버튼 클릭 이벤트 끝.
 		}); // ready 함수 끝.
     </script>
 </th:block>

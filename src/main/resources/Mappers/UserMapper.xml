@@ -26,11 +26,29 @@
 		VALUES
 		(
 			#{userId}
-			, #{userPassword}
+			, #{hashedUserPassword}
 			, #{userName}
 			, #{userNickName}
 			, NOW()
 			, NOW()
 		)
 	</insert>
+	
+	<!-- 로그인 - db에서 select -->
+	<select id="selectUserByUserIdAndUserPassword" parameterType="map" resultType="com.movie.User.domain.User">
+		SELECT 
+			`id`
+			,`userId`
+			,`userPassword`
+			,`userName`
+			,`userNickName`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`user`
+		WHERE
+			`userId` = #{userId}
+		AND
+			`userPassword` = #{userPassword}
+	</select>
 </mapper>
