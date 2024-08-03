@@ -4,18 +4,21 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/defaultLayoutForPage}">
 <section layout:fragment="content" class="contents d-flex justify-content-center">
-	<article class="article m-3 col-12">
-		<div class="movieInfo">
-			<!-- 아래는 예시. 어차피 지금 타임리프로 해봤자 에러만 뜰 뿐이니 대충 틀은 잡기 위해 -->
-			<img id="moviePoster" class="moviePoster" alt="영화포스터사진" src="https://an2-img.amz.wtchn.net/image/v2/4fXGcnpr8CS5f2l3jE2Z-Q.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXhMM2gzY1d0aWEyeHRkbkJsZG5sNllXWjFabUp5SW4wLmMwUjdILXByVzhFVGhESDZQckNpc2M0RkhGOW1mdl9MRnE3RGswU1VRcUU">
-			<h4 class="movieName font-weight-bold ml-3">영화</h4>
+	<div class="justify-content-center">
+	<article class="article d-flex flex-wrap m-3 col-12">
+			
+		<div class="movieInfo mt-4 ml-3 mr-3" th:each="movie, status : ${movieInfo}">
+			<img id="moviePoster" class="moviePoster" alt="영화포스터사진" th:src="${movie.moviePoster}">
+			<h4 class="movieName font-weight-bold ml-3 mt-3" th:text="${movie.movieName}">영화이름</h4>
 			<div class="d-flex ml-3">
-				<h5 class="movieYear font-weight-bold">2024 -</h5>
-				<h5 class="movieNation font-weight-bold">한국 -</h5>
-				<h5 class="movieDirector font-weight-bold">봉준호</h5>
+				<h5 class="movieYear font-weight-bold" th:text="|${movie.movieYear} -|">영화개봉년도</h5>
+				<h5 class="movieNation font-weight-bold" th:text="| ${movie.movieNation} -|">영화개봉국가</h5>
+				<h5 class="movieDirector font-weight-bold" th:text="| ${movie.movieDirector}|">영화감독</h5>
 			</div>
 		</div>
+	
 	</article>
+	</div>
 </section>
 
 <th:block layout:fragment="script">

@@ -17,6 +17,5 @@
 			,`updatedAt`
 		FROM
 			`movie`
-		WHERE
 	</select>
 </mapper>

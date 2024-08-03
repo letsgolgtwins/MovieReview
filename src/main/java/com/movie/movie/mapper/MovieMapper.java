@@ -1,5 +1,7 @@
 package com.movie.movie.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.movie.movie.domain.Movie;
@@ -8,5 +10,5 @@ import com.movie.movie.domain.Movie;
 public interface MovieMapper {
 
 	// 영화 정보 가져오기 - db에서 select
-	public Movie selectMovieInfo();
+	public List<Movie> selectMovieInfo();
 }

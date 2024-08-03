@@ -10,4 +10,6 @@ footer {height: 100px; background-color: white;}
 .signInBox {margin: 150px 50px}
 .center {background-color: #FF0558}
 
-#moviePoster {width: 245px; height: 350px}
+.article {display: flex; flex-wrap: wrap;}
+.movieInfo {width: 270px; height: 500px}
+#moviePoster {width: 270px; height: 386px}
