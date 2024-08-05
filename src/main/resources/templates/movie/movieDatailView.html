@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/defaultLayoutForPage}">
+<section layout:fragment="content" class="contents d-flex justify-content-center mt-3">
+	<div class="MoviePosterArea col-4 w-100 h-100">
+		<img class="MoviePoster2" alt="영화포스터" th:src="${movieInfo.moviePoster}">
+	</div>
+	<div class="MovieDetailArea col-8 w-100">
+		
+	</div>
+</section>
+
+<th:block layout:fragment="script">
+    <script>
+
+    </script>
+</th:block>

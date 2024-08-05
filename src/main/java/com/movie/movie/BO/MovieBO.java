@@ -14,8 +14,13 @@ public class MovieBO {
 	@Autowired
 	private MovieMapper movieMapper;
 	
-	// 영화 정보들 가져오기 - db에서 select
+	// 영화 목록들 가져오기 - db에서 select
 	public List<Movie> getMovieInfo() {
 		return movieMapper.selectMovieInfo();
+	}
+	
+	// 특정 영화 상세 정보 가져오기 (단 건) - db에서 select
+	public Movie getMovieByUserOriginIdAndMovieId(int movieId) {
+		return movieMapper.selectMovieByUserOriginIdAndMovieId(movieId);
 	}
 }

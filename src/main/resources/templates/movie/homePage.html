@@ -8,8 +8,8 @@
 	<article class="article d-flex flex-wrap m-3 col-12">
 			
 		<div class="movieInfo mt-4 ml-3 mr-3" th:each="movie, status : ${movieInfo}">
-			<img id="moviePoster" class="moviePoster" alt="영화포스터사진" th:src="${movie.moviePoster}">
-			<h4 class="movieName font-weight-bold ml-3 mt-3" th:text="${movie.movieName}">영화이름</h4>
+			<a th:href="|/movie/movie-detail-view?movieId=${movie.id}|"><img id="moviePoster" class="moviePoster" alt="영화포스터사진" th:src="${movie.moviePoster}"></a>
+			<h4 class="ml-3 mt-3"><a class="movieName font-weight-bold text-dark" th:href="|/movie/movie-detail-view?movieId=${movie.id}|" th:text="${movie.movieName}">영화이름</a></h4>
 			<div class="d-flex ml-3">
 				<h5 class="movieYear font-weight-bold" th:text="|${movie.movieYear} -|">영화개봉년도</h5>
 				<h5 class="movieNation font-weight-bold" th:text="| ${movie.movieNation} -|">영화개봉국가</h5>
@@ -23,6 +23,6 @@
 
 <th:block layout:fragment="script">
     <script>
-    	
+    
     </script>
 </th:block>
