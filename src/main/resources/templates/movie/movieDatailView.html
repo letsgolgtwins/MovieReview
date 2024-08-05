@@ -9,11 +9,102 @@
 	</div>
 	<div class="MovieDetailArea col-8 w-100">
 		
+		<!-- 영화 상세 정보 페이지 -->
+		<div class="MovieDetailAreaUp pt-3">
+			<h1 class="font-weight-bold" th:text="${movieInfo.movieName}">제목</h1>	
+			<h3 class="font-weight-bold" th:text="|${movieInfo.movieYear} - ${movieInfo.movieNation}|">년도/국가</h3>	
+			<h3 class="font-weight-bold" th:text="${movieInfo.movieGenre}">장르</h3>	
+			<h3 class="font-weight-bold" th:text="${movieInfo.movieDirector}">감독</h3>	
+		</div>
+		
+		<!-- 평점 매기고, 이 영화의 평점 보여주는 영역 -->
+		<div class="MovieDetailAreaCenter pt-2 d-flex justify-content-between">
+			<div class="star col-6">	
+				<img alt="별점" src="/image/empty_star.png">
+				<img alt="별점" src="/image/empty_star.png">
+				<img alt="별점" src="/image/empty_star.png">
+				<img alt="별점" src="/image/empty_star.png">
+				<img alt="별점" src="/image/empty_star.png">			
+				<h4 class="d-flex justify-content-center mt-2">별점 메기기</h4>
+			</div>
+			<div class="grade pl-5 col-6 d-flex align-items-center">
+				<div>	
+					<!-- 임시 -->
+					<h3 class="d-flex justify-content-center font-weight-bold">n</h3>
+					<h3 class="d-flex justify-content-center font-weight-bold">평균별점</h3>
+					<!-- 임시 -->
+					<h5 class="d-flex justify-content-center font-weight-bold">(1234명)</h5>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 리뷰 쓰는 영역 -->
+		<div class="MovieDetailAreaDown p-3">
+			<textarea id="reviewTextArea" name="review" class="reviewTextArea form-control w-100" rows="6" placeholder="리뷰를 남겨보세요!"></textarea>
+			<div class="pt-3 d-flex justify-content-end">
+				<input type="button" class="btn deleteAllBtn text-white font-weight-bold" value="리뷰 내용 초기화">
+				<input type="submit" class="btn reviewBtn text-white font-weight-bold ml-4" value="리뷰 남기기">
+			</div>
+		</div>
 	</div>
 </section>
 
 <th:block layout:fragment="script">
     <script>
-
+		$(document).ready(function() {
+			// deleteAllBtn 리뷰 내용 초기화 버튼 클릭 이벤트.
+			$(".deleteAllBtn").on('click', function(e) {
+				e.preventDefault();
+				alert("리뷰 내용을 초기화 합니다.");
+				
+				// validation
+				let reviewText = $("#reviewTextArea").val();
+				
+				// 리뷰 내용 초기화 - 미완
+				reviewText.replace("");
+			}); // deleteAllBtn 리뷰 내용 초기화 버튼 클릭 이벤트 끝.
+			
+			// reviewBtn 리뷰 남기기 버튼 클릭 이벤트.
+			$(".reviewBtn").on('click', function(e) {
+				e.preventDefault();
+				alert("리뷰를 남깁니다.");
+				
+				// validation
+				let review = $("#reviewTextArea").val();
+				
+				// 유효성 검사
+				if (!review) {
+					alert("리뷰 내용이 없습니다. 리뷰 내용을 입력해주세요.");
+					return false;
+				}
+				
+				$.ajax({
+					// request
+					type: "get"
+					// 와일드 카드 문법 알아보기
+					// 주소에는 영화의 고유 id만 들어와있다.
+					// 근데 난 ReviewRestController에서 movieId(movie의 pk), userOriginId(user의 pk), review(리뷰내용)를 파라미터로 가져오는데
+					// 여기에선 review와 movieId만 가능하다. 그러면 애초에 만들 때부터 userOriginId를 넘겻어야 했나?
+					// 예상) 지금은 로그인 된 상태이므로 이걸 이용해서 userOriginId 를 적절히 뽑아보자
+/* 					, url: "/review/create-review?{}"
+					, data: {"review":review}
+				
+					// response
+					, success:function(data) {
+						if (data.code == 200) {
+							// 리뷰 남기기 성공
+							alert("리뷰 남기기 성공! 리뷰 화면으로 이동합니다.");
+							location.href="/movie/movie-review-view{}";   */
+						} else if (data.code == 500) {
+							// 리뷰 남기기 실패
+							alert(data.error_message);
+						}
+					}
+					, error:function(error) {
+						alert("서버상의 에러입니다.");
+					}
+				}); // AJAX 끝.
+			}); // reviewBtn 리뷰 남기기 버튼 클릭 이벤트 끝.
+		}); // ready 함수 끝.
     </script>
 </th:block>

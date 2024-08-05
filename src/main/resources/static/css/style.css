@@ -15,3 +15,10 @@ footer {height: 100px; background-color: white;}
 #moviePoster {width: 270px; height: 386px}
 
 .MoviePoster2 {width: 420px; height: 600px;}
+.MovieDetailAreaUp {height: 200px}
+.MovieDetailAreaCenter {height: 150px}
+.MovieDetailAreaDown {height: 250px}
+.reviewTextArea {width: 1080px}
+
+.deleteAllBtn, .reviewBtn {background-color: #FF0558}
+

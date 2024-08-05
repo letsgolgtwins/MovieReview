@@ -10,4 +10,24 @@
 		FROM
 			`review`
 	</select>
+	
+	<!-- 영화 리뷰 남기기 - db에 insert -->
+	<insert id="insertReviewByMovieIdAndUserOriginId" parameterType="map">
+		INSERT INTO `review`
+		(
+			`userId`
+			,`movieId`
+			,`review`
+			,`createdAt`
+			,`updatedAt`
+		)
+		VALUES
+		(
+			#{userOriginId}
+			, #{movieId}
+			, #{review}
+			, NOW()
+			, NOW()
+		)
+	</insert>
 </mapper>
