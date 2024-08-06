@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,16 +22,18 @@ public class ReviewRestController {
 	
 	// 영화 리뷰 남기는 API
 	// /review/create-review
-	@GetMapping("/create-review")
+	@PostMapping("/create-review")
 	public Map<String, Object> CreateReview(
 			@RequestParam(value = "review", required = false) String review,
 			@RequestParam("movieId") int movieId,
 			HttpSession session) {
-		// session에서 userOriginId 가져오기
+		
+		// session에서 userOriginId, userNickName 가져오기
 		int userOriginId = (int) session.getAttribute("userOriginId");
+		String userNickName = (String) session.getAttribute("userNickName");
 		
 		// 리뷰 남기기 - db에 insert / 파라미터는 위의 세 개
-		int rowCount = reviewBO.addReviewByMovieIdAndUserOriginId(review, movieId, userOriginId);
+		int rowCount = reviewBO.addReviewByMovieIdAndUserOriginId(review, movieId, userOriginId, userNickName);
 		
 		// 응답 JSON
 		Map<String, Object> result = new HashMap<>();

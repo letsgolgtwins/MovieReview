@@ -51,50 +51,60 @@
 
 <th:block layout:fragment="script">
     <script>
+		// URL에 포함된 movieId(쿼리 파라미터)를 추출한 다음 JavaScript에서 해당 값을 가져와 사용. 
+		// 그리고 그 값을 AJAX 요청에 사용.
+    	function getQueryParam(param) {
+	        let urlParams = new URLSearchParams(window.location.search);
+	        return urlParams.get(param);
+	    }
+    
+		// ready 함수 시작
 		$(document).ready(function() {
 			// deleteAllBtn 리뷰 내용 초기화 버튼 클릭 이벤트.
 			$(".deleteAllBtn").on('click', function(e) {
 				e.preventDefault();
 				alert("리뷰 내용을 초기화 합니다.");
 				
-				// validation
-				let reviewText = $("#reviewTextArea").val();
-				
-				// 리뷰 내용 초기화 - 미완
-				reviewText.replace("");
+				// 리뷰 내용 초기화 
+				$("#reviewTextArea").val("");
 			}); // deleteAllBtn 리뷰 내용 초기화 버튼 클릭 이벤트 끝.
 			
 			// reviewBtn 리뷰 남기기 버튼 클릭 이벤트.
-			$(".reviewBtn").on('click', function(e) {
-				e.preventDefault();
+			// ReviewRestController에서 movieId(movie의 pk), userOriginId(user의 pk), review(리뷰내용)를 파라미터로 가져옴
+			// movieId <- 음.. 
+			// userOriginId는 session에서 가져옴
+			// review는 여기서 직접 가져옴
+			$(".reviewBtn").on('click', function() {
 				alert("리뷰를 남깁니다.");
-				
+
 				// validation
 				let review = $("#reviewTextArea").val();
+				let movieId = getQueryParam('movieId'); // new 방법
 				
-				// 유효성 검사
+				// 유효성 검사 - null 허용이지만 리뷰 안남길거면 굳이 왜 리뷰 남기기 버튼을 누르겠나
 				if (!review) {
 					alert("리뷰 내용이 없습니다. 리뷰 내용을 입력해주세요.");
 					return false;
 				}
 				
+				// 폼
+				let formData = new FormData();
+				formData.append("review", review);
+				formData.append("movieId", movieId); 
+				
 				$.ajax({
 					// request
-					type: "get"
-					// 와일드 카드 문법 알아보기
-					// 주소에는 영화의 고유 id만 들어와있다.
-					// 근데 난 ReviewRestController에서 movieId(movie의 pk), userOriginId(user의 pk), review(리뷰내용)를 파라미터로 가져오는데
-					// 여기에선 review와 movieId만 가능하다. 그러면 애초에 만들 때부터 userOriginId를 넘겻어야 했나?
-					// 예상) 지금은 로그인 된 상태이므로 이걸 이용해서 userOriginId 를 적절히 뽑아보자
-/* 					, url: "/review/create-review?{}"
-					, data: {"review":review}
-				
+					type: "post"
+ 					, url: "/review/create-review"
+					, data: formData
+					, processData: false
+					, contentType: false
 					// response
 					, success:function(data) {
 						if (data.code == 200) {
 							// 리뷰 남기기 성공
 							alert("리뷰 남기기 성공! 리뷰 화면으로 이동합니다.");
-							location.href="/movie/movie-review-view{}";   */
+							location.href="/review/movie-review-list?movieId=" + movieId;
 						} else if (data.code == 500) {
 							// 리뷰 남기기 실패
 							alert(data.error_message);

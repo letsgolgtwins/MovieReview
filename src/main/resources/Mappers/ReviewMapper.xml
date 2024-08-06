@@ -17,6 +17,7 @@
 		(
 			`userId`
 			,`movieId`
+			,`userNickName`
 			,`review`
 			,`createdAt`
 			,`updatedAt`
@@ -25,9 +26,26 @@
 		(
 			#{userOriginId}
 			, #{movieId}
+			, #{userNickName}
 			, #{review}
 			, NOW()
 			, NOW()
 		)
 	</insert>
+	
+	<!-- 특정 영화의 리뷰들 가져오기 - db에서 여러건 select -->
+	<select id="selectMovieReviewListByMovieId" resultType="com.movie.Review.domain.Review">
+		SELECT 
+			`id`
+			,`userId`
+			,`movieId`
+			,`userNickName`
+			,`review`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`review`
+		WHERE
+			`movieId` = #{movieId}
+	</select>
 </mapper>

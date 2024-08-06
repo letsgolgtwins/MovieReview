@@ -13,6 +13,7 @@ public class Review {
 	private int id;
 	private int userId;
 	private int movieId;
+	private String userNickName;
 	private String review;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
