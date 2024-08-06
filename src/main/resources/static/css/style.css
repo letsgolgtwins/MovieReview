@@ -20,5 +20,5 @@ footer {height: 100px; background-color: white;}
 .MovieDetailAreaDown {height: 250px}
 .reviewTextArea {width: 1080px}
 
-.deleteAllBtn, .reviewBtn {background-color: #FF0558}
+.reviewListBtn, .deleteAllBtn, .reviewBtn {background-color: #FF0558}
 

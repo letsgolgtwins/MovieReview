@@ -42,7 +42,8 @@
 		<div class="MovieDetailAreaDown p-3">
 			<textarea id="reviewTextArea" name="review" class="reviewTextArea form-control w-100" rows="6" placeholder="리뷰를 남겨보세요!"></textarea>
 			<div class="pt-3 d-flex justify-content-end">
-				<input type="button" class="btn deleteAllBtn text-white font-weight-bold" value="리뷰 내용 초기화">
+				<input type="button" class="btn reviewListBtn text-white font-weight-bold" value="리뷰 화면으로 이동">
+				<input type="button" class="btn deleteAllBtn text-white font-weight-bold ml-4" value="리뷰 내용 초기화">
 				<input type="submit" class="btn reviewBtn text-white font-weight-bold ml-4" value="리뷰 남기기">
 			</div>
 		</div>
@@ -60,6 +61,17 @@
     
 		// ready 함수 시작
 		$(document).ready(function() {
+			
+			// reviewListBtn 리뷰화면으로 이동 버튼 클릭 이벤트. 이 영화의 리뷰 페이지로 이동
+			$(".reviewListBtn").on('click', function() {
+				alert("리뷰화면으로 이동합니다.");
+				// url에서 movieId 가져오기
+				let movieId = getQueryParam('movieId');
+				
+				// 이 영화의 리뷰 리스트 페이지로 이동
+				location.href="/review/movie-review-list?movieId=" + movieId;
+			}); // reviewListBtn 리뷰화면으로 이동 버튼 클릭 이벤트 끝.
+			
 			// deleteAllBtn 리뷰 내용 초기화 버튼 클릭 이벤트.
 			$(".deleteAllBtn").on('click', function(e) {
 				e.preventDefault();
