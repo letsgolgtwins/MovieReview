@@ -48,10 +48,11 @@ public class MovieController {
 	public String MovieDetailView(@RequestParam("movieId") int movieId, Model model) {
 	
 		// Movie에서 단 건 조회
-		Movie movie = movieBO.getMovieByUserOriginIdAndMovieId(movieId);
+		Movie movie = movieBO.getMovieByMovieId(movieId);
 		
 		// model에 담기
 		model.addAttribute("movieInfo", movie);
+		//model.addAttribute("movieId", movieId);
 		
 		// 상세 페이지로 이동
 		return "movie/movieDatailView";

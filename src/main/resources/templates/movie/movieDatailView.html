@@ -42,7 +42,7 @@
 		<div class="MovieDetailAreaDown p-3">
 			<textarea id="reviewTextArea" name="review" class="reviewTextArea form-control w-100" rows="6" placeholder="리뷰를 남겨보세요!"></textarea>
 			<div class="pt-3 d-flex justify-content-end">
-				<input type="button" class="btn reviewListBtn text-white font-weight-bold" value="리뷰 화면으로 이동">
+				<input type="button" th:data-movie-id="${movieInfo.id}" class="btn reviewListBtn text-white font-weight-bold" value="리뷰 화면으로 이동">
 				<input type="button" class="btn deleteAllBtn text-white font-weight-bold ml-4" value="리뷰 내용 초기화">
 				<input type="submit" class="btn reviewBtn text-white font-weight-bold ml-4" value="리뷰 남기기">
 			</div>
@@ -58,7 +58,7 @@
 	        let urlParams = new URLSearchParams(window.location.search);
 	        return urlParams.get(param);
 	    }
-    
+    	
 		// ready 함수 시작
 		$(document).ready(function() {
 			
@@ -93,6 +93,8 @@
 				let review = $("#reviewTextArea").val();
 				let movieId = getQueryParam('movieId'); // new 방법
 				
+				let movieId2 = $(this).data("movie-id"); // 기존 방법
+				
 				// 유효성 검사 - null 허용이지만 리뷰 안남길거면 굳이 왜 리뷰 남기기 버튼을 누르겠나
 				if (!review) {
 					alert("리뷰 내용이 없습니다. 리뷰 내용을 입력해주세요.");
@@ -102,7 +104,8 @@
 				// 폼
 				let formData = new FormData();
 				formData.append("review", review);
-				formData.append("movieId", movieId); 
+				formData.append("movieId", movieId); // new 방법
+				formData.append("movieId2", movieId2); 
 				
 				$.ajax({
 					// request
@@ -116,7 +119,7 @@
 						if (data.code == 200) {
 							// 리뷰 남기기 성공
 							alert("리뷰 남기기 성공! 리뷰 화면으로 이동합니다.");
-							location.href="/review/movie-review-list?movieId=" + movieId;
+							location.href="/review/movie-review-list?movieId2=" + movieId2;
 						} else if (data.code == 500) {
 							// 리뷰 남기기 실패
 							alert(data.error_message);

@@ -20,7 +20,7 @@ public class MovieBO {
 	}
 	
 	// 특정 영화 상세 정보 가져오기 (단 건) - db에서 select
-	public Movie getMovieByUserOriginIdAndMovieId(int movieId) {
-		return movieMapper.selectMovieByUserOriginIdAndMovieId(movieId);
+	public Movie getMovieByMovieId(int movieId) {
+		return movieMapper.selectMovieByMovieId(movieId);
 	}
 }
