@@ -32,7 +32,7 @@ public class ReviewRestController {
 		int userOriginId = (int) session.getAttribute("userOriginId");
 		String userNickName = (String) session.getAttribute("userNickName");
 		
-		// 리뷰 남기기 - db에 insert / 파라미터는 위의 세 개
+		// 리뷰 남기기 - db에 insert / 파라미터는 위의 4개
 		int rowCount = reviewBO.addReviewByMovieIdAndUserOriginId(review, movieId, userOriginId, userNickName);
 		
 		// 응답 JSON

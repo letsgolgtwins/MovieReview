@@ -52,7 +52,6 @@ public class MovieController {
 		
 		// model에 담기
 		model.addAttribute("movieInfo", movie);
-		//model.addAttribute("movieId", movieId);
 		
 		// 상세 페이지로 이동
 		return "movie/movieDatailView";

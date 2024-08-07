@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.movie.star.mapper.StarMapper">
+	<!-- 특정 영화에 특정 유저가 좋아요 눌렀는지 여부 - db에서 count(*) select -->
+	<select id="selectStarCountByMovieIdAndUserOriginId" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			`star`
+		WHERE
+			`movieId` = #{movieId}
+		AND
+			`userId` = #{userOriginId}
+	</select>
+	
+	<!-- 별점 매기는 toggle - db에 insert -->
+	<insert id="insertStarByMovieIdAndUserOriginId" parameterType="map">
+		INSERT INTO `star`
+		(
+			`movieId`
+			,`userId`
+			,`createdAt`
+			,`updatedAt`
+		)
+		VALUES
+		(
+			#{movieId}
+			, #{userOriginId}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+	
+	<!-- 별점 지우는 toggle - db에서 delete -->
+	<delete id="deleteStarByMovieIdAndUserOriginId" parameterType="map">
+		DELETE FROM
+			`star`
+		WHERE
+			`movieId` = #{movieId}
+		AND
+			`userId` = #{userOriginId}
+	</delete>
+</mapper>
