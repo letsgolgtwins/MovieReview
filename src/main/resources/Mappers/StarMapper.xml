@@ -41,5 +41,7 @@
 			`movieId` = #{movieId}
 		AND
 			`userId` = #{userOriginId}
+		ORDER BY `id` 
+		DESC LIMIT 1
 	</delete>
 </mapper>

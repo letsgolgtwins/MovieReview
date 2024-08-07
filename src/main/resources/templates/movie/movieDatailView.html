@@ -20,11 +20,26 @@
 		<!-- 평점 매기고, 이 영화의 평점 보여주는 영역 -->
 		<div class="MovieDetailAreaCenter pt-2 d-flex justify-content-between">
 			<div class="star col-6">	
-				<a href="#" class="starBtn1"><img alt="별점" src="/image/empty_star.png"></a>
-				<a href="#" class="starBtn2"><img alt="별점" src="/image/empty_star.png"></a>
-				<a href="#" class="starBtn3"><img alt="별점" src="/image/empty_star.png"></a>
-				<a href="#" class="starBtn4"><img alt="별점" src="/image/empty_star.png"></a>
-				<a href="#" class="starBtn5"><img alt="별점" src="/image/empty_star.png"></a>
+				<a href="#" class="starBtn1">
+					<img id="emptyStar1" class="emptyStar1" alt="비워진별점" src="/image/empty_star.png">
+					<img id="fullStar1" class="fullStar1 d-none" alt="채워진별점" src="/image/full_star.png">
+				</a>
+				<a href="#" class="starBtn2">
+					<img id="emptyStar2" class="emptyStar2" alt="비워진별점" src="/image/empty_star.png">
+					<img id="fullStar2" class="fullStar2 d-none" alt="채워진별점" src="/image/full_star.png">
+				</a>
+				<a href="#" class="starBtn3">
+					<img id="emptyStar3" class="emptyStar3" alt="비워진별점" src="/image/empty_star.png">
+					<img id="fullStar3" class="fullStar3 d-none" alt="채워진별점" src="/image/full_star.png">
+				</a>
+				<a href="#" class="starBtn4">
+					<img id="emptyStar4" class="emptyStar4" alt="비워진별점" src="/image/empty_star.png">
+					<img id="fullStar4" class="fullStar4 d-none" alt="채워진별점" src="/image/full_star.png">
+				</a>
+				<a href="#" class="starBtn5">
+					<img id="emptyStar5" class="emptyStar5" alt="비워진별점" src="/image/empty_star.png">
+					<img id="fullStar5" class="fullStar5 d-none" alt="채워진별점" src="/image/full_star.png">
+				</a>
 				<h4 class="d-flex justify-content-center mt-2">별점 메기기</h4>
 			</div>
 			<div class="grade pl-5 col-6 d-flex align-items-center">
@@ -132,27 +147,26 @@
 			}); // reviewBtn 리뷰 남기기 버튼 클릭 이벤트 끝.
 			
 			// 별점 toggle
-			
 			// starBtn1 1점 매기기 버튼 클릭 이벤트
 			$(".starBtn1").on('click', function(e) {
 				e.preventDefault();
 				// alert("중간점검");
-				
+		
 				// url에서 movieId 꺼내오기 - new 방법 
 				let movieId = getQueryParam('movieId');
 				// alert(movieId); > 확인
 				
-				let form
-				
 				$.ajax({
 					// request
 					type: "get"
-					, url: "/star/" + movieId
+					, url: "/star1/" + movieId
 					, data: {"movieId":movieId}
 					// response
 					, success:function(data) {
 						if (data.code == 200) {
-							location.reload(true);
+							$("#emptyStar1").addClass("d-none"); // 빈 별은 없어지고
+							$("#fullStar1").removeClass("d-none"); // 채워진 별은 등장하고
+							//location.reload(true);
 						} else if (data.code == 403) { // 비로그인 상태
 							alert(data.error_message);
 							// 로그인 페이지로 이동
@@ -177,12 +191,14 @@
 				$.ajax({
 					// request
 					type: "get"
-					, url: "/star/" + movieId
+					, url: "/star2/" + movieId
 					, data: {"movieId":movieId}
 					// response
 					, success:function(data) {
 						if (data.code == 200) {
-							location.reload(true);
+							$("#emptyStar2").addClass("d-none"); // 빈 별은 없어지고
+							$("#fullStar2").removeClass("d-none"); // 채워진 별은 등장하고
+							//location.reload(true);
 						} else if (data.code == 403) { // 비로그인 상태
 							alert(data.error_message);
 							// 로그인 페이지로 이동
@@ -207,12 +223,14 @@
 				$.ajax({
 					// request
 					type: "get"
-					, url: "/star/" + movieId
+					, url: "/star3/" + movieId
 					, data: {"movieId":movieId}
 					// response
 					, success:function(data) {
 						if (data.code == 200) {
-							location.reload(true);
+							$("#emptyStar3").addClass("d-none"); // 빈 별은 없어지고
+							$("#fullStar3").removeClass("d-none"); // 채워진 별은 등장하고
+							//location.reload(true);
 						} else if (data.code == 403) { // 비로그인 상태
 							alert(data.error_message);
 							// 로그인 페이지로 이동
@@ -225,9 +243,69 @@
 				}); // AJAX 끝.
 			}); // starBtn3 3점 매기기 버튼 클릭 이벤트 끝.
 			
+			// starBtn4 4점 매기기 버튼 클릭 이벤트
+			$(".starBtn4").on('click', function(e) {
+				e.preventDefault();
+				// alert("중간점검");
+				
+				// url에서 movieId 꺼내오기 - new 방법 
+				let movieId = getQueryParam('movieId');
+				// alert(movieId); > 확인
+				
+				$.ajax({
+					// request
+					type: "get"
+					, url: "/star4/" + movieId
+					, data: {"movieId":movieId}
+					// response
+					, success:function(data) {
+						if (data.code == 200) {
+							$("#emptyStar4").addClass("d-none"); // 빈 별은 없어지고
+							$("#fullStar4").removeClass("d-none"); // 채워진 별은 등장하고
+							//location.reload(true);
+						} else if (data.code == 403) { // 비로그인 상태
+							alert(data.error_message);
+							// 로그인 페이지로 이동
+							location.href = "/user/sign-in-view";
+						} 
+					}
+					, error:function(error) {
+						alert("별점을 매기는데 실패. 서버상의 에러입니다.");
+					}
+				}); // AJAX 끝.
+			}); // starBtn4 4점 매기기 버튼 클릭 이벤트 끝.
 			
-			
-			
+			// starBtn5 5점 매기기 버튼 클릭 이벤트
+			$(".starBtn5").on('click', function(e) {
+				e.preventDefault();
+				// alert("중간점검");
+				
+				// url에서 movieId 꺼내오기 - new 방법 
+				let movieId = getQueryParam('movieId');
+				// alert(movieId); > 확인
+				
+				$.ajax({
+					// request
+					type: "get"
+					, url: "/star5/" + movieId
+					, data: {"movieId":movieId}
+					// response
+					, success:function(data) {
+						if (data.code == 200) {
+							$("#emptyStar5").addClass("d-none"); // 빈 별은 없어지고
+							$("#fullStar5").removeClass("d-none"); // 채워진 별은 등장하고
+							//location.reload(true);
+						} else if (data.code == 403) { // 비로그인 상태
+							alert(data.error_message);
+							// 로그인 페이지로 이동
+							location.href = "/user/sign-in-view";
+						} 
+					}
+					, error:function(error) {
+						alert("별점을 매기는데 실패. 서버상의 에러입니다.");
+					}
+				}); // AJAX 끝.
+			}); // starBtn5 5점 매기기 버튼 클릭 이벤트 끝.
 		}); // ready 함수 끝.
     </script>
 </th:block>
