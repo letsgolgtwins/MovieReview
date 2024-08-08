@@ -12,64 +12,16 @@ public interface StarMapper {
 			@Param("userOriginId") int userOriginId
 			);
 	
-	// 1번 별 클릭 > 별점 1점 매기는 toggle
-	public void insertStar1ByMovieIdAndUserOriginId(
+	// 특정 영화에 특정 유저가 별점 매기기 - db에 insert
+	public int insertStarByMovieIdAndUserOriginIdAndPoint(
 			@Param("movieId") int movieId, 
-			@Param("userOriginId") int userOriginId
-			);
-
-	// 1번 별 재클릭 > 별점 1점 지우는 toggle
-	public void deleteStar1ByMovieIdAndUserOriginId(
-			@Param("movieId") int movieId, 
-			@Param("userOriginId") int userOriginId
-			);
+			@Param("userOriginId") int userOriginId,
+			@Param("point") int point
+			); 
 	
-	// 2번 별 클릭 > 별점 2점 매기는 toggle
-	public void insertStar2ByMovieIdAndUserOriginId(
+	// 특정 영화에 특정 유저가 매긴 별점 삭제 - db에서 delete
+	public int deleteStarByMovieIdAndUserOriginId(
 			@Param("movieId") int movieId, 
 			@Param("userOriginId") int userOriginId
-			);
-	
-	// 2번 별 재클릭 > 별점 2점 지우는 toggle
-	public void deleteStar2ByMovieIdAndUserOriginId(
-			@Param("movieId") int movieId, 
-			@Param("userOriginId") int userOriginId
-			);
-	
-	// 3번 별 클릭 > 별점 3점 매기는 toggle
-	public void insertStar3ByMovieIdAndUserOriginId(
-			@Param("movieId") int movieId, 
-			@Param("userOriginId") int userOriginId
-			);
-	
-	// 3번 별 재클릭 > 별점 3점 지우는 toggle
-	public void deleteStar3ByMovieIdAndUserOriginId(
-			@Param("movieId") int movieId, 
-			@Param("userOriginId") int userOriginId
-			);
-	
-	// 4번 별 클릭 > 별점 4점 매기는 toggle
-	public void insertStar4ByMovieIdAndUserOriginId(
-			@Param("movieId") int movieId, 
-			@Param("userOriginId") int userOriginId
-			);
-	
-	// 4번 별 재클릭 > 별점 4점 지우는 toggle
-	public void deleteStar4ByMovieIdAndUserOriginId(
-			@Param("movieId") int movieId, 
-			@Param("userOriginId") int userOriginId
-			);
-	
-	// 5번 별 클릭 > 별점 5점 매기는 toggle
-	public void insertStar5ByMovieIdAndUserOriginId(
-			@Param("movieId") int movieId, 
-			@Param("userOriginId") int userOriginId
-			);
-	
-	// 5번 별 재클릭 > 별점 5점 지우는 toggle
-	public void deleteStar5ByMovieIdAndUserOriginId(
-			@Param("movieId") int movieId, 
-			@Param("userOriginId") int userOriginId
-			);
-	
+			); 
 }
