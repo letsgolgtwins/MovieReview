@@ -156,6 +156,16 @@
 				let movieId = getQueryParam('movieId');
 				// alert(movieId); > 확인
 				
+				// point값 할당
+				let point = 
+					$(this).find("img").data("point-one") || 
+					$(this).find("img").data("point-two") || 
+					$(this).find("img").data("point-three") || 
+					$(this).find("img").data("point-four") || 
+					$(this).find("img").data("point-five");
+				
+				alert(point + "점");
+				
 				// 각 별 당 고유의 point 꺼내오기 테스트
 				//let point1 = $("#emptyStar1").data("point-one");
 				//let point2 = $("#emptyStar2").data("point-two");
@@ -171,26 +181,26 @@
 				// 테스트
 				//if ($("#emptyStar2").on('click')) { 
 				//	alert($("#emptyStar2").data("point-two"));
-				//} > 잘 됨. 근데 아래에선 왜 안될까? 
+				//} 
 				
 				// 여기서부터 다시 해보고 다시 생각해볼 것(0808 저녁부터)
 				// 파라미터인 point에 각각의 상황(몇번 별을 클릭했는지)에 맞게 validation
-				if ($("#emptyStar1").on('click')) { 
+				//if ($("#emptyStar1").on('click')) { 
 					// 1번 별을 클릭한 경우
-					let point = $("#emptyStar1").data("point-one"); // 1점
-				} else if ($("#emptyStar2").on('click')) { 
+				//	let point = $("#emptyStar1").data("point-one"); // 1점
+				//} else if ($("#emptyStar2").on('click')) { 
 					// 2번 별을 클릭한 경우
-					let point = $("#emptyStar2").data("point-two"); // 2점
-				} else if ($("#emptyStar3").on('click')) { 
+				//	let point = $("#emptyStar2").data("point-two"); // 2점
+				//} else if ($("#emptyStar3").on('click')) { 
 					// 3번 별을 클릭한 경우
-					let point = $("#emptyStar3").data("point-three"); // 3점
-				} else if ($("#emptyStar4").on('click')) { 
+				//	let point = $("#emptyStar3").data("point-three"); // 3점
+				//} else if ($("#emptyStar4").on('click')) { 
 					// 4번 별을 클릭한 경우
-					let point = $("#emptyStar4").data("point-four"); // 4점
-				} else { 
+				//	let point = $("#emptyStar4").data("point-four"); // 4점
+				//} else { 
 					// 5번 별을 클릭한 경우
-					let point = $("#emptyStar5").data("point-five"); // 5점
-				}
+				//	let point = $("#emptyStar5").data("point-five"); // 5점
+				//}
 				
 				// 폼
 				let formData = new FormData();
@@ -199,7 +209,7 @@
 				
 				$.ajax({
 					// request 
-					type: "get"
+					type: "post"
  					, url: "/star/" + movieId
 					, data: formData
 					, processData: false
@@ -208,7 +218,7 @@
 					// response
 					, success:function(data) {
 						if (data.code == 200) {
-							alert("별점 매기기 성공!");
+							alert("별점 매기기/삭제하기 성공!");
 							location.reload(true);
 						} else if (data.code == 403) { // 비로그인 상태
 							alert(data.error_message);

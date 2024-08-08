@@ -20,9 +20,9 @@ public class StarBO {
 	// 별점 toggle 
 	public void starToggle(int movieId, int userOriginId, int point) {
 		int count = starMapper.selectStarCountByMovieIdAndUserOriginId(movieId, userOriginId);
-		if (count == 1) { // 이미 별점 누른 상태 > 재클릭 > 별점 삭제
+		if (count == 0) { // 아직 별점을 안누른 상태 > 클릭 > 별점 매김
 			starMapper.insertStarByMovieIdAndUserOriginIdAndPoint(movieId, userOriginId, point);
-		} else if (count == 0) { // 아직 별점을 안누른 상태 > 클릭 > 별점 매김
+		} else { // 이미 별점 누른 상태 > 재클릭 > 별점 삭제 
 			starMapper.deleteStarByMovieIdAndUserOriginId(movieId, userOriginId);
 		}
 	}

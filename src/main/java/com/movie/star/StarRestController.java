@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +24,7 @@ public class StarRestController {
 	// 별점 매기기
 	// 인풋 파라미터 - movieId(PathVariable로 가져옴), userOriginId(session으로 가져옴), point(RequestParam으로 가져옴)
 	// /star/{movieId}
-	@GetMapping("/star/{movieId}")
+	@PostMapping("/star/{movieId}")
 	public Map<String, Object> StarToggle1(
 			@PathVariable(name = "movieId") int movieId, 
 			@RequestParam("point") int point, HttpSession session) {

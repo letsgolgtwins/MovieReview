@@ -41,6 +41,6 @@
 		WHERE
 			`movieId` = #{movieId}
 		AND
-			`userOriginId` = #{userOriginId}
+			`userId` = #{userOriginId}
 	</delete>
 </mapper>
