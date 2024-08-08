@@ -21,11 +21,11 @@ public class StarRestController {
 	@Autowired
 	private StarBO starBO;
 	
-	// 별점 매기기
+	// 별점 매기기 toggle API
 	// 인풋 파라미터 - movieId(PathVariable로 가져옴), userOriginId(session으로 가져옴), point(RequestParam으로 가져옴)
 	// /star/{movieId}
 	@PostMapping("/star/{movieId}")
-	public Map<String, Object> StarToggle1(
+	public Map<String, Object> StarToggle(
 			@PathVariable(name = "movieId") int movieId, 
 			@RequestParam("point") int point, HttpSession session) {
 		Map<String, Object> result = new HashMap<>();

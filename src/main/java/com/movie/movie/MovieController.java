@@ -54,6 +54,6 @@ public class MovieController {
 		model.addAttribute("movieInfo", movie);
 		
 		// 상세 페이지로 이동
-		return "movie/movieDatailView";
+		return "movie/movieDetailView";
 	}
 }
