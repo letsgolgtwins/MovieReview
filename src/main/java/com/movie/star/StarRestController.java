@@ -41,7 +41,7 @@ public class StarRestController {
 		Integer userOriginId = (Integer) session.getAttribute("userOriginId");
 		
 		// 별점 toggle
-		starBO.starToggle1(movieId, userOriginId);
+		starBO.StarToggle1(movieId, userOriginId);
 		
 		// 응답 JSON
 		result.put("code", 200);
@@ -69,14 +69,14 @@ public class StarRestController {
 		Integer userOriginId = (Integer) session.getAttribute("userOriginId");
 		
 		// 별점 toggle
-		starBO.starToggle2(movieId, userOriginId);
+		starBO.StarToggle2(movieId, userOriginId);
 		
 		// 응답 JSON
 		result.put("code", 200);
 		result.put("result", "성공");
 		return result;
 	}
-
+	
 	// 3번별 클릭
 	// /star3/{movieId}
 	@GetMapping("/star3/{movieId}")
@@ -97,7 +97,7 @@ public class StarRestController {
 		Integer userOriginId = (Integer) session.getAttribute("userOriginId");
 		
 		// 별점 toggle
-		starBO.starToggle3(movieId, userOriginId);
+		starBO.StarToggle3(movieId, userOriginId);
 		
 		// 응답 JSON
 		result.put("code", 200);
@@ -125,7 +125,7 @@ public class StarRestController {
 		Integer userOriginId = (Integer) session.getAttribute("userOriginId");
 		
 		// 별점 toggle
-		starBO.starToggle4(movieId, userOriginId);
+		starBO.StarToggle4(movieId, userOriginId);
 		
 		// 응답 JSON
 		result.put("code", 200);
@@ -153,13 +153,11 @@ public class StarRestController {
 		Integer userOriginId = (Integer) session.getAttribute("userOriginId");
 		
 		// 별점 toggle
-		starBO.starToggle5(movieId, userOriginId);
+		starBO.StarToggle5(movieId, userOriginId);
 		
 		// 응답 JSON
 		result.put("code", 200);
 		result.put("result", "성공");
 		return result;
 	}
-	
-	// 별점 수정
 }

@@ -12,15 +12,64 @@ public interface StarMapper {
 			@Param("userOriginId") int userOriginId
 			);
 	
-	// 별점 매기는 toggle
-	public void insertStarByMovieIdAndUserOriginId(
+	// 1번 별 클릭 > 별점 1점 매기는 toggle
+	public void insertStar1ByMovieIdAndUserOriginId(
 			@Param("movieId") int movieId, 
 			@Param("userOriginId") int userOriginId
 			);
 
-	// 별점 지우는 toggle
-	public void deleteStarByMovieIdAndUserOriginId(
+	// 1번 별 재클릭 > 별점 1점 지우는 toggle
+	public void deleteStar1ByMovieIdAndUserOriginId(
 			@Param("movieId") int movieId, 
 			@Param("userOriginId") int userOriginId
 			);
+	
+	// 2번 별 클릭 > 별점 2점 매기는 toggle
+	public void insertStar2ByMovieIdAndUserOriginId(
+			@Param("movieId") int movieId, 
+			@Param("userOriginId") int userOriginId
+			);
+	
+	// 2번 별 재클릭 > 별점 2점 지우는 toggle
+	public void deleteStar2ByMovieIdAndUserOriginId(
+			@Param("movieId") int movieId, 
+			@Param("userOriginId") int userOriginId
+			);
+	
+	// 3번 별 클릭 > 별점 3점 매기는 toggle
+	public void insertStar3ByMovieIdAndUserOriginId(
+			@Param("movieId") int movieId, 
+			@Param("userOriginId") int userOriginId
+			);
+	
+	// 3번 별 재클릭 > 별점 3점 지우는 toggle
+	public void deleteStar3ByMovieIdAndUserOriginId(
+			@Param("movieId") int movieId, 
+			@Param("userOriginId") int userOriginId
+			);
+	
+	// 4번 별 클릭 > 별점 4점 매기는 toggle
+	public void insertStar4ByMovieIdAndUserOriginId(
+			@Param("movieId") int movieId, 
+			@Param("userOriginId") int userOriginId
+			);
+	
+	// 4번 별 재클릭 > 별점 4점 지우는 toggle
+	public void deleteStar4ByMovieIdAndUserOriginId(
+			@Param("movieId") int movieId, 
+			@Param("userOriginId") int userOriginId
+			);
+	
+	// 5번 별 클릭 > 별점 5점 매기는 toggle
+	public void insertStar5ByMovieIdAndUserOriginId(
+			@Param("movieId") int movieId, 
+			@Param("userOriginId") int userOriginId
+			);
+	
+	// 5번 별 재클릭 > 별점 5점 지우는 toggle
+	public void deleteStar5ByMovieIdAndUserOriginId(
+			@Param("movieId") int movieId, 
+			@Param("userOriginId") int userOriginId
+			);
+	
 }

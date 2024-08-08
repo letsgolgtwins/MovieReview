@@ -12,69 +12,84 @@ public class StarBO {
 	@Autowired
 	private StarMapper starMapper;
 
-	// 1번별 클릭
-	public void starToggle1(int movieId, int userOriginId) { // 누가, 어떤 영화에
-
-		// 이미 별점 매겼나 확인 
-		int starTrue = starMapper.selectStarCountByMovieIdAndUserOriginId(movieId, userOriginId);
-
-		if (starTrue == 1) { // 이미 별점 매김
-			// 이미 별점이 매겨진 상태니 삭제
-			starMapper.deleteStarByMovieIdAndUserOriginId(movieId, userOriginId);
-		} else if (starTrue == 0) { // 아직 별점 안매긴 상태 (starTrue == 0)
-			// 별점이 안매겨진 상태이므로 별점을 매김
-			starMapper.insertStarByMovieIdAndUserOriginId(movieId, userOriginId);
-		}
-	}
-	
-	// 2번별 클릭
-	public void starToggle2(int movieId, int userOriginId) { // 누가, 어떤 영화에
-		// 이미 별점 매겼나 확인 
-		int starTrue = starMapper.selectStarCountByMovieIdAndUserOriginId(movieId, userOriginId);
-		if (starTrue == 1) { // 이미 별점1점 매긴 상태에서 2점을 매기는 것
-			starMapper.insertStarByMovieIdAndUserOriginId(movieId, userOriginId);
-		} else if (starTrue == 2) { // 이미 별점2점을 매긴 상태이므로 싹 다 삭제(0점으로 리셋).
-			starMapper.deleteStarByMovieIdAndUserOriginId(movieId, userOriginId);
-		}
-	}
-	
-	// 3번별 클릭
-	public void starToggle3(int movieId, int userOriginId) { // 누가, 어떤 영화에
-		// 이미 별점 매겼나 확인 
-		int starTrue = starMapper.selectStarCountByMovieIdAndUserOriginId(movieId, userOriginId);
-		if (starTrue == 2) { // 이미 별점2점 매긴 상태에서 3점을 매기는 것
-			starMapper.insertStarByMovieIdAndUserOriginId(movieId, userOriginId);
-		} else if (starTrue == 3) { // 이미 별점3점을 매긴 상태이므로 싹 다 삭제(0점으로 리셋).
-			starMapper.deleteStarByMovieIdAndUserOriginId(movieId, userOriginId);
-		}
-	}
-	
-	// 4번별 클릭
-	public void starToggle4(int movieId, int userOriginId) { // 누가, 어떤 영화에
-		// 이미 별점 매겼나 확인 
-		int starTrue = starMapper.selectStarCountByMovieIdAndUserOriginId(movieId, userOriginId);
-		if (starTrue == 3) { // 이미 별점3점 매긴 상태에서 4점을 매기는 것
-			starMapper.insertStarByMovieIdAndUserOriginId(movieId, userOriginId);
-		} else if (starTrue == 4) { // 이미 별점4점을 매긴 상태이므로 싹 다 삭제(0점으로 리셋).
-			starMapper.deleteStarByMovieIdAndUserOriginId(movieId, userOriginId);
-		}
-	}
-	
-	// 5번별 클릭
-	public void starToggle5(int movieId, int userOriginId) { // 누가, 어떤 영화에
-		// 이미 별점 매겼나 확인 
-		int starTrue = starMapper.selectStarCountByMovieIdAndUserOriginId(movieId, userOriginId);
-		if (starTrue == 4) { // 이미 별점4점 매긴 상태에서 5점을 매기는 것
-			starMapper.insertStarByMovieIdAndUserOriginId(movieId, userOriginId);
-		} else if (starTrue == 5) { // 이미 별점5점을 매긴 상태이므로 싹 다 삭제(0점으로 리셋).
-			starMapper.deleteStarByMovieIdAndUserOriginId(movieId, userOriginId);
-		}
-	}
-
-	// 위의 메소드를 위해서 만든 메소드
 	// 특정 영화에 특정 유저가 좋아요 눌렀는지 여부 - db에서 count(*) select
 	public int getStarCountByMovieIdAndUserOriginId(int movieId, int userOriginId) {
 		return starMapper.selectStarCountByMovieIdAndUserOriginId(movieId, userOriginId);
+	}
+
+	// 1번별에 대한 toggle - 클릭시 1, 재클릭시 0
+	public void StarToggle1(int movieId, int userOriginId) { 
+		// 이미 별점 매겼나 확인
+		int count1 = starMapper.selectStarCountByMovieIdAndUserOriginId(movieId, userOriginId);
+		
+		// 조회해보고 그 여부에 따라 > 삭제 or 추가
+		if (count1 > 0) { 
+			// 이미 쌓여있음 > 재클릭 > 1삭제
+			starMapper.deleteStar1ByMovieIdAndUserOriginId(movieId, userOriginId);
+		} else { 
+			// 안 쌓여있음 > 클릭 > 1추가
+			starMapper.insertStar1ByMovieIdAndUserOriginId(movieId, userOriginId);
+		}
+	}
+	
+	// 2번별에 대한 toggle - 클릭시 2, 재클릭시 0
+	public void StarToggle2(int movieId, int userOriginId) { 
+		// 이미 별점 매겼나 확인
+		int count2 = starMapper.selectStarCountByMovieIdAndUserOriginId(movieId, userOriginId);
+		
+		// 조회해보고 그 여부에 따라 > 삭제 or 추가
+		if (count2 == 2) { 
+			// 이미 쌓여있음 > 재클릭 > 2삭제
+			starMapper.deleteStar2ByMovieIdAndUserOriginId(movieId, userOriginId);
+		} else { 
+			// 안 쌓여있음 > 클릭 > 2추가
+			starMapper.insertStar2ByMovieIdAndUserOriginId(movieId, userOriginId);
+		}
+	}
+	
+	// 3번별에 대한 toggle - 클릭시 3, 재클릭시 0
+	public void StarToggle3(int movieId, int userOriginId) { 
+		// 이미 별점 매겼나 확인
+		int count3 = starMapper.selectStarCountByMovieIdAndUserOriginId(movieId, userOriginId);
+		
+		// 조회해보고 그 여부에 따라 > 삭제 or 추가
+		if (count3 == 3) { 
+			// 이미 쌓여있음 > 재클릭 > 3삭제
+			starMapper.deleteStar3ByMovieIdAndUserOriginId(movieId, userOriginId);
+		} else { 
+			// 안 쌓여있음 > 클릭 > 3추가
+			starMapper.insertStar3ByMovieIdAndUserOriginId(movieId, userOriginId);
+		}
+	}
+	
+	// 4번별에 대한 toggle - 클릭시 4, 재클릭시 0
+	public void StarToggle4(int movieId, int userOriginId) { 
+		// 이미 별점 매겼나 확인
+		int count4 = starMapper.selectStarCountByMovieIdAndUserOriginId(movieId, userOriginId);
+		
+		// 조회해보고 그 여부에 따라 > 삭제 or 추가
+		if (count4 == 4) { 
+			// 이미 쌓여있음 > 재클릭 > 4삭제
+			starMapper.deleteStar4ByMovieIdAndUserOriginId(movieId, userOriginId);
+		} else { 
+			// 안 쌓여있음 > 클릭 > 4추가
+			starMapper.insertStar4ByMovieIdAndUserOriginId(movieId, userOriginId);
+		}
+	}
+	
+	// 5번별에 대한 toggle - 클릭시 5, 재클릭시 0
+	public void StarToggle5(int movieId, int userOriginId) { 
+		// 이미 별점 매겼나 확인
+		int count5 = starMapper.selectStarCountByMovieIdAndUserOriginId(movieId, userOriginId);
+		
+		// 조회해보고 그 여부에 따라 > 삭제 or 추가
+		if (count5 == 5) { 
+			// 이미 쌓여있음 > 재클릭 > 5삭제
+			starMapper.deleteStar5ByMovieIdAndUserOriginId(movieId, userOriginId);
+		} else { 
+			// 안 쌓여있음 > 클릭 > 5추가
+			starMapper.insertStar5ByMovieIdAndUserOriginId(movieId, userOriginId);
+		}
 	}
 	
 	// 별 채울지 여부

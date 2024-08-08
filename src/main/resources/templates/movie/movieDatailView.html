@@ -146,7 +146,7 @@
 				}); // AJAX 끝.
 			}); // reviewBtn 리뷰 남기기 버튼 클릭 이벤트 끝.
 			
-			// 별점 toggle
+			// 1,2,3,4,5 각 별점 toggle 시작
 			// starBtn1 1점 매기기 버튼 클릭 이벤트
 			$(".starBtn1").on('click', function(e) {
 				e.preventDefault();
@@ -161,12 +161,11 @@
 					type: "get"
 					, url: "/star1/" + movieId
 					, data: {"movieId":movieId}
+				
 					// response
 					, success:function(data) {
 						if (data.code == 200) {
-							$("#emptyStar1").addClass("d-none"); // 빈 별은 없어지고
-							$("#fullStar1").removeClass("d-none"); // 채워진 별은 등장하고
-							//location.reload(true);
+							location.reload(true);
 						} else if (data.code == 403) { // 비로그인 상태
 							alert(data.error_message);
 							// 로그인 페이지로 이동
@@ -196,9 +195,7 @@
 					// response
 					, success:function(data) {
 						if (data.code == 200) {
-							$("#emptyStar2").addClass("d-none"); // 빈 별은 없어지고
-							$("#fullStar2").removeClass("d-none"); // 채워진 별은 등장하고
-							//location.reload(true);
+							location.reload(true);
 						} else if (data.code == 403) { // 비로그인 상태
 							alert(data.error_message);
 							// 로그인 페이지로 이동
@@ -210,7 +207,7 @@
 					}
 				}); // AJAX 끝.
 			}); // starBtn2 2점 매기기 버튼 클릭 이벤트 끝.
-			
+
 			// starBtn3 3점 매기기 버튼 클릭 이벤트
 			$(".starBtn3").on('click', function(e) {
 				e.preventDefault();
@@ -228,9 +225,7 @@
 					// response
 					, success:function(data) {
 						if (data.code == 200) {
-							$("#emptyStar3").addClass("d-none"); // 빈 별은 없어지고
-							$("#fullStar3").removeClass("d-none"); // 채워진 별은 등장하고
-							//location.reload(true);
+							location.reload(true);
 						} else if (data.code == 403) { // 비로그인 상태
 							alert(data.error_message);
 							// 로그인 페이지로 이동
@@ -260,9 +255,7 @@
 					// response
 					, success:function(data) {
 						if (data.code == 200) {
-							$("#emptyStar4").addClass("d-none"); // 빈 별은 없어지고
-							$("#fullStar4").removeClass("d-none"); // 채워진 별은 등장하고
-							//location.reload(true);
+							location.reload(true);
 						} else if (data.code == 403) { // 비로그인 상태
 							alert(data.error_message);
 							// 로그인 페이지로 이동
@@ -292,9 +285,7 @@
 					// response
 					, success:function(data) {
 						if (data.code == 200) {
-							$("#emptyStar5").addClass("d-none"); // 빈 별은 없어지고
-							$("#fullStar5").removeClass("d-none"); // 채워진 별은 등장하고
-							//location.reload(true);
+							location.reload(true);
 						} else if (data.code == 403) { // 비로그인 상태
 							alert(data.error_message);
 							// 로그인 페이지로 이동
@@ -306,6 +297,7 @@
 					}
 				}); // AJAX 끝.
 			}); // starBtn5 5점 매기기 버튼 클릭 이벤트 끝.
+			// 1,2,3,4,5 각 별점 toggle 끝.
 		}); // ready 함수 끝.
     </script>
 </th:block>

@@ -15,8 +15,8 @@
 			`userId` = #{userOriginId}
 	</select>
 	
-	<!-- 별점 매기는 toggle - db에 insert -->
-	<insert id="insertStarByMovieIdAndUserOriginId" parameterType="map">
+	<!-- 1번 별 눌렀을 때 > 클릭 시 > db에 1개 insert -->
+	<insert id="insertStar1ByMovieIdAndUserOriginId" parameterType="map">
 		INSERT INTO `star`
 		(
 			`movieId`
@@ -33,15 +33,195 @@
 		)
 	</insert>
 	
-	<!-- 별점 지우는 toggle - db에서 delete -->
-	<delete id="deleteStarByMovieIdAndUserOriginId" parameterType="map">
+	<!-- 1번 별 눌렀을 때 > 재클릭 시 > db에 1개 delete -->
+	<delete id="deleteStar1ByMovieIdAndUserOriginId" parameterType="map">
 		DELETE FROM
 			`star`
 		WHERE
 			`movieId` = #{movieId}
 		AND
 			`userId` = #{userOriginId}
-		ORDER BY `id` 
-		DESC LIMIT 1
+	</delete>
+	
+	<!-- 2번 별 눌렀을 때 > 클릭 시 > db에 2개 insert -->
+	<insert id="insertStar2ByMovieIdAndUserOriginId" parameterType="map">
+		INSERT INTO `star`
+		(
+			`movieId`
+			,`userId`
+			,`createdAt`
+			,`updatedAt`
+		)
+		VALUES
+		(
+			#{movieId}
+			, #{userOriginId}
+			, NOW()
+			, NOW()
+		)
+		,
+		(
+			#{movieId}
+			, #{userOriginId}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+	
+	<!-- 2번 별 눌렀을 때 > 재클릭 시 > db에 2개 싹 다 delete -->
+	<delete id="deleteStar2ByMovieIdAndUserOriginId" parameterType="map">
+		DELETE FROM
+			`star`
+		WHERE
+			`movieId` = #{movieId}
+		AND
+			`userId` = #{userOriginId}
+	</delete>
+	
+	<!-- 3번 별 눌렀을 때 > 클릭 시 > db에 3개 insert -->
+	<insert id="insertStar3ByMovieIdAndUserOriginId" parameterType="map">
+		INSERT INTO `star`
+		(
+			`movieId`
+			,`userId`
+			,`createdAt`
+			,`updatedAt`
+		)
+		VALUES
+		(
+			#{movieId}
+			, #{userOriginId}
+			, NOW()
+			, NOW()
+		)
+		,
+		(
+			#{movieId}
+			, #{userOriginId}
+			, NOW()
+			, NOW()
+		)
+		,
+		(
+			#{movieId}
+			, #{userOriginId}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+	
+	<!-- 3번 별 눌렀을 때 > 재클릭 시 > db에 3개 싹 다 delete -->
+	<delete id="deleteStar3ByMovieIdAndUserOriginId" parameterType="map">
+		DELETE FROM
+			`star`
+		WHERE
+			`movieId` = #{movieId}
+		AND
+			`userId` = #{userOriginId}
+	</delete>
+	
+	<!-- 4번 별 눌렀을 때 > 클릭 시 > db에 4개 insert -->
+	<insert id="insertStar4ByMovieIdAndUserOriginId" parameterType="map">
+		INSERT INTO `star`
+		(
+			`movieId`
+			,`userId`
+			,`createdAt`
+			,`updatedAt`
+		)
+		VALUES
+		(
+			#{movieId}
+			, #{userOriginId}
+			, NOW()
+			, NOW()
+		)
+		,
+		(
+			#{movieId}
+			, #{userOriginId}
+			, NOW()
+			, NOW()
+		)
+		,
+		(
+			#{movieId}
+			, #{userOriginId}
+			, NOW()
+			, NOW()
+		)
+		,
+		(
+			#{movieId}
+			, #{userOriginId}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+	
+	<!-- 4번 별 눌렀을 때 > 재클릭 시 > db에 4개 싹 다 delete -->
+	<delete id="deleteStar4ByMovieIdAndUserOriginId" parameterType="map">
+		DELETE FROM
+			`star`
+		WHERE
+			`movieId` = #{movieId}
+		AND
+			`userId` = #{userOriginId}
+	</delete>
+	
+	<!-- 5번 별 눌렀을 때 > 클릭 시 > db에 5개 insert -->
+	<insert id="insertStar5ByMovieIdAndUserOriginId" parameterType="map">
+		INSERT INTO `star`
+		(
+			`movieId`
+			,`userId`
+			,`createdAt`
+			,`updatedAt`
+		)
+		VALUES
+		(
+			#{movieId}
+			, #{userOriginId}
+			, NOW()
+			, NOW()
+		)
+		,
+		(
+			#{movieId}
+			, #{userOriginId}
+			, NOW()
+			, NOW()
+		)
+		,
+		(
+			#{movieId}
+			, #{userOriginId}
+			, NOW()
+			, NOW()
+		)
+		,
+		(
+			#{movieId}
+			, #{userOriginId}
+			, NOW()
+			, NOW()
+		)
+		,
+		(
+			#{movieId}
+			, #{userOriginId}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+	
+	<!-- 5번 별 눌렀을 때 > 재클릭 시 > db에 5개 싹 다 delete -->
+	<delete id="deleteStar5ByMovieIdAndUserOriginId" parameterType="map">
+		DELETE FROM
+			`star`
+		WHERE
+			`movieId` = #{movieId}
+		AND
+			`userId` = #{userOriginId}
 	</delete>
 </mapper>
