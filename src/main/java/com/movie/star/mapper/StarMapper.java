@@ -47,5 +47,8 @@ public interface StarMapper {
 			@Param("movieId") int movieId,
 			@Param("userOriginId") int userOriginId
 			);
+	
+	// 특정 영화의 별점 가져오기 - db에서 select
+	public int selectPointByMovieId(int movieId);
 		
 }

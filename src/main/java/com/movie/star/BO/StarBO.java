@@ -60,4 +60,8 @@ public class StarBO {
 		return starMapper.selectStarInfoByMovieIdAndUserOriginId(movieId, userOriginId);
 	}
 	
+	// 특정 영화의 별점 가져오기 - db에서 select
+	public int getPointByMovieId(int movieId) {
+		return starMapper.selectPointByMovieId(movieId);
+	}
 }

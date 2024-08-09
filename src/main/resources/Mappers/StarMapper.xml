@@ -83,4 +83,15 @@
 		AND
 			`userId` = #{userOriginId}
 	</select>
+	
+	<!-- 특정 영화의 별점 가져오기 - db에서 select -->
+	<select id="selectPointByMovieId" resultType="int">
+		SELECT AVG(`point`) 
+		FROM 
+			`star`
+		WHERE 
+			`movieId` = #{movieId}
+		GROUP BY
+			`movieId`;
+	</select>
 </mapper>

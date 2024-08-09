@@ -62,9 +62,13 @@ public class MovieController {
 		// 0809 오전 추가 - Star 가져오기
 		Star star = starBO.getStarInfoByMovieIdAndUserOriginId(movieId, userOriginId);
 		
+		// 0809 오후 추가 - 영화별 평점 가져오기
+		int AvgPoint = starBO.getPointByMovieId(movieId);
+		
 		// model에 담기
 		model.addAttribute("movieInfo", movie);
 		model.addAttribute("starInfo", star); // 0809 오전 추가
+		model.addAttribute("pointAvg", AvgPoint); // 0809 오후 추가
 		
 		// 상세 페이지로 이동
 		return "movie/movieDetailView";
