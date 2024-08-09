@@ -1,8 +1,11 @@
 package com.movie.star.BO;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.movie.star.domain.Star;
 import com.movie.star.mapper.StarMapper;
 
 @Service
@@ -37,23 +40,9 @@ public class StarBO {
 		return starMapper.deleteStarByMovieIdAndUserOriginId(movieId, userOriginId);
 	}
 	
-	// 별 채울지 여부
-//	public int filledStarByMovieIdAndUserOriginId(int movieId, int userOriginId) {
-//		// 로그인 여부 확인 절차 - 생략
-//		
-//		int starCount = starMapper.selectStarCountByMovieIdAndUserOriginId(movieId, userOriginId);
-//		if (starCount == 1) { // 1번 별 누름
-//			return 1;
-//		} else if (starCount == 2) { // 2번 별 누름
-//			return 2;
-//		} else if (starCount == 3) { // 3번 별 누름
-//			return 3;
-//		} else if (starCount == 4) { // 4번 별 누름
-//			return 4; 
-//		} else { // 5번 별 누름
-//			return 5;
-//		}
-//	
-//	} 
+	// 특정 영화의 특정 유저가 매긴 별점 정보 일단 가져오기 - db에서 select
+	public List<Star> getStarInfoByMovieIdAndUserOriginId(int movieId, int userOriginId) {
+		return starMapper.selectStarInfoByMovieIdAndUserOriginId(movieId, userOriginId);
+	}
 	
 }

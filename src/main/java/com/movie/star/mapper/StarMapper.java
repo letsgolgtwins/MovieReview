@@ -1,7 +1,11 @@
 package com.movie.star.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import com.movie.star.domain.Star;
 
 @Mapper
 public interface StarMapper {
@@ -24,4 +28,11 @@ public interface StarMapper {
 			@Param("movieId") int movieId, 
 			@Param("userOriginId") int userOriginId
 			); 
+	
+	// 특정 영화의 특정 유저가 매긴 별점 정보 일단 가져오기 - db에서 select 
+	public List<Star> selectStarInfoByMovieIdAndUserOriginId(
+			@Param("movieId") int movieId,
+			@Param("userOriginId") int userOriginId
+			);
+		
 }

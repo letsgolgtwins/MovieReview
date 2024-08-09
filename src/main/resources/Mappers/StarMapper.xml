@@ -43,4 +43,21 @@
 		AND
 			`userId` = #{userOriginId}
 	</delete>
+	
+	<!-- 특정 영화의 특정 유저가 매긴 별점 정보 일단 가져오기 - db에서 select -->
+	<select id="selectStarInfoByMovieIdAndUserOriginId" resultType="com.movie.star.domain.Star">
+		SELECT 
+			`id`
+			,`movieId`
+			,`userId`
+			,`point`
+			,`createdAt`
+			,`updatedAt`
+		FROM 
+			`star`
+		WHERE
+			`movieId` = #{movieId}
+		AND
+			`userId` = #{userOriginId}
+	</select>
 </mapper>

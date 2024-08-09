@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.movie.movie.BO.MovieBO;
 import com.movie.movie.domain.Movie;
+import com.movie.star.BO.StarBO;
+import com.movie.star.domain.Star;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -20,6 +22,10 @@ public class MovieController {
 
 	@Autowired
 	private MovieBO movieBO;
+	
+	// 0809오전
+	@Autowired
+	private StarBO starBO;
 	
 	// 홈페이지 - 영화 정보들 뿌리기
 	// http://localhost/movie/movie-list-view
@@ -45,13 +51,20 @@ public class MovieController {
 	// 영화 상세 화면
 	// http://localhost/movie/movie-detail-view
 	@GetMapping("/movie-detail-view")
-	public String MovieDetailView(@RequestParam("movieId") int movieId, Model model) {
-	
+	public String MovieDetailView(@RequestParam("movieId") int movieId, Model model, HttpSession session) {
+		
+		// 0809 오전 추가 -파라미터로 movieId(이미 리퀘스트 파람으로 되어있음), userOriginId(session으로)를 받아온다
+		Integer userOriginId = (Integer) session.getAttribute("userOriginId");
+		
 		// Movie에서 단 건 조회
 		Movie movie = movieBO.getMovieByMovieId(movieId);
 		
+		// 0809 오전 추가 - Star 가져오기
+		List<Star> star = starBO.getStarInfoByMovieIdAndUserOriginId(movieId, userOriginId);
+		
 		// model에 담기
 		model.addAttribute("movieInfo", movie);
+		model.addAttribute("starInfo", star); // 0809 오전 추가
 		
 		// 상세 페이지로 이동
 		return "movie/movieDetailView";
