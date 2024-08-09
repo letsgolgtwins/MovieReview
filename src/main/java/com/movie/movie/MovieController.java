@@ -23,7 +23,7 @@ public class MovieController {
 	@Autowired
 	private MovieBO movieBO;
 	
-	// 0809오전
+	// 0809오전 추가
 	@Autowired
 	private StarBO starBO;
 	
@@ -60,7 +60,7 @@ public class MovieController {
 		Movie movie = movieBO.getMovieByMovieId(movieId);
 		
 		// 0809 오전 추가 - Star 가져오기
-		List<Star> star = starBO.getStarInfoByMovieIdAndUserOriginId(movieId, userOriginId);
+		Star star = starBO.getStarInfoByMovieIdAndUserOriginId(movieId, userOriginId);
 		
 		// model에 담기
 		model.addAttribute("movieInfo", movie);

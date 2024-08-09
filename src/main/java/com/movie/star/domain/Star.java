@@ -13,7 +13,7 @@ public class Star {
 	private int id;
 	private int movieId;
 	private int userId;
-	private Integer point;
+	private int point;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 }

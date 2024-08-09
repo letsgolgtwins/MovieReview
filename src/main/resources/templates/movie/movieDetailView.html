@@ -21,24 +21,24 @@
 		<div class="MovieDetailAreaCenter pt-2 d-flex justify-content-between">
 			<div class="star col-6">	
 				<a href="#" class="starBtn">
-					<img th:data-point-one="1" id="emptyStar1" class="emptyStar1" alt="비워진별점" src="/image/empty_star.png">
-					<img id="fullStar1" class="fullStar1 d-none" alt="채워진별점" src="/image/full_star.png">
+					<img th:unless="${starInfo?.point} == 1 or ${starInfo?.point} == 2 or ${starInfo?.point} == 3 or ${starInfo?.point} == 4 or ${starInfo?.point} == 5" th:data-point-one="1" id="emptyStar1" class="emptyStar1" alt="비워진별점" src="/image/empty_star.png">
+					<img th:if="${starInfo?.point} == 1 or ${starInfo?.point} == 2 or ${starInfo?.point} == 3 or ${starInfo?.point} == 4 or ${starInfo?.point} == 5" th:data-point-one="1" id="fullStar1" class="fullStar1" alt="채워진별점" src="/image/full_star.png">
 				</a>
 				<a href="#" class="starBtn">
-					<img th:data-point-two="2" id="emptyStar2" class="emptyStar2" alt="비워진별점" src="/image/empty_star.png">
-					<img id="fullStar2" class="fullStar2 d-none" alt="채워진별점" src="/image/full_star.png">
+					<img th:unless="${starInfo?.point} == 2 or ${starInfo?.point} == 3 or ${starInfo?.point} == 4 or ${starInfo?.point} == 5" th:data-point-two="2" id="emptyStar2" class="emptyStar2" alt="비워진별점" src="/image/empty_star.png">
+					<img th:if="${starInfo?.point} == 2 or ${starInfo?.point} == 3 or ${starInfo?.point} == 4 or ${starInfo?.point} == 5" th:data-point-two="2" id="fullStar2" class="fullStar2" alt="채워진별점" src="/image/full_star.png">
 				</a>
 				<a href="#" class="starBtn">
-					<img th:data-point-three="3" id="emptyStar3" class="emptyStar3" alt="비워진별점" src="/image/empty_star.png">
-					<img id="fullStar3" class="fullStar3 d-none" alt="채워진별점" src="/image/full_star.png">
+					<img th:unless="${starInfo?.point} == 3 or ${starInfo?.point} == 4 or ${starInfo?.point} == 5" th:data-point-three="3" id="emptyStar3" class="emptyStar3" alt="비워진별점" src="/image/empty_star.png">
+					<img th:if="${starInfo?.point} == 3 or ${starInfo?.point} == 4 or ${starInfo?.point} == 5" th:data-point-three="3" id="fullStar3" class="fullStar3" alt="채워진별점" src="/image/full_star.png">
 				</a>
 				<a href="#" class="starBtn">
-					<img th:data-point-four="4" id="emptyStar4" class="emptyStar4" alt="비워진별점" src="/image/empty_star.png">
-					<img id="fullStar4" class="fullStar4 d-none" alt="채워진별점" src="/image/full_star.png">
+					<img th:unless="${starInfo?.point} == 4 or ${starInfo?.point} == 5" th:data-point-four="4" id="emptyStar4" class="emptyStar4" alt="비워진별점" src="/image/empty_star.png">
+					<img th:if="${starInfo?.point} == 4 or ${starInfo?.point} == 5" th:data-point-four="4" id="fullStar4" class="fullStar4" alt="채워진별점" src="/image/full_star.png">
 				</a>
 				<a href="#" class="starBtn">
-					<img th:data-point-five="5" id="emptyStar5" class="emptyStar5" alt="비워진별점" src="/image/empty_star.png">
-					<img id="fullStar5" class="fullStar5 d-none" alt="채워진별점" src="/image/full_star.png">
+					<img th:unless="${starInfo?.point} == 5" th:data-point-five="5" id="emptyStar5" class="emptyStar5" alt="비워진별점" src="/image/empty_star.png">
+					<img th:if="${starInfo?.point} == 5" th:data-point-five="5" id="fullStar5" class="fullStar5" alt="채워진별점" src="/image/full_star.png">
 				</a>
 				<h4 class="d-flex justify-content-center mt-2">별점 메기기</h4>
 			</div>
@@ -163,8 +163,7 @@
 					$(this).find("img").data("point-three") || 
 					$(this).find("img").data("point-four") || 
 					$(this).find("img").data("point-five");
-				
-				alert(point + "점");
+				//alert(point + "점");
 				
 				// 각 별 당 고유의 point 꺼내오기 테스트
 				//let point1 = $("#emptyStar1").data("point-one");
@@ -218,7 +217,7 @@
 					// response
 					, success:function(data) {
 						if (data.code == 200) {
-							alert("별점 매기기/삭제하기 성공!");
+							//alert("별점 매기기/삭제하기 성공!");
 							location.reload(true);
 						} else if (data.code == 403) { // 비로그인 상태
 							alert(data.error_message);
