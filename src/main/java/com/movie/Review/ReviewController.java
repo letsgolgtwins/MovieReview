@@ -34,4 +34,5 @@ public class ReviewController {
 		return "review/movieReviewList";
 	}
 
+	// 240811 modal 만들기
 }
