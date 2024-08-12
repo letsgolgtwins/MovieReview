@@ -85,7 +85,7 @@
 	</select>
 	
 	<!-- 특정 영화의 별점 가져오기 - db에서 select -->
-	<select id="selectPointByMovieId" resultType="int">
+	<select id="selectPointByMovieId" resultType="double">
 		SELECT AVG(`point`) 
 		FROM 
 			`star`
@@ -93,5 +93,14 @@
 			`movieId` = #{movieId}
 		GROUP BY
 			`movieId`;
+	</select>
+	
+	<!-- 특정 영화에 몇 명의 유저들이 몇점을 매겼는지 가져오기 - db에서 count select -->
+	<select id="selectCountByMovieId" resultType="integer">
+		SELECT COUNT(*)
+		FROM
+			`star`
+		WHERE
+			`movieId` = #{movieId}
 	</select>
 </mapper>

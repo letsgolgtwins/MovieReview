@@ -19,6 +19,7 @@
 	          			<div class="input-group-text">Q</div>
 		        		</div>
 		       			<input type="text" id="searchMovie" name="searchMovie" class="form-control col-12" placeholder="영화, 년도, 장르, 국가, 감독을 검색해보세요.">
+		       			<input type="button" id="searchBtn" name="searchBtn" class="form-control btn" value="검색">
 					</div>
 				</form>
 			</div>
@@ -41,7 +42,10 @@
 <th:block layout:fragment="script">
     <script>
 		$(document).ready(function() {
-			
+			// searchBtn 검색 버튼 클릭 이벤트
+			$("#searchBtn").on('click', function() {
+				alert("중간점검"); // 왜 안되지??
+			}); // searchBtn 검색 버튼 클릭 이벤트 끝.
 		}); // ready 함수 끝
     </script>
 </th:block>

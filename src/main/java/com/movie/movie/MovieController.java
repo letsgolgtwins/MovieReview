@@ -59,16 +59,34 @@ public class MovieController {
 		// Movie에서 단 건 조회
 		Movie movie = movieBO.getMovieByMovieId(movieId);
 		
-		// 0809 오전 추가 - Star 가져오기
+		// 0809 오전 추가 - Star 가져오기 
 		Star star = starBO.getStarInfoByMovieIdAndUserOriginId(movieId, userOriginId);
 		
 		// 0809 오후 추가 - 영화별 평점 가져오기
-		int AvgPoint = starBO.getPointByMovieId(movieId);
+		Double AvgPoint = (Double) starBO.getPointByMovieId(movieId);
+		
+		// 0812 오후 추가 - 영화별 몇명이나 별점 매겼나 가져오기
+		Integer starCount = (Integer) starBO.getCountByMovieId(movieId);
+		
+		// 0812 수정 - 영화 평균 별점
+		if (AvgPoint == null) {
+			AvgPoint = 0.0; // 아직 아무도 별점을 매기지 않았다면 0.0
+		} else {
+			AvgPoint = starBO.getPointByMovieId(movieId);
+		}
+		
+		// 0812 오후 추가 - 별점을 몇 명이나 매겼나
+		if (starCount == null) {
+			starCount = 0;
+		} else {
+			starCount = (Integer) starBO.getCountByMovieId(movieId);
+		}
 		
 		// model에 담기
 		model.addAttribute("movieInfo", movie);
 		model.addAttribute("starInfo", star); // 0809 오전 추가
 		model.addAttribute("pointAvg", AvgPoint); // 0809 오후 추가
+		model.addAttribute("starCount", starCount); // 0812 오후 추가
 		
 		// 상세 페이지로 이동
 		return "movie/movieDetailView";

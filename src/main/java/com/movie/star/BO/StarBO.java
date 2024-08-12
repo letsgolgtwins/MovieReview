@@ -35,33 +35,38 @@ public class StarBO {
 		}
 	}
 	
-	// 별점 매기기 - db에 insert
+	// 별점 매기기 - db에 insert // 안누른 상태에서 새로 매기기
 	public int addStarByMovieIdAndUserOriginIdAndPoint(int movieId, int userOriginId, int point) {
 		return starMapper.insertStarByMovieIdAndUserOriginIdAndPoint(movieId, userOriginId, point);
 	}
 	
-	// 별점 수정하기 - db에 update
+	// 별점 수정하기 - db에 update // 다른 별 재클릭
 	public int updateStarByMovieIdAndUserOriginIdAndPoint(int movieId, int userOriginId, int point) {
 		return starMapper.updateStarByMovieIdAndUserOriginIdAndPoint(movieId, userOriginId, point);
 	}
 	
-	// 별점 삭제하기 - db에서 delete
+	// 별점 삭제하기 - db에서 delete // 별점 삭제
 	public int removeStarByMovieIdAndUserOriginId(int movieId, int userOriginId) {
 		return starMapper.deleteStarByMovieIdAndUserOriginId(movieId, userOriginId);
 	}
 	
 	// 특정 유저가 특정 영화에 '몇 점'을 매겼나 알아내는 메소드 - db에서 int(point) select
-	public int getPointByMovieIdAndUserOriginId(int movieId, int userOriginId) {
+	public Integer getPointByMovieIdAndUserOriginId(int movieId, int userOriginId) {
 		return starMapper.selectPointByMovieIdAndUserOriginId(movieId, userOriginId);
 	}
 	
-	// 특정 영화의 특정 유저가 매긴 별점 정보 일단 가져오기 - db에서 select
+	// 특정 영화의 특정 유저가 매긴 별점 정보 일단 가져오기 - db에서 select // 이건 MovieController의 model에서 뿌리기 위해
 	public Star getStarInfoByMovieIdAndUserOriginId(int movieId, int userOriginId) {
 		return starMapper.selectStarInfoByMovieIdAndUserOriginId(movieId, userOriginId);
 	}
 	
-	// 특정 영화의 별점 가져오기 - db에서 select
-	public int getPointByMovieId(int movieId) {
+	// 특정 영화의 별점 가져오기 - db에서 select // (4.5) 위해서
+	public Double getPointByMovieId(int movieId) {
 		return starMapper.selectPointByMovieId(movieId);
+	}
+	
+	// 특정 영화에 몇 명의 유저들이 몇점을 매겼는지 가져오기 - db에서 count select // (1234명) 위해서
+	public Integer getCountByMovieId(int movieId) {
+		return starMapper.selectCountByMovieId(movieId);
 	}
 }

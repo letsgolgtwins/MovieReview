@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.movie.Review.BO.ReviewBO;
 import com.movie.Review.domain.Review;
+import com.movie.star.BO.StarBO;
+
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/review")
 @Controller
@@ -19,20 +22,33 @@ public class ReviewController {
 	@Autowired
 	private ReviewBO reviewBO;
 
+	@Autowired
+	private StarBO starBO; // 240812 오후 추가 (리뷰리스트 화면에 닉네임 옆에 본인들이 매긴 별점 뜨게끔 하기 위해)
+	
 	// 특정 영화의 리뷰들 목록 페이지
 	// http://localhost/review/movie-review-list?movieId=
-
 	@GetMapping("/movie-review-list")
-	public String MovieReviewList(@RequestParam("movieId") int movieId, Model model) {
+	public String MovieReviewList(
+			@RequestParam("movieId") int movieId, Model model) { // httpsession으로 userOriginId를 가져오려고 했으나, 그건 지금 로그인된 유저의 userOriginId를 가져어는 것이므로 그렇게하면 안된다.
 		
 		// 특정 영화의 리뷰들 가져오기 - db에서 여러건 select 
 		List<Review> reviewList = reviewBO.getMovieReviewListByMovieId(movieId);
+		
+		// 특정 영화의 특정 유저가 몇점을 매겼나 - db에서 point select // 0812 추가
+		//Integer point = (Integer) starBO.getPointByMovieIdAndUserOriginId(movieId, userOriginId);
+		
+		//if (point == null) { // 별점은 안매기고 리뷰만 쓴 거임.
+		//	point = 0;
+		//} else {
+		//	point = (Integer) starBO.getPointByMovieIdAndUserOriginId(movieId, userOriginId);
+		//}
 
 		// model에 담기
 		model.addAttribute("reviewInfo", reviewList);
+		//model.addAttribute("point", point); // 0812 추가
 		
 		return "review/movieReviewList";
 	}
 
-	// 240811 modal 만들기
+	// 240811 modal 만들기 - 나중으로 미룸
 }
