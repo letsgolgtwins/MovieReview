@@ -13,15 +13,15 @@
 					<h4 class="font-weight-bold"><li class="nav-link"><a href="#" class="text-dark">웹툰</a></li></h4>
 				</nav>
 				<!-- 검색창 영역 form -->
-				<form action="/movie/movie-search" method="get">
+				<!-- <form action="/movie/movie-search" method="get"> -->
 					<div class="d-flex mt-4 ml-5">
 						<div class="input-group-prepend">
-	          			<div class="input-group-text">Q</div>
+	          				<div class="input-group-text">Q</div>
 		        		</div>
 		       			<input type="text" id="searchMovie" name="searchMovie" class="form-control col-12" placeholder="영화, 연도, 장르, 국가, 감독을 검색해보세요.">
-		       			<input type="submit" id="searchBtn" class="form-control btn" value="검색">
+						<input type="button" id="searchBtn" class="form-control font-weight-bold" value="검색">
 					</div>
-				</form>
+				<!-- </form> -->
 			</div>
 			<!-- 로그인한 유저 정보(닉네임) -->
 			<div class="userInfo mt-3">	
@@ -37,15 +37,40 @@
 		</div>
 		<hr>
 	</header>
-</html>
 
 <th:block layout:fragment="script">
     <script>
 		$(document).ready(function() {
 			// searchBtn 검색 버튼 클릭 이벤트
-			$("#searchBtn").on('click', function() {
+			$("#searchBtn").on('click', function(e) {
+				e.preventDefault();
+				alert("중간점검"); 
+				
 				// validation
 				let movieInfo = $("#searchMovie").val();
+				
+				$.ajax({
+					// request
+					type: "get"
+					, url: "/movie/movie-search"
+					, data: {"movieInfo":movieInfo}
+				
+					// response
+					, success:function(data) {
+						if (data.code == 200) {
+							alert("해당 영화 상세 페이지로 이동합니다.");
+							let movieId = data.movieId;
+							alert(movieId);
+							// 이동할 주소 > /movie/movie-detail-view?movieId=
+							//location.href = "/movie/movie-detail-view?movieId=" + movieId;
+						} else if (data.code == 500) {
+							alert(data.error_message);
+						}
+					}
+					, error:function(error) {
+						alert("검색하는데 오류가 있습니다. 서버상의 에러입니다.");
+					}
+				}); // AJAX 끝.
 			}); // searchBtn 검색 버튼 클릭 이벤트 끝.
 		}); // ready 함수 끝
     </script>

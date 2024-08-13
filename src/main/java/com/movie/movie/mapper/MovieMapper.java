@@ -15,4 +15,13 @@ public interface MovieMapper {
 	
 	// 특정 영화 상세 정보 가져오기 (단 건) - db에서 select
 	public Movie selectMovieByMovieId(int movieId);
+	
+	// 영화 정보 검색 - db에서 select
+	public List<Movie> selectMovieIdByMovieNameMovieYearMovieGenreMovieNationMovieDirector(
+			@Param("movieName") String movieName, 
+			@Param("movieYear") int movieYear, 
+			@Param("movieGenre") String movieGenre, 
+			@Param("movieNation") String movieNation, 
+			@Param("movieDirector") String movieDirector
+			);
 }

@@ -36,4 +36,22 @@
 		WHERE
 			`id` = #{movieId}
 	</select>
+	
+	<!-- 영화 정보 검색하기 - db에서 여러건 select -->
+	<select id="selectMovieIdByMovieNameMovieYearMovieGenreMovieNationMovieDirector" resultType="list">
+		SELECT 
+			`id`
+		FROM
+			`movie`
+		WHERE
+			`movieName` = #{movieName}
+		OR
+			`movieYear` = #{movieYear}
+		OR 
+			`movieGenre` LIKE %#{movieGenre}%
+		OR
+			`movieNation` = #{movieNation}
+		OR
+			`movieDirector` = #{movieDirector}
+	</select>
 </mapper>
