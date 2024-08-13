@@ -15,17 +15,84 @@
 						<!-- 240812 but 추후 다시 
 						<h3 class="pt-3 ml-4 font-weight-bold" th:text="${point}"></h3>  
 						-->
+						<!-- 더보기 ... 버튼 -->
+						<a href="#" class="more-btn" th:if="${session.userOriginId == review.userId}" th:data-review-user-id="${review.userId}" data-toggle="modal" data-target="#modal">
+							<img alt="더보기modal" width="50" class="ml-4 mt-2" src="/image/more-icon.png">
+						</a>
 					</div>
 					<hr>
 					<h4 class="reviewText text-secondary ml-4 mr-4" th:text="${review.review}"></h4>
 				</div>
 			</div>
 		</article>
+		
+		<!-- modal창 -->
+		<div class="modal fade" id="modal">
+			<div class="modal-dialog modal-lg modal-dialog-centered">
+				<div class="modal-content text-center">
+					<div>
+						<a href="#" id="reviewDeleteBtn">삭제하기</a>
+					</div>
+					<div>
+						<a href="#" data-dismiss="modal">취소</a>
+					</div>
+				</div>
+			</div>
+		</div> <!-- modal 끝 -->
 	</div>
 </section>
 
 <th:block layout:fragment="script">
     <script>
-
+    
+ 		// URL에 포함된 movieId(쿼리 파라미터)를 추출한 다음 JavaScript에서 해당 값을 가져와 사용. 
+		// 그리고 그 값을 AJAX 요청에 사용.
+		function getQueryParam(param) {
+ 			let urlParams = new URLSearchParams(window.location.search);
+      	  	return urlParams.get(param);
+   		}
+    
+		$(document).ready(function() {
+			// 더보기 modal (more-btn) 클릭 이벤트
+			$(".more-btn").on('click', function(e) {
+				e.preventDefault();
+				
+				let reviewUserId = $(this).data("review-user-id");
+				//alert(reviewUserId);
+				
+				// 클릭 시 뜨게되는 그 modal창에 data-review-user-id를 심어놓는다. 일종의 setting 
+				$("#modal").data("review-user-id", reviewUserId);
+				// alert( $("#modal").data("review-user-id") );
+			}); // 더보기 modal (more-btn) 클릭 이벤트 끝.
+			
+			// 삭제하기 reviewDeleteBtn 클릭 이벤트
+			$("#reviewDeleteBtn").on('click', function(e) {
+				e.preventDefault();
+				
+				let reviewUserId = $("#modal").data("review-user-id");
+				let movieId = getQueryParam('movieId');
+				//alert(reviewUserId);
+				
+				$.ajax({
+					// request
+					type: "delete"
+					, url: "/review/delete-review"
+					, data: {"reviewUserId":reviewUserId, "movieId":movieId}
+				
+					// response
+					, sucess:function(data) {
+						if (data.code == 200) {
+							// 왜 모달창이 안내려갈까?
+							location.reload(true);
+						} else {
+							alert(data.error_message);
+						}
+					} 
+					, error:function(error) {
+						alert("리뷰 삭제에 실패하였습니다. 서버상의 에러입니다.");
+					}
+				}); // 삭제 AJAX 끝.
+			}); // 삭제하기 reviewDeleteBtn 클릭 이벤트 끝.
+		}); // ready 함수 끝.
     </script>
 </th:block>

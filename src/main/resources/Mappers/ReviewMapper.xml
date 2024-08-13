@@ -11,6 +11,17 @@
 			`review`
 	</select>
 	
+	<!-- 이 유저가 이 영화에 대해 이미 쓴 리뷰가 있는 지 확인 - db에서 select -->
+	<select id="selectMovieReviewByMovieIdAndUserOriginId" resultType="int">
+		SELECT COUNT(*)
+		FROM
+			`review`
+		WHERE
+			`movieId` = #{movieId}
+		AND
+			`userId` = #{userOriginId}
+	</select>
+	
 	<!-- 영화 리뷰 남기기 - db에 insert -->
 	<insert id="insertReviewByMovieIdAndUserOriginId" parameterType="map">
 		INSERT INTO `review`
@@ -48,4 +59,14 @@
 		WHERE
 			`movieId` = #{movieId}
 	</select>
+	
+	<!-- 특정 영화에 특정 유저가 쓴 리뷰 삭제하기 - db에서 delete -->
+	<delete id="deleteReviewByMovieIdAndUserOriginId" parameterType="map">
+		DELETE FROM
+			`review`
+		WHERE
+			`movieId` = #{movieId}
+		AND
+			`userId` = #{userOriginId}
+	</delete>
 </mapper>
