@@ -12,12 +12,8 @@
 				<div class="reviewBox">
 					<div class="d-flex">
 						<h3 class="pt-4 ml-4 font-weight-bold" th:text="${review.userNickName}"></h3>
-						
-						<!-- 240812 but 추후 다시 -->
-						<!-- 로그인 된 유저라면 -->
+						<!-- 본인이 매긴 평점 -->
 						<h3 class="pt-3 ml-4 font-weight-bold" th:text="${point}"></h3>
-						<!-- 로그인 되어있지 않은 유저라면 -->
-						<!-- <h3 class="pt-3 ml-4 font-weight-bold" th:text="${reviewStarList.star}"></h3>   -->
 			
 						<!-- 더보기 ... 버튼 -->
 						<a href="#" class="more-btn" th:if="${session.userOriginId == review.userId}" th:data-review-user-id="${review.userId}" data-toggle="modal" data-target="#modal">

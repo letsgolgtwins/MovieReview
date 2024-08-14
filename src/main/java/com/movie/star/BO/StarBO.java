@@ -50,7 +50,7 @@ public class StarBO {
 		return starMapper.deleteStarByMovieIdAndUserOriginId(movieId, userOriginId);
 	}
 	
-	// 특정 유저가 특정 영화에 '몇 점'을 매겼나 알아내는 메소드 - db에서 int(point) select
+	// 현재 로그인 한 유저가 특정 영화에 '몇 점'을 매겼나 알아내는 메소드 - db에서 int(point) select > 지금 로그인된 유저의 별점만 가져오는 문제
 	public Integer getPointByMovieIdAndUserOriginId(int movieId, int userOriginId) {
 		return starMapper.selectPointByMovieIdAndUserOriginId(movieId, userOriginId);
 	}

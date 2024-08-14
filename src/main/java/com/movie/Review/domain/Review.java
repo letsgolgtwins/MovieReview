@@ -17,7 +17,4 @@ public class Review {
 	private String review;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
-	
-	// star 추가 0814 
-	private int star;
 }

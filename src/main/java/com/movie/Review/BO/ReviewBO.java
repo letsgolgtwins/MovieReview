@@ -38,14 +38,4 @@ public class ReviewBO {
 		return reviewMapper.deleteReviewByMovieIdAndUserOriginId(movieId, userOriginId);
 	}
 	
-	// 특정 영화에 특정 유저가 매긴 별점이 뜨게끔 하기위해 만든 메소드
-	public List<Review> getReviewListAndStarMixByMovieId(int movieId) {
-		List<Review> reviewList = reviewMapper.selectMovieReviewListByMovieId(movieId); // 재활용 > 특정 영화의 리뷰들 가져와서 list에 담음
-	
-		for (Review review : reviewList) {
-			int star = starMapper.selectPointByMovieIdAndUserId(movieId, review.getUserId()); // 메소드 이름은 UserOriginId로 되어있지만, 나는 어차피 review의 userId를 가져와서 파라미터로 #{userOriginId}에 넣을 것이기에 큰 문제는 없을 것으로 예상.
-			review.setStar(star); // review 도메인에 private int star 필드 추가 하였기에 setStar 할 수 있음.
-		}
-		return reviewList;
-	}
 }

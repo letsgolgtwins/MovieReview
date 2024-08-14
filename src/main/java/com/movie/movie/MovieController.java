@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.movie.aop.TimeTrace;
 import com.movie.movie.BO.MovieBO;
 import com.movie.movie.domain.Movie;
 import com.movie.star.BO.StarBO;
@@ -29,6 +30,7 @@ public class MovieController {
 	
 	// 홈페이지 - 영화 정보들 뿌리기
 	// http://localhost/movie/movie-list-view
+	@TimeTrace // AOP 추가 (0814 오후)
 	@GetMapping("/movie-list-view")
 	public String MoviewListView(Model model, HttpSession session) {
 		

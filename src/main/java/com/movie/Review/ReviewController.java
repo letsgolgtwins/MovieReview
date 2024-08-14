@@ -37,12 +37,8 @@ public class ReviewController {
 		// 특정 영화의 리뷰들 가져오기 - db에서 여러건 select 
 		List<Review> reviewList = reviewBO.getMovieReviewListByMovieId(movieId);
 		
-		// 특정 영화의 (로그인 안되어있는) 각 유저들이 매긴 별점들 가져오기 
-		//List<Review> reviewStarList = reviewBO.getReviewListAndStarMixByMovieId(movieId);
-		
-		// 특정 영화의 현재 로그인 된 유저가 몇점을 매겼나 - db에서 point select // 0812 추가
+		// 특정 영화의 현재 로그인 된 유저가 몇점을 매겼나 - db에서 point select // 0812 추가 > 지금 로그인된 유저의 별점만 가져오는 문제
 		Integer point = (Integer) starBO.getPointByMovieIdAndUserOriginId(movieId, userOriginId);
-		
 		if (point == null) { // 별점은 안매기고 리뷰만 쓴 거임.
 			point = 0;
 		} else {
@@ -50,9 +46,8 @@ public class ReviewController {
 		}
 
 		// model에 담기
-		model.addAttribute("reviewInfo", reviewList);
-		model.addAttribute("point", point); // 0812 추가
-		//model.addAttribute("reviewStarList", reviewStarList); // 0814 추가
+		model.addAttribute("reviewInfo", reviewList); // 리뷰들과 그 리뷰들을 쓴 닉네임을 나타내기 위해
+		model.addAttribute("point", point); // 현재 로그인 되어있는 유저가 몇점을 줬나 나타내기 위해 / 0812 추가 > 지금 로그인된 유저의 별점만 가져오는 문제
 		
 		return "review/movieReviewList";
 	}
