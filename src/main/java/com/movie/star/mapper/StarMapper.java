@@ -43,6 +43,12 @@ public interface StarMapper {
 			@Param("userOriginId") int userOriginId
 			);
 	
+	// 위의 메소드는 현재 로그인된 유저가 매긴 별점 정보만 뜨는 거라 로그인 되어있지 않은 유저들이 매긴 별점 정보도 뜨게끔 하는 메소드 - db에서 int(point) select // 0814오전 추가 
+	public int selectPointByMovieIdAndUserId(
+			@Param("movieId") int movieId, 
+			@Param("userId") int userId
+			);
+	
 	// 특정 영화의 특정 유저가 매긴 별점 정보 일단 가져오기 - db에서 select 
 	public Star selectStarInfoByMovieIdAndUserOriginId(
 			@Param("movieId") int movieId,

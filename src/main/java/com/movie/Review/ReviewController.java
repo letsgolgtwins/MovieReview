@@ -29,26 +29,31 @@ public class ReviewController {
 	// http://localhost/review/movie-review-list?movieId=
 	@GetMapping("/movie-review-list")
 	public String MovieReviewList(
-			@RequestParam("movieId") int movieId, Model model) { // httpsession으로 userOriginId를 가져오려고 했으나, 그건 지금 로그인된 유저의 userOriginId를 가져어는 것이므로 그렇게하면 안된다.
+			@RequestParam("movieId") int movieId, Model model, HttpSession session) { // httpsession으로 userOriginId를 가져오려고 했으나, 그건 지금 로그인된 유저의 userOriginId를 가져어는 것이므로 그렇게하면 안된다.
+		
+		// session에서 userOriginId 가져오기
+		Integer userOriginId = (Integer) session.getAttribute("userOriginId");
 		
 		// 특정 영화의 리뷰들 가져오기 - db에서 여러건 select 
 		List<Review> reviewList = reviewBO.getMovieReviewListByMovieId(movieId);
 		
-		// 특정 영화의 특정 유저가 몇점을 매겼나 - db에서 point select // 0812 추가
-		//Integer point = (Integer) starBO.getPointByMovieIdAndUserOriginId(movieId, userOriginId);
+		// 특정 영화의 (로그인 안되어있는) 각 유저들이 매긴 별점들 가져오기 
+		//List<Review> reviewStarList = reviewBO.getReviewListAndStarMixByMovieId(movieId);
 		
-		//if (point == null) { // 별점은 안매기고 리뷰만 쓴 거임.
-		//	point = 0;
-		//} else {
-		//	point = (Integer) starBO.getPointByMovieIdAndUserOriginId(movieId, userOriginId);
-		//}
+		// 특정 영화의 현재 로그인 된 유저가 몇점을 매겼나 - db에서 point select // 0812 추가
+		Integer point = (Integer) starBO.getPointByMovieIdAndUserOriginId(movieId, userOriginId);
+		
+		if (point == null) { // 별점은 안매기고 리뷰만 쓴 거임.
+			point = 0;
+		} else {
+			point = (Integer) starBO.getPointByMovieIdAndUserOriginId(movieId, userOriginId);
+		}
 
 		// model에 담기
 		model.addAttribute("reviewInfo", reviewList);
-		//model.addAttribute("point", point); // 0812 추가
+		model.addAttribute("point", point); // 0812 추가
+		//model.addAttribute("reviewStarList", reviewStarList); // 0814 추가
 		
 		return "review/movieReviewList";
 	}
-
-	// 240811 modal 만들기 - 나중으로 미룸
 }

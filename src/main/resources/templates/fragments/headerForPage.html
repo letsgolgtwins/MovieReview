@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+        <!-- jQuery 라이브러리 포함 -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
 	<header th:fragment="headerFragmentForPage">
 		<div class="d-flex justify-content-between h-100 align-items-center">
 			<div class="d-flex align-items-center">	
@@ -42,8 +46,8 @@
     <script>
 		$(document).ready(function() {
 			// searchBtn 검색 버튼 클릭 이벤트
-			$("#searchBtn").on('click', function(e) {
-				e.preventDefault();
+			$("#searchBtn").on('click', function(/*e*/) {
+				//e.preventDefault();
 				alert("중간점검"); 
 				
 				// validation
