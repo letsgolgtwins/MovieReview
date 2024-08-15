@@ -34,7 +34,7 @@ public class ReviewController {
 		// session에서 userOriginId 가져오기
 		Integer userOriginId = (Integer) session.getAttribute("userOriginId");
 		
-		// 특정 영화의 리뷰들 가져오기 - db에서 여러건 select 
+		// 특정 영화의 리뷰들 가져오기 - db에서 여러건 select > 카드뷰처럼 만들기 재시도
 		List<Review> reviewList = reviewBO.getMovieReviewListByMovieId(movieId);
 		
 		// 특정 영화의 현재 로그인 된 유저가 몇점을 매겼나 - db에서 point select // 0812 추가 > 지금 로그인된 유저의 별점만 가져오는 문제
