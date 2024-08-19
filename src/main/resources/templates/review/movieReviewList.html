@@ -8,20 +8,24 @@
 	
 	<div class="justify-content-center">
 		<article class="article d-flex flex-wrap justify-content-center">
-			<div class="pt-5 pr-3 pl-3" th:each="reviewList, status : ${reviewAndStarInfo}">
+			<div class="pt-5 pr-3 pl-3" th:each="reviewList : ${reviewAndStarInfo}">
 				<div class="reviewBox">
 					<div class="d-flex">
+						
 						<!-- 닉네임 -->
 						<h3 class="pt-4 ml-4 font-weight-bold" th:text="${reviewList.review.userNickName}"></h3>
-						<!-- 본인이 매긴 평점 -->
-						<h3 class="pt-3 ml-4 font-weight-bold" th:text="${reviewList.starGrade}"></h3>
-			
+						
+						<!-- 유저가 매긴 평점 -->
+						<h3 class="pt-3 ml-4 font-weight-bold" th:if="${session.userOriginId == reviewList.review.userId}" th:text="${reviewList.starPoints}"></h3>
+						<h3 class="pt-3 ml-4 font-weight-bold" th:unless="${session.userOriginId == reviewList.review.userId}" th:text="${reviewList.starPoints}"></h3>
+					
 						<!-- 더보기 ... 버튼 -->
-						<a href="#" class="more-btn" th:if="${session.userOriginId == reviewList.review.userId}" th:data-review-user-id="${review.userId}" data-toggle="modal" data-target="#modal">
+						<a href="#" class="more-btn" th:if="${session.userOriginId == reviewList.review.userId}" th:data-review-user-id="${reviewList.review.userId}" data-toggle="modal" data-target="#modal">
 							<img alt="더보기modal" width="50" class="ml-4 mt-3" src="/image/more-icon.png">
 						</a>
 					</div>
 					<hr>
+					<!-- 리뷰 내용 -->
 					<h4 class="reviewText text-secondary ml-4 mr-4" th:text="${reviewList.review.review}"></h4>
 				</div>
 			</div>

@@ -1,9 +1,8 @@
 package com.movie.ReviewList.domain;
 
-import java.util.List;
+import java.util.Map;
 
 import com.movie.Review.domain.Review;
-import com.movie.star.domain.Star;
 
 import lombok.Data;
 import lombok.ToString;
@@ -16,6 +15,6 @@ public class ReviewAndStar {
 	private Review review;
 	
 	// 리뷰의 별점이 몇점인가
-	//private Star starGrade;
-	private int starGrade;
+	private Integer starPoints;
+
 }

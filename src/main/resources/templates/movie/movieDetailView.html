@@ -139,7 +139,8 @@
 						if (data.code == 200) {
 							// 리뷰 남기기 성공
 							alert("리뷰 남기기 성공! 리뷰 화면으로 이동합니다.");
-							location.href="/review/movie-review-list?movieId=" + movieId;
+							// /reviewList/reviewList-view?movieId=3 0819 수정
+							location.href="/reviewList/reviewList-view?movieId=" + movieId;
 						} else if (data.code == 500) {
 							// 리뷰 남기기 실패
 							alert(data.error_message);

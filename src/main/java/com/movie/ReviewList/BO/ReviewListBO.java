@@ -2,7 +2,9 @@ package com.movie.ReviewList.BO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.hibernate.metamodel.mapping.internal.AbstractStateArrayContributorMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,24 +25,23 @@ public class ReviewListBO {
 	private StarBO starBO;
 	
 	public List<ReviewAndStar> generateReviewList(int movieId) {
-		List<ReviewAndStar> allReviewList = new ArrayList<>();
+		List<ReviewAndStar> reviewLists = new ArrayList<>();
 		
 		// 특정 영화의 리뷰 목록들 가져오기
 		List<Review> reviews = reviewBO.getMovieReviewListByMovieId(movieId);
 		
 		// 리뷰 목록들 반복문
 		for (Review review : reviews) {
+			
 			ReviewAndStar reviewAndStar = new ReviewAndStar();
 			
 			// 리뷰 내용들, 닉네임들 목록 세팅
 			reviewAndStar.setReview(review);
 			
 			// 별점 세팅
-			int starCount = starBO.getStarCountByMovieIdAndUserOriginId(movieId, review.getUserId());
-			reviewAndStar.setStarGrade(starCount);
-			
-			allReviewList.add(reviewAndStar);
+			reviewAndStar.setStarPoints(movieId);
+			reviewLists.add(reviewAndStar);
 		}
-		return allReviewList;
+		return reviewLists;
 	}
 }
