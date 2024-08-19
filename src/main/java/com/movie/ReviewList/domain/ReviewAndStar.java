@@ -16,5 +16,4 @@ public class ReviewAndStar {
 	
 	// 리뷰의 별점이 몇점인가
 	private Integer starPoints;
-
 }

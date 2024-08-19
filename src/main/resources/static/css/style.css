@@ -12,9 +12,9 @@ footer {height: 100px; background-color: white;}
 
 .article {display: flex; flex-wrap: wrap;}
 .movieInfo {width: 270px; height: 500px}
-#moviePoster {width: 270px; height: 386px}
+#moviePoster {width: 270px; height: 386px; border-radius: 40px;}
 
-.MoviePoster2 {width: 420px; height: 600px;}
+.MoviePoster2 {width: 420px; height: 600px; border-radius: 40px;}
 .MovieDetailAreaUp {height: 200px}
 .MovieDetailAreaCenter {height: 150px}
 .MovieDetailAreaDown {height: 250px}
@@ -30,6 +30,5 @@ footer {height: 100px; background-color: white;}
 	}
 
 #searchBtn {background-color: #FF0558; color: white;}
-
 
 

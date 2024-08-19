@@ -3,12 +3,10 @@
 	<footer th:fragment="footerFragmentForPage">
 		<hr>
 		<div class="d-flex justify-content-center h-100 align-items-center">
-		<h3 class="font-weight-bold">지금까지 n개의 리뷰가 쌓였어요!</h3>
-<!-- 			
-			<div th:each="내가 지을 이름, status : ${model에 담은 이름}">
-				<h3 th:text="|지금까지 ${status.}개의 리뷰가 쌓였어요!|"></h3>
-			</div> 
--->
+		<!-- <h3 class="font-weight-bold">지금까지 n개의 리뷰가 쌓였어요!</h3> -->
+
+			<h2 class="font-weight-bold" th:text="|지금까지 ${totalReviewCount}개의 리뷰가 쌓였어요!|"></h2>
+
 		</div>
 	</footer>
 </html>

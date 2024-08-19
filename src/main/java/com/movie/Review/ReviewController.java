@@ -1,27 +1,27 @@
-//package com.movie.Review;
-//
-//import java.util.List;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//
-//import com.movie.Review.BO.ReviewBO;
-//import com.movie.Review.domain.Review;
-//import com.movie.star.BO.StarBO;
-//
-//import jakarta.servlet.http.HttpSession;
-//
-//@RequestMapping("/review")
-//@Controller
-//public class ReviewController {
-//
-//	@Autowired
-//	private ReviewBO reviewBO;
-//
+package com.movie.Review;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.movie.Review.BO.ReviewBO;
+import com.movie.Review.domain.Review;
+import com.movie.star.BO.StarBO;
+
+import jakarta.servlet.http.HttpSession;
+
+@RequestMapping("/review")
+@Controller
+public class ReviewController {
+
+	@Autowired
+	private ReviewBO reviewBO;
+
 //	@Autowired
 //	private StarBO starBO; // 240812 오후 추가 (리뷰리스트 화면에 닉네임 옆에 본인들이 매긴 별점 뜨게끔 하기 위해)
 //	
@@ -51,4 +51,16 @@
 //		
 //		return "review/movieReviewList";
 //	}
-//}
+	
+	// footer에 총 리뷰 개수 나타내기 > 추후 다시
+	//@GetMapping("/total-review-count")
+	public String TotalReviewCount(Model model) {
+		// 총 리류 개수 가져오기
+		Integer totalReviewCount = (Integer) reviewBO.getTotalReviewCount();
+		
+		// model에 저장
+		model.addAttribute("totalReviewCount", totalReviewCount);
+		
+		return "templates/footerForPage";
+	}
+}

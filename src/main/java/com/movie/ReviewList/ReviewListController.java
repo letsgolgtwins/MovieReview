@@ -34,7 +34,7 @@ public class ReviewListController {
 	// /reviewList/reviewList-view
 	@GetMapping("/reviewList-view")
 	public String ReviewListView(
-			@RequestParam("movieId") int movieId, Model model, @RequestParam("userOriginId") int userOriginId) {
+			@RequestParam("movieId") int movieId, Model model) {
 		
 		List<ReviewAndStar> reviewAndStarList = reviewListBO.generateReviewList(movieId);
 	
