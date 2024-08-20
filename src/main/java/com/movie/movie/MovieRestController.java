@@ -20,13 +20,13 @@ public class MovieRestController {
 	@Autowired
 	private MovieBO movieBO;
 	
-	// 영화, 연도, 장르, 국가, 감독 검색 기능 API
+	// 영화 검색 기능 API
 	// /movie/movie-search
 	@GetMapping("/movie-search")
-	public Map<String, Object> MovieSearch(Object search) {
+	public Map<String, Object> MovieSearch(@RequestParam("movieInfo") String movieInfo) {
 		
 		// 영화 정보 검색해서 영화 객체 받기
-		List<Movie> movieId = movieBO.getMovieIdBySearch(search);
+		Integer movieId = (Integer) movieBO.getMovieIdBySearch(movieInfo);
 		
 		// 응답 JSON
 		Map<String, Object> result = new HashMap<>();

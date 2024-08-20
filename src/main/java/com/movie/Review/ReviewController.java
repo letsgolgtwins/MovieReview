@@ -53,15 +53,15 @@ public class ReviewController {
 //		return "review/movieReviewList";
 //	}
 	
-	// footer에 총 리뷰 개수 나타내기 > 추후 다시
+	// footer에 총 리뷰 개수 나타내기
 	@GetMapping("/total-review-count")
 	public String TotalReviewCount(Model model) {
 		// 총 리류 개수 가져오기
-		int totalReviewCount = reviewBO.getTotalReviewCount();
+		int totalCount = reviewBO.getTotalReviewCount();
 		
 		// model에 저장
-		model.addAttribute("totalReviewCount", totalReviewCount);
+		model.addAttribute("totalReviewCount", totalCount);
 		
-		return "layout/defaultLayoutForPage";
+		return "fragments/footerForPage";
 	}
 }

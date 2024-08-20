@@ -25,7 +25,8 @@ public class MovieBO {
 	}
 	
 	// 영화 정보 검색 - db에서 select
-	public List<Movie> getMovieIdBySearch(Object search) {
-		return movieMapper.selectMovieIdBySearch(search);
+	public Integer getMovieIdBySearch(String movieInfo) {
+		return movieMapper.selectMovieIdBySearch(movieInfo);
 	}
+	
 }

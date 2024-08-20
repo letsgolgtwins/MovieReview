@@ -38,20 +38,12 @@
 	</select>
 	
 	<!-- 영화 정보 검색하기 - db에서 여러건 select -->
-	<select id="selectMovieIdBySearch" resultType="list">
+	<select id="selectMovieIdBySearch" resultType="Integer">
 		SELECT 
 			`id`
 		FROM
 			`movie`
 		WHERE
-			`movieName` = #{search}
-		OR
-			`movieYear` = #{search}
-		OR 
-			`movieGenre` LIKE %#{search}%
-		OR
-			`movieNation` = #{search}
-		OR
-			`movieDirector` = #{search}
+			`movieName` = #{movieInfo}
 	</select>
 </mapper>

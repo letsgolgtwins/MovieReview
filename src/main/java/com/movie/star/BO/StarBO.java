@@ -69,4 +69,5 @@ public class StarBO {
 	public Integer getCountByMovieId(int movieId) {
 		return starMapper.selectCountByMovieId(movieId);
 	}
+
 }

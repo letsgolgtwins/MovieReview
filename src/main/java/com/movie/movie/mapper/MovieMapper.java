@@ -17,5 +17,5 @@ public interface MovieMapper {
 	public Movie selectMovieByMovieId(int movieId);
 	
 	// 영화 정보 검색 - db에서 select
-	public List<Movie> selectMovieIdBySearch(Object search);
+	public Integer selectMovieIdBySearch(String movieInfo);
 }

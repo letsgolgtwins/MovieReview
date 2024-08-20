@@ -37,7 +37,7 @@ public class ReviewListController {
 			@RequestParam("movieId") int movieId, Model model) {
 		
 		List<ReviewAndStar> reviewAndStarList = reviewListBO.generateReviewList(movieId);
-	
+		
 		// model에 담기
 		model.addAttribute("reviewAndStarInfo", reviewAndStarList);
 		
