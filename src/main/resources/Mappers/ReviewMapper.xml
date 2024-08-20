@@ -71,7 +71,7 @@
 	</delete>
 	
 	<!-- total 리뷰 개수 - db에서 count select 해서 footer에 총 리뷰 개수 나타내기 위해 -->
-	<select id="selectTotalReviewCount" resultType="Integer">
+	<select id="selectTotalReviewCount" resultType="int">
 		SELECT COUNT(*)
 		FROM
 			`review`

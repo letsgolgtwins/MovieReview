@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.movie.Review.mapper.ReviewMapper;
 
-
 @RequestMapping("/test")
 @Controller
 public class TestController {

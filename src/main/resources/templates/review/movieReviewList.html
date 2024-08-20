@@ -5,7 +5,6 @@
       layout:decorate="~{layout/defaultLayoutForPage}">
 <section layout:fragment="content" class="contents d-flex justify-content-center">
 	<!-- [[${reviewInfo}]] 여기까지 했음(0806 오전). 이제 마크업 하고 타임리프 each 반복문으로 리뷰 리스트 뿌리자 -->
-	
 	<div class="justify-content-center">
 		<article class="article d-flex flex-wrap justify-content-center">
 			<div class="pt-5 pr-3 pl-3" th:each="reviewList : ${reviewAndStarInfo}">

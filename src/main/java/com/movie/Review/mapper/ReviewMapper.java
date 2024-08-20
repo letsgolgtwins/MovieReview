@@ -38,5 +38,5 @@ public interface ReviewMapper {
 			); 
 	
 	// total 리뷰 개수 - db에서 count select // footer에 총 리뷰개수 나타내기 위해
-	public Integer selectTotalReviewCount();
+	public int selectTotalReviewCount();
 }

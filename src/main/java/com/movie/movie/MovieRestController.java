@@ -23,15 +23,10 @@ public class MovieRestController {
 	// 영화, 연도, 장르, 국가, 감독 검색 기능 API
 	// /movie/movie-search
 	@GetMapping("/movie-search")
-	public Map<String, Object> MovieSearch(
-			@RequestParam("movieName") String movieName,
-			@RequestParam("movieYear") int movieYear,
-			@RequestParam("movieGenre") String movieGenre,
-			@RequestParam("movieNation") String movieNation,
-			@RequestParam("movieDirector") String movieDirector) {
+	public Map<String, Object> MovieSearch(Object search) {
 		
 		// 영화 정보 검색해서 영화 객체 받기
-		List<Movie> movieId = movieBO.getMovieIdByMovieNameMovieYearMovieGenreMovieNationMovieDirector(movieName, movieYear, movieGenre, movieNation, movieDirector);
+		List<Movie> movieId = movieBO.getMovieIdBySearch(search);
 		
 		// 응답 JSON
 		Map<String, Object> result = new HashMap<>();

@@ -17,11 +17,5 @@ public interface MovieMapper {
 	public Movie selectMovieByMovieId(int movieId);
 	
 	// 영화 정보 검색 - db에서 select
-	public List<Movie> selectMovieIdByMovieNameMovieYearMovieGenreMovieNationMovieDirector(
-			@Param("movieName") String movieName, 
-			@Param("movieYear") int movieYear, 
-			@Param("movieGenre") String movieGenre, 
-			@Param("movieNation") String movieNation, 
-			@Param("movieDirector") String movieDirector
-			);
+	public List<Movie> selectMovieIdBySearch(Object search);
 }

@@ -25,7 +25,7 @@ public class MovieBO {
 	}
 	
 	// 영화 정보 검색 - db에서 select
-	public List<Movie> getMovieIdByMovieNameMovieYearMovieGenreMovieNationMovieDirector(String movieName, int movieYear, String movieGenre, String movieNation, String movieDirector) {
-		return movieMapper.selectMovieIdByMovieNameMovieYearMovieGenreMovieNationMovieDirector(movieName, movieYear, movieGenre, movieNation, movieDirector);
+	public List<Movie> getMovieIdBySearch(Object search) {
+		return movieMapper.selectMovieIdBySearch(search);
 	}
 }
