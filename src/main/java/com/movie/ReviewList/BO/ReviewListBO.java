@@ -52,7 +52,7 @@ public class ReviewListBO {
 		
 		// 리뷰별 별점 가져오기
 		Integer point = starBO.getPointByMovieIdAndUserOriginId(movieId, userOriginId);
-	
+		
 		
 	}
 	
