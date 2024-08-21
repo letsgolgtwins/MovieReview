@@ -32,4 +32,11 @@ public class UserController {
 		session.removeAttribute("userId");
 		return "redirect:/user/sign-in-view";
 	}
+	
+	// 마이페이지로 이동 (0821)
+	// http://localhost/user/mypage-view
+	@GetMapping("/mypage-view")
+	public String MyPage() {
+		return "user/MyPage";
+	}
 }

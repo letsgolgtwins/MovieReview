@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.movie.Review.BO.ReviewBO;
 import com.movie.aop.TimeTrace;
 import com.movie.movie.BO.MovieBO;
 import com.movie.movie.domain.Movie;
@@ -28,6 +29,10 @@ public class MovieController {
 	@Autowired
 	private StarBO starBO;
 	
+	// 0821오후 추가
+	@Autowired
+	private ReviewBO reviewBO;
+	
 	// 홈페이지 - 영화 정보들 뿌리기
 	// http://localhost/movie/movie-list-view
 	@TimeTrace // AOP 추가 (0814 오후)
@@ -44,8 +49,12 @@ public class MovieController {
 		// 영화 정보들 가져오기
 		List<Movie> movie = movieBO.getMovieInfo(); // 여기까지 0802 수업떄 만든 내용
 		
+		// 리뷰 총개수 가져오기 (0821 오후 추가)
+		int totalReviewCount = reviewBO.getTotalReviewCount();
+		
 		// model에 담기
 		model.addAttribute("movieInfo", movie);
+		model.addAttribute("totalReviewCount", totalReviewCount); // 0821 오후 추가(총 리뷰 개수)
 		
 		return "movie/homePage";
 	}
@@ -84,11 +93,15 @@ public class MovieController {
 			starCount = (Integer) starBO.getCountByMovieId(movieId);
 		}
 		
+		// 리뷰 총개수 가져오기 (0821 오후 추가)
+		int totalReviewCount = reviewBO.getTotalReviewCount();
+		
 		// model에 담기
 		model.addAttribute("movieInfo", movie);
 		model.addAttribute("starInfo", star); // 0809 오전 추가
 		model.addAttribute("pointAvg", AvgPoint); // 0809 오후 추가
 		model.addAttribute("starCount", starCount); // 0812 오후 추가
+		model.addAttribute("totalReviewCount", totalReviewCount); // 0821 오후 추가(총 리뷰 개수)
 		
 		// 상세 페이지로 이동
 		return "movie/movieDetailView";

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import lombok.Getter;
-
+//0820
 public class EnumTest1 {
 
 	@Getter
