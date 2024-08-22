@@ -39,12 +39,8 @@ public class ReviewListController {
 		// 큰 틀
 		List<ReviewAndStar> reviewAndStarList = reviewListBO.generateReviewList(movieId);
 		
-		// 리뷰 총개수 가져오기 (0821 오후 추가)
-		int totalReviewCount = reviewBO.getTotalReviewCount();
-		
 		// model에 담기
 		model.addAttribute("reviewAndStarInfo", reviewAndStarList);
-		model.addAttribute("totalReviewCount", totalReviewCount); // 0821 오후 추가(총 리뷰 개수)
 		
 		return "review/movieReviewList";
 	}
