@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.movie.Review.BO.ReviewBO;
 import com.movie.Review.domain.Review;
-import com.movie.ReviewList.domain.ReviewAndStar;
+import com.movie.ReviewList.domain.ReviewCard;
 import com.movie.star.BO.StarBO;
 import com.movie.star.domain.Star;
+
+import jakarta.servlet.http.HttpSession;
 
 @Service
 public class ReviewListBO {
@@ -25,35 +27,29 @@ public class ReviewListBO {
 	@Autowired
 	private StarBO starBO;
 	
-	public List<ReviewAndStar> generateReviewList(int movieId) {
-		List<ReviewAndStar> reviewLists = new ArrayList<>();
+	public List<ReviewCard> generateReviewCardList(int movieId) {
+		List<ReviewCard> reviewLists = new ArrayList<>();
 		
 		// 특정 영화의 리뷰 목록들 가져오기
-		List<Review> reviews = reviewBO.getMovieReviewListByMovieId(movieId);
+		List<Review> reviewInfo = reviewBO.getMovieReviewListByMovieId(movieId);
 		
 		// 리뷰 목록들 반복문
-		for (Review review : reviews) {
-			
-			ReviewAndStar reviewAndStar = new ReviewAndStar();
+		for (Review review : reviewInfo) {
+			ReviewCard reviewCard = new ReviewCard();
 			
 			// 리뷰 내용들, 닉네임들 목록 세팅
-			reviewAndStar.setReview(review);
+			reviewCard.setReview(review);
+			
+			// 별점 가져오기 
+			Integer starPoints = starBO.getPointByMovieIdAndUserId(movieId, review.getUserId());
 			
 			// 별점 세팅
-			reviewAndStar.setStarPoints(movieId);
-			reviewLists.add(reviewAndStar);
+			reviewCard.setStarPoints(starPoints);
+			
+			// 저장
+			reviewLists.add(reviewCard);
 		}
 		return reviewLists;
-	}
-	
-	// 0820 추가
-	public List<ReviewAndStar> generateStarList(int movieId, int userOriginId) {
-		List<ReviewAndStar> pointLists = new ArrayList<>();
-		
-		// 리뷰별 별점 가져오기
-		Integer point = starBO.getPointByMovieIdAndUserOriginId(movieId, userOriginId);
-		
-		
 	}
 	
 }

@@ -9,7 +9,7 @@ import lombok.ToString;
 
 @ToString
 @Data
-public class ReviewAndStar {
+public class ReviewCard {
 
 	// 리뷰 내용
 	private Review review;

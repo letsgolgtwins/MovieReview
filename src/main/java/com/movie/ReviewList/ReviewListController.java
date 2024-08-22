@@ -12,15 +12,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.movie.Review.BO.ReviewBO;
 import com.movie.ReviewList.BO.ReviewListBO;
-import com.movie.ReviewList.domain.ReviewAndStar;
+import com.movie.ReviewList.domain.ReviewCard;
 import com.movie.star.BO.StarBO;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequestMapping("/reviewList")
 @Controller
 public class ReviewListController {
-
+	
 	@Autowired
 	private ReviewBO reviewBO;
 	
@@ -32,15 +34,16 @@ public class ReviewListController {
 	
 	// 특정 영화의 리뷰 리스트 페이지
 	// /reviewList/reviewList-view
+	// /reviewList/reviewList-view?movieId=
 	@GetMapping("/reviewList-view")
 	public String ReviewListView(
 			@RequestParam("movieId") int movieId, Model model) {
 		
 		// 큰 틀
-		List<ReviewAndStar> reviewAndStarList = reviewListBO.generateReviewList(movieId);
+		List<ReviewCard> reviewCardList = reviewListBO.generateReviewCardList(movieId);
 		
 		// model에 담기
-		model.addAttribute("reviewAndStarInfo", reviewAndStarList);
+		model.addAttribute("reviewCard", reviewCardList);
 		
 		return "review/movieReviewList";
 	}

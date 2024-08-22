@@ -69,5 +69,11 @@ public class StarBO {
 	public Integer getCountByMovieId(int movieId) {
 		return starMapper.selectCountByMovieId(movieId);
 	}
-
+	
+	// 0822
+	// 특정 유저가 특정 영화에 별점 몇점을 매겼나 - db에서 point select
+	public Integer getPointByMovieIdAndUserId(int movieId, int userId) {
+		return starMapper.selectPointByMovieIdAndUserId(movieId, userId);
+	}
+	
 }

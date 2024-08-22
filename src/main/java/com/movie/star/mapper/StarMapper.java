@@ -56,5 +56,12 @@ public interface StarMapper {
 	
 	// 특정 영화에 몇 명의 유저들이 몇점을 매겼는지 가져오기 - db에서 count select // (1234)위해서
 	public Integer selectCountByMovieId(int movieId);
+	
+	// 0822
+	// 특정 유저가 특정 영화에 별점 몇점을 매겼나 - db에서 point select
+	public Integer selectPointByMovieIdAndUserId(
+			@Param("movieId") int movieId,
+			@Param("userId") int userId
+			);
 		
 }

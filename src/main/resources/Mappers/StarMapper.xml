@@ -104,4 +104,17 @@
 		WHERE
 			`movieId` = #{movieId}
 	</select>
+	
+	<!-- 0822 오후 -->
+	<!-- 특정 유저가 특정 영화에 별점 몇점을 매겼나 - db에서 point select -->
+	<select id="selectPointByMovieIdAndUserId" resultType="Integer">
+		SELECT 
+			`point`
+		FROM
+			`star`
+		WHERE
+			`movieId` = #{movieId}
+		AND
+			`userId` = #{userId}
+	</select>
 </mapper>
