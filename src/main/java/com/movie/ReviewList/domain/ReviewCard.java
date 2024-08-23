@@ -11,7 +11,7 @@ import lombok.ToString;
 @Data
 public class ReviewCard {
 
-	// 리뷰 내용
+	// 리뷰 작성자 닉네임 및 리뷰 내용
 	private Review review;
 	
 	// 리뷰의 별점이 몇점인가
