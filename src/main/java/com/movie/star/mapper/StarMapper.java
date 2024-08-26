@@ -63,5 +63,11 @@ public interface StarMapper {
 			@Param("movieId") int movieId,
 			@Param("userId") int userId
 			);
+	
+	// 현재 로그인 된 유저가 매긴 전체 별점 평균 -db에서 select / 0826 
+	public Integer selectAvgPointByUser(int userOriginId);
+	
+	// 현재 로그인 된 유저가 별점을 매긴 영화의 고유idovieId) 목록 - db에서 list select / 0826
+	public List<Integer> selectMovieIdByUserOriginId(int userOriginId);
 		
 }

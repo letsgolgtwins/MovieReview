@@ -46,4 +46,22 @@
 		WHERE
 			`movieName` = #{movieInfo}
 	</select>
+	
+	<!-- movieId로 영화 정보들 가져오기 - db에서 select / 0826 -->
+	<select id="selectMovieInfoByMovieId" resultType="com.movie.movie.domain.Movie">
+		SELECT 
+			`id`
+			,`moviePoster`
+			,`movieName`
+			,`movieYear`
+			,`movieGenre`
+			,`movieNation`
+			,`movieDirector`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`movie`
+		WHERE
+			`id` = #{movieId}
+	</select>
 </mapper>

@@ -31,4 +31,16 @@ public class 람다테스트 {
 	
 		log.info("$$$$$$$$ {}", fruits); // 로그로 결과 찍어보기
 	}
+	
+	@Test // 0826
+	void 메소드레퍼런스() {
+		List<String> fruits = List.of("apple", "banana", "cherry");
+		
+		fruits = fruits
+		.stream()
+		.map(String::toUpperCase) // element -> element.toUpperCase() 람다식을 변환
+		.collect(Collectors.toList());
+	
+		log.info("%%%%%%%%% {}", fruits);
+	}
 }

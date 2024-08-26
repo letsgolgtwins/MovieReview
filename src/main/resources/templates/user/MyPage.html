@@ -9,17 +9,28 @@
 		
 		<div class="d-flex justify-content-center">
 			<div id="profileBox">
-				<h2 class="font-weight-bold ml-4 mt-2" th:text="${session.userNickName}">닉네임</h2>
-				<h4 class="font-weight-bold ml-4 mt-2" th:text="${session.userId}">계정(이메일)</h4>
+				<div class="d-flex row-4">
+					<!-- 닉네임 -->
+					<h1 class="font-weight-bold ml-4 mt-3" th:text="${session.userNickName}">닉네임</h1>
+					<!-- 설정 -->
+					<a href="#" class="modify-Btn" th:if="${session.userOriginId != null}" th:data-review-user-id="${session.userOriginId}" data-toggle="modal" data-target="#modal">
+						<img alt="설정modal" width="40" class="ml-3 mt-3" src="/image/setting-icon.png">
+					</a>
+				</div>
+				<h3 class="font-weight-bold ml-4 mt-4" th:text="${session.userId}">계정(이메일)</h3>
 				<hr>
-				<div class="d-flex">
+				<div class="d-flex pt-3">
 					<div class="starByUser col-6">
 						<h4 class="font-weight-bold d-flex justify-content-center">내가 남긴 평가</h4>
-						<h3 class="font-weight-bold d-flex justify-content-center">12</h3>
+						<a href="/movie/my-movie-view">
+							<h3 class="font-weight-bold text-dark d-flex justify-content-center">12</h3>
+						</a>
 					</div>
 					<div class="commentByUser col-6">
 						<h4 class="font-weight-bold d-flex justify-content-center">내가 남긴 코멘트</h4>
-						<h3 class="font-weight-bold d-flex justify-content-center">34</h3>
+						<a href="/review/my-review-view">
+							<h3 class="font-weight-bold text-dark d-flex justify-content-center">34</h3>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -27,21 +38,41 @@
 		
 		<div class="d-flex justify-content-center">
 			<div id="preferenceTypeBox">
+				<div class="d-flex">
+					<h2 class="font-weight-bold ml-4 mt-2 text-danger" th:text="|${avgPoint}점|">평균별점</h2>
+					<h2 class="font-weight-bold ml-4 mt-2" th:text="|${session.userNickName}님의 평균 별점|">닉네임</h2>
+				</div>
 				
+				<h2 class="font-weight-bold ml-4 mt-2" th:if="${avgPoint == 1.0}" th:text="|웬만해선 영화에 만족하지 않는 '헝그리파' |"></h2>
+				<h2 class="font-weight-bold ml-4 mt-2" th:if="${avgPoint > 1.0 && avgPoint <= 2.0}" th:text="|영화를 대단히 냉정하게 평가하는 '냉장고파'|"></h2>
+				<h2 class="font-weight-bold ml-4 mt-2" th:if="${avgPoint > 2.0 && avgPoint <= 3.0}" th:text="|깐깐한 깐새우파|"></h2>
+				<h2 class="font-weight-bold ml-4 mt-2" th:if="${avgPoint > 3.0 && avgPoint <= 4.0}" th:text="|편식 없이 영화를 골고루 보는 '균형파'|"></h2>
+				<h2 class="font-weight-bold ml-4 mt-2" th:if="${avgPoint > 4.0 && avgPoint <= 5.0}" th:text="|영화면 마냥 다 좋은 '천사급' 착한 사람|"></h2>
 			</div>
 		</div>
+		
+		<!-- modal창 -->
+		<div class="modal fade" id="modal">
+			<div class="modal-dialog modal-lg modal-dialog-centered">
+				<div class="modal-content text-center">
+					<div class="my-4">
+						<a href="/user/modify-my-profile" id="modifyPersonalInfo"><h3 class="font-weight-bold text-danger">개인정보 수정</h3></a>
+					</div>
+					<hr>
+					<div class="my-4">
+						<a href="#" data-dismiss="modal" class="font-weight-bold text-dark"><h3 class="font-weight-bold text-dark">취소</h3></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- modal창 끝 -->
 		
 	</div>		
 	<div class="MyPageRight col-3 bg-secondary"></div>		
 </section>
 
-<!-- 마이페이지 구상
-내 정보 화면에 내 이름, 닉네임, 계정(이메일), 별점 매긴 영화 개수, 코멘트(리뷰)남긴 개수
-그리고 그 별점 매긴 개수 클릭하면 실제로 별점 매긴 영화들 리스트 
-그리고 그 코멘트(리뷰) 남긴 개수 클릭하면 실제로 남긴 코멘트들 뜨게끔 -->
-
 <th:block layout:fragment="script">
     <script>
-
+	
     </script>
 </th:block>

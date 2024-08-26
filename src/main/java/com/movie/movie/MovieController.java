@@ -1,5 +1,6 @@
 package com.movie.movie;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.movie.movie.domain.Movie;
 import com.movie.star.BO.StarBO;
 import com.movie.star.domain.Star;
 
+import groovyjarjarantlr4.v4.parse.GrammarTreeVisitor.mode_return;
 import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/movie")
@@ -97,5 +99,30 @@ public class MovieController {
 		
 		// 상세 페이지로 이동
 		return "movie/movieDetailView";
+	}
+	
+	// 0826  
+	// 현재 로그인 되어있는 유저가 매긴 별점이 있는 영화 목록들 화면
+	@GetMapping("/my-movie-view")
+	public String myMovieView(HttpSession session, Model model) {
+		// session에서 userOriginId 가져오기
+		int userOriginId = (int) session.getAttribute("userOriginId");
+
+		// 현재 로그인된 유저가 별점을 매긴 영화의 고유 id(movieId)를 starBO로 부터 가져오기
+		List<Integer> movieIdList = starBO.getMovieIdByUserOriginId(userOriginId);
+		
+		// 위의 movieIdList를 반복문을 돌려서 movieId를 뽑아낸 다음 movieBO 매소드의 파라미터로 보낸다.
+		for (Integer movieIds : movieIdList) {
+			List<Integer> movieId = new ArrayList<>();
+			movieId.add(movieIds);
+		} 
+		
+		Movie movieInfo = movieBO.getMovieInfoByMovieId(movieId);
+		
+		// model에 담기
+		model.addAttribute("movieInfo", movieInfo);
+
+		// view화면으로 이동
+		return "movie/myMovie";
 	}
 }

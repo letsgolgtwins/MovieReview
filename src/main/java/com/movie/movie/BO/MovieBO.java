@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.movie.movie.domain.Movie;
 import com.movie.movie.mapper.MovieMapper;
+import com.movie.star.BO.StarBO;
 
 @Service
 public class MovieBO {
@@ -27,6 +28,11 @@ public class MovieBO {
 	// 영화 정보 검색 - db에서 select
 	public Integer getMovieIdBySearch(String movieInfo) {
 		return movieMapper.selectMovieIdBySearch(movieInfo);
+	}
+	
+	// list에서 뽑아온 movieId로 영화 정보 가져오기 - db에서 select / 0826
+	public Movie getMovieInfoByMovieId(int movieId) {
+		return movieMapper.selectMovieInfoByMovieId(movieId);
 	}
 	
 }

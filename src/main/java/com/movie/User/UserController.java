@@ -1,8 +1,12 @@
 package com.movie.User;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.movie.star.BO.StarBO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -34,9 +38,27 @@ public class UserController {
 	}
 	
 	// 마이페이지로 이동 (0821)
+	@Autowired
+	private StarBO starBO;
 	// http://localhost/user/mypage-view
 	@GetMapping("/mypage-view")
-	public String MyPage() {
+	public String MyPage(Model model, HttpSession session) {
+		// userOriginId 가져오기
+		Integer userOriginId = (Integer) session.getAttribute("userOriginId");
+		
+		// 현재 로그인 되어있는 유저의 전체 별점 평균 가져오기
+		Double avgPoint = (double) starBO.getAvgPointByUser(userOriginId);
+		
+		// model에 담기
+		model.addAttribute("avgPoint", avgPoint);
+		
+		// view 화면
 		return "user/MyPage";
+	}
+	
+	// 내 정보 수정화면으로 이동(0826)
+	@GetMapping("/modify-my-profile")
+	public String ModifyMyProfile() {
+		return "user/MyProfile";
 	}
 }

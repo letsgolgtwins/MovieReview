@@ -1,5 +1,6 @@
 package com.movie.star.BO;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,4 +77,13 @@ public class StarBO {
 		return starMapper.selectPointByMovieIdAndUserId(movieId, userId);
 	}
 	
+	// 현재 로그인 된 유저가 매긴 전체 별점 평균 0826
+	public Integer getAvgPointByUser(int userOriginId) {
+		return starMapper.selectAvgPointByUser(userOriginId);
+	}
+	
+	// 현재 로그인 된 유저가 별점을 매긴 영화의 고유idovieId) 목록 - db에서 list select / 0826
+	public List<Integer> getMovieIdByUserOriginId(int userOriginId) {
+		return starMapper.selectMovieIdByUserOriginId(userOriginId);
+	}
 }

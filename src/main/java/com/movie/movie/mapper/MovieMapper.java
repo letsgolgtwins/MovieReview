@@ -18,4 +18,7 @@ public interface MovieMapper {
 	
 	// 영화 정보 검색 - db에서 select
 	public Integer selectMovieIdBySearch(String movieInfo);
+	
+	// list에서 뽑아온 movieId로 영화 정보 가져오기 - db에서 select / 0826
+	public Movie selectMovieInfoByMovieId(int movieId);
 }
