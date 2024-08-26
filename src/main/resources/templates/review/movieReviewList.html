@@ -15,7 +15,7 @@
 						<h3 class="pt-4 ml-4 font-weight-bold" th:text="${reviewCards.review.userNickName}"></h3>
 						
 						<!-- 유저가 매긴 평점 -->
-						<h3 class="pt-3 ml-4 font-weight-bold" th:text="${reviewCards.starPoints}"></h3>
+						<h3 class="pt-4 ml-4 font-weight-bold" th:text="${reviewCards.starPoints}"></h3>
 					
 						<!-- 더보기 ... 버튼 -->
 						<a href="#" class="more-btn" th:if="${session.userOriginId == reviewCards.review.userId}" th:data-review-user-id="${reviewCards.review.userId}" data-toggle="modal" data-target="#modal">

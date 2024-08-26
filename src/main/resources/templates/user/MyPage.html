@@ -4,8 +4,35 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/defaultLayoutForSign}">
 <section layout:fragment="content" class="contents d-flex justify-content-center">
-	<div id="myPageUp"></div>
-	<div id="myPagedown"></div>
+	<div class="MyPageLeft col-3 bg-secondary"></div>		
+	<div class="MyPageCenter col-6 bg-warning">
+		
+		<div class="d-flex justify-content-center">
+			<div id="profileBox">
+				<h2 class="font-weight-bold ml-4 mt-2" th:text="${session.userNickName}">닉네임</h2>
+				<h4 class="font-weight-bold ml-4 mt-2" th:text="${session.userId}">계정(이메일)</h4>
+				<hr>
+				<div class="d-flex">
+					<div class="starByUser col-6">
+						<h4 class="font-weight-bold d-flex justify-content-center">내가 남긴 평가</h4>
+						<h3 class="font-weight-bold d-flex justify-content-center">12</h3>
+					</div>
+					<div class="commentByUser col-6">
+						<h4 class="font-weight-bold d-flex justify-content-center">내가 남긴 코멘트</h4>
+						<h3 class="font-weight-bold d-flex justify-content-center">34</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="d-flex justify-content-center">
+			<div id="preferenceTypeBox">
+				
+			</div>
+		</div>
+		
+	</div>		
+	<div class="MyPageRight col-3 bg-secondary"></div>		
 </section>
 
 <!-- 마이페이지 구상
