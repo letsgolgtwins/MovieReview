@@ -46,4 +46,8 @@ public class MovieBO {
 		return movieInfoList;
 	}
 	
+	// 현재 로그인 되어있는 유저가 리뷰를 남긴 영화들 가져오기 - db에서 select / 0827
+	public List<String> getMovieNameByMovieId(int movieId) {
+		return movieMapper.selectMovieNameByMovieId(movieId);
+	}
 }

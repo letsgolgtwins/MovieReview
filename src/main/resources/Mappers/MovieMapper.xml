@@ -64,4 +64,14 @@
 		WHERE
 			`id` = #{movieId}
 	</select>
+	
+	<!-- 현재 로그인 된 유저가 리뷰를 남긴 영화들 영화 제목 가져오기 - db에서 select / 0827 -->
+	<select id="selectMovieNameByMovieId" resultType="String">
+		SELECT 
+			`movieName`
+		FROM
+			`movie`
+		WHERE
+			`id` = #{movieId}
+	</select>
 </mapper>

@@ -21,4 +21,7 @@ public interface MovieMapper {
 	
 	// list에서 뽑아온 movieId로 영화 정보 가져오기 - db에서 select / 0826
 	public Movie selectMovieInfoByMovieId(int movieId);
+	
+	// 현재 로그인 된 유저가 리뷰를 남긴 영화들 영화 제목들 가져오기 - db에서 select / 0827
+	public List<String> selectMovieNameByMovieId(int movieId);
 }

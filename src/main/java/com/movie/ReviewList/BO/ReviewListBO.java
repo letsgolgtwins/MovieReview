@@ -73,9 +73,15 @@ public class ReviewListBO {
 			// 리뷰 내용들 세팅
 			reviewCardByUser.setReview(review);
 			
-			// 영화 제목 가져오기
+			// 영화 제목들 가져오기
+			List<String> movieNameList = movieBO.getMovieNameByMovieId(review.getMovieId());
+			// 영화 제목 세팅
+			reviewCardByUser.setMovieName(movieNameList);
 			
+			// 저장
+			reviewLists.add(reviewCardByUser);
 		}
+		return reviewLists;
 	}
 	
 }

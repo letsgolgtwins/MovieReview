@@ -2,9 +2,27 @@
 <html 
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/defaultLayout}">
+      layout:decorate="~{layout/defaultLayoutForPage}">
 <section layout:fragment="content" class="contents d-flex justify-content-center">
-
+	<!-- [[${reviewCard2}]]  -->
+	<div class="justify-content-center">
+		<article class="article d-flex flex-wrap justify-content-center">
+			<div class="pt-5 pr-3 pl-3" th:each="reviewCard2 : ${reviewCard2}">
+				<div class="reviewBox">
+				
+					<!-- 영화 제목 -->
+					<h3 class="pt-4 ml-4 font-weight-bold" th:text="${reviewCard2.movieName}"></h3>
+					
+					<!-- 중간 선 -->
+					<hr>
+					
+					<!-- 리뷰 내용 -->
+					<h4 class="reviewText text-secondary ml-4 mr-4" th:text="${reviewCard2.review.review}"></h4>
+					
+				</div>
+			</div>
+		</article>
+	
 </section>
 
 <th:block layout:fragment="script">
