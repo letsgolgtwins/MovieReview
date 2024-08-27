@@ -130,9 +130,18 @@
 	</select>
 	
 	<!-- 현재 로그인 된 유저가 별점을 매긴 영화의 고유idovieId) 목록 - db에서 list select / 0826 -->
-	<select id="selectMovieIdByUserOriginId" resultType="list">
+	<select id="selectMovieIdListByUserOriginId" resultType="Integer">
 		SELECT 
 			`movieId` 
+		FROM
+			`star`
+		WHERE
+			`userId` = #{userOriginId}
+	</select>
+	
+	<!-- 현재 로그인 되어있는 유저가 별점을 매긴 영화의 총 개수 가져오기 - db에서 count select / 0827 -->
+	<select id="selectTotalStarCountByUserOriginId" resultType="int">
+		SELECT COUNT(*)
 		FROM
 			`star`
 		WHERE

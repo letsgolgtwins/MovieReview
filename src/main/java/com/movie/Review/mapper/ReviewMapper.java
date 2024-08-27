@@ -39,4 +39,10 @@ public interface ReviewMapper {
 	
 	// total 리뷰 개수 - db에서 count select // footer에 총 리뷰개수 나타내기 위해
 	public int selectTotalReviewCount();
+	
+	// 현재 로그인 되어있는 유저가 리뷰를 남긴 영화의 총 개수 가져오기 - db에서 count select / 0827
+	public int selectTotalReviewCountByUserOriginId(int userOriginId);
+	
+	// 현재 로그인 되어있는 유저가 남긴 리뷰 정보들 가져오기 - db에서 select / 0827
+	public List<Review> selectReviewInfoByUserOriginId(int userOriginId);
 }

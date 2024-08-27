@@ -23,13 +23,13 @@
 					<div class="starByUser col-6">
 						<h4 class="font-weight-bold d-flex justify-content-center">내가 남긴 평가</h4>
 						<a href="/movie/my-movie-view">
-							<h3 class="font-weight-bold text-dark d-flex justify-content-center">12</h3>
+							<h3 th:text="${totalStarCount}" class="font-weight-bold text-dark d-flex justify-content-center">12</h3>
 						</a>
 					</div>
 					<div class="commentByUser col-6">
 						<h4 class="font-weight-bold d-flex justify-content-center">내가 남긴 코멘트</h4>
 						<a href="/review/my-review-view">
-							<h3 class="font-weight-bold text-dark d-flex justify-content-center">34</h3>
+							<h3 th:text="${totalReviewCountByUserOriginId}" class="font-weight-bold text-dark d-flex justify-content-center">34</h3>
 						</a>
 					</div>
 				</div>

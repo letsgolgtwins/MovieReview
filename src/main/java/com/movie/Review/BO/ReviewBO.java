@@ -43,4 +43,15 @@ public class ReviewBO {
 	public int getTotalReviewCount() {
 		return reviewMapper.selectTotalReviewCount();
 	}
+	
+	// 현재 로그인 되어있는 유저가 리뷰를 남긴 영화의 총 개수 가져오기 - db에서 count select / 0827
+	public int getTotalReviewCountByUserOriginId(int userOriginId) {
+		return reviewMapper.selectTotalReviewCountByUserOriginId(userOriginId);
+	}
+	
+	// 현재 로그인 되어있는 유저가 남긴 리뷰 정보들 가져오기 - db에서 select / 0827
+	public List<Review> getReviewInfoByUserOriginId(int userOriginId) {
+		return reviewMapper.selectReviewInfoByUserOriginId(userOriginId);
+	}
+
 }

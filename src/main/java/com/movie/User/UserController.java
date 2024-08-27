@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.movie.Review.BO.ReviewBO;
 import com.movie.star.BO.StarBO;
 
 import jakarta.servlet.http.HttpSession;
@@ -40,17 +41,29 @@ public class UserController {
 	// 마이페이지로 이동 (0821)
 	@Autowired
 	private StarBO starBO;
+	
+	@Autowired
+	private ReviewBO reviewBO;
+	
 	// http://localhost/user/mypage-view
 	@GetMapping("/mypage-view")
 	public String MyPage(Model model, HttpSession session) {
 		// userOriginId 가져오기
 		Integer userOriginId = (Integer) session.getAttribute("userOriginId");
 		
-		// 현재 로그인 되어있는 유저의 전체 별점 평균 가져오기
+		// 현재 로그인 되어있는 유저의 전체 별점 평균 가져오기 / 0826
 		Double avgPoint = (double) starBO.getAvgPointByUser(userOriginId);
+		 
+		// 현재 로그인 되어있는 유저가 별점을 매긴 영화의 총 개수 가져오기 / 0827
+		int totalStarCount = starBO.getTotalStarCountByUserOriginId(userOriginId);
+		
+		// 현재 로그인 되어있는 유저가 리뷰를 남긴 영화의 총 개수 가져오기
+		int totalReviewCountByUserOriginId = reviewBO.getTotalReviewCountByUserOriginId(userOriginId);
 		
 		// model에 담기
-		model.addAttribute("avgPoint", avgPoint);
+		model.addAttribute("avgPoint", avgPoint); // 0826
+		model.addAttribute("totalStarCount", totalStarCount); // 0827
+		model.addAttribute("totalReviewCountByUserOriginId", totalReviewCountByUserOriginId); // 0827
 		
 		// view 화면
 		return "user/MyPage";

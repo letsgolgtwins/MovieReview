@@ -4,7 +4,38 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/defaultLayoutForSign}">
 <section layout:fragment="content" class="contents d-flex justify-content-center">
+	<div class="left col-4"></div>
+	
+	<div class="center col-4 mt-5 mb-5">
+		<div class="signUpBox">
+			<form action="/user/sign-up" method="post">
+				<!-- 회원가입 -->
+				<h1 class="d-flex justify-content-center text-white font-weight-bold mt-5">회원가입</h1>
+				<!-- 아이디 입력칸 그리고 중복확인 버튼 -->
+				<div class="d-flex">
+					<input type="text" name="userId" id="userId" class="form-control mt-4 col-9" placeholder="아이디">
+					<input type="submit" id="duplicateCheckBtn" class="form-control btn btn-success mt-4 col-3" value="중복확인">
+				</div>
+				<!-- 숨겨진 텍스트 공간 -->
+				<span id="ableToUse" class="text-white font-weight-bold d-none mt-1">사용 가능한 아이디입니다.</span>
+				<span id="NotAbleToUse" class="text-white font-weight-bold d-none mt-1">중복된 아이디입니다.</span>
 
+				<!-- 비밀번호, 이름, 닉네임 -->
+				<input type="password" name="userPassword" id="userPassword" class="form-control mt-4" placeholder="비밀번호">
+				<input type="text" name="userName" id="userName" class="form-control mt-4" placeholder="이름">
+				<input type="text" name="userNickName" id="userNickName" class="form-control mt-4" placeholder="닉네임">
+				<!-- 회원가입 버튼 submit -->
+				<input type="submit" id="signUpBtn" class="form-control btn btn-warning mt-4" value="회원가입">
+			</form>
+			<div class="d-flex justify-content-between mt-4">
+				<a class="text-white" href="/user/sign-in-view">로그인 페이지</a>
+				<div class="text-white font-weight-bold">|</div>
+				<a class="text-white" href="/movie/movie-list-view">비회원으로 둘러보기</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="right col-4"></div>
 </section>
 
 <th:block layout:fragment="script">

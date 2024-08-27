@@ -1,5 +1,6 @@
 package com.movie.movie.BO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,18 @@ public class MovieBO {
 	}
 	
 	// list에서 뽑아온 movieId로 영화 정보 가져오기 - db에서 select / 0826
-	public Movie getMovieInfoByMovieId(int movieId) {
-		return movieMapper.selectMovieInfoByMovieId(movieId);
+	public List<Movie> getMovieInfoByMovieId(List<Integer> movieIdList) {
+		
+		List<Movie> movieInfoList = new ArrayList<>(); // 리스트 만들기
+		
+		for (Integer movieId : movieIdList) { // movieIdList를 반복문 돌려서 movieId를 하나씩 꺼내옴.
+			Movie movieInfo = movieMapper.selectMovieInfoByMovieId(movieId); // 꺼내온 movieId로 movie의 정보들 가져와서 movieInfo에다 저장
+			if (movieInfo != null) {
+				movieInfoList.add(movieInfo);
+			}
+		}
+		
+		return movieInfoList;
 	}
 	
 }

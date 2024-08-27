@@ -76,4 +76,29 @@
 		FROM
 			`review`
 	</select>
+	
+	<!-- 현재 로그인 되어있는 유저가 리뷰를 남긴 영화의 총 개수 가져오기 - db에서 count select / 0827 -->
+	<select id="selectTotalReviewCountByUserOriginId" resultType="int">
+		SELECT COUNT(*)
+		FROM
+			`review`
+		WHERE
+			`userId` = #{userOriginId}
+	</select>
+	
+	<!-- 현재 로그인 되어있는 유저가 남긴 리뷰 정보들 가져오기 - db에서 select / 0827 -->
+	<select id="selectReviewInfoByUserOriginId" resultType="com.movie.Review.domain.Review">
+		SELECT 
+			`id`
+			,`userId`
+			,`movieId`
+			,`userNickName`
+			,`review`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`review`
+		WHERE
+			`userId` = #{userOriginId}
+	</select>
 </mapper>

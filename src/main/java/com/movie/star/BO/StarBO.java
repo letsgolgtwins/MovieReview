@@ -83,7 +83,12 @@ public class StarBO {
 	}
 	
 	// 현재 로그인 된 유저가 별점을 매긴 영화의 고유idovieId) 목록 - db에서 list select / 0826
-	public List<Integer> getMovieIdByUserOriginId(int userOriginId) {
-		return starMapper.selectMovieIdByUserOriginId(userOriginId);
+	public List<Integer> getMovieIdListByUserOriginId(int userOriginId) {
+		return starMapper.selectMovieIdListByUserOriginId(userOriginId);
+	}
+	
+	// 현재 로그인 되어있는 유저가 별점을 매긴 영화의 총 개수 가져오기 - db에서 count select / 내가 남긴 평가 12 이걸 위해서 / 0827
+	public int getTotalStarCountByUserOriginId(int userOriginId) {
+		return starMapper.selectTotalStarCountByUserOriginId(userOriginId);
 	}
 }

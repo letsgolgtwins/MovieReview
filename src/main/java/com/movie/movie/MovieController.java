@@ -42,11 +42,11 @@ public class MovieController {
 	public String MoviewListView(Model model, HttpSession session) {
 		
 		// 로그인 여부 확인
-		Integer userOriginId = (Integer) session.getAttribute("userOriginId");
-		if (userOriginId == null) { // 비로그인 상태
-			// 로그인 페이지로 이동
-			return "redirect:/user/sign-in-view";
-		}
+//		Integer userOriginId = (Integer) session.getAttribute("userOriginId");
+//		if (userOriginId == null) { // 비로그인 상태
+//			// 로그인 페이지로 이동
+//			return "redirect:/user/sign-in-view";
+//		}
 		
 		// 영화 정보들 가져오기
 		List<Movie> movie = movieBO.getMovieInfo(); // 여기까지 0802 수업떄 만든 내용
@@ -108,19 +108,14 @@ public class MovieController {
 		// session에서 userOriginId 가져오기
 		int userOriginId = (int) session.getAttribute("userOriginId");
 
-		// 현재 로그인된 유저가 별점을 매긴 영화의 고유 id(movieId)를 starBO로 부터 가져오기
-		List<Integer> movieIdList = starBO.getMovieIdByUserOriginId(userOriginId);
+		// 현재 로그인된 유저가 별점을 매긴 영화의 고유 id(movieId) 목록들을 starBO로 부터 가져오기
+		List<Integer> movieIdList = starBO.getMovieIdListByUserOriginId(userOriginId);
 		
-		// 위의 movieIdList를 반복문을 돌려서 movieId를 뽑아낸 다음 movieBO 매소드의 파라미터로 보낸다.
-		for (Integer movieIds : movieIdList) {
-			List<Integer> movieId = new ArrayList<>();
-			movieId.add(movieIds);
-		} 
-		
-		Movie movieInfo = movieBO.getMovieInfoByMovieId(movieId);
+		// movie테이블에서 movie정보들 가져오기
+		List<Movie> movieInfoList = movieBO.getMovieInfoByMovieId(movieIdList);
 		
 		// model에 담기
-		model.addAttribute("movieInfo", movieInfo);
+		model.addAttribute("movieInfos", movieInfoList);
 
 		// view화면으로 이동
 		return "movie/myMovie";
