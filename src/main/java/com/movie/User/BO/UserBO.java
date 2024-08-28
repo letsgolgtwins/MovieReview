@@ -27,8 +27,25 @@ public class UserBO {
 		return userMapper.selectUserByUserIdAndUserPassword(userId, userPassword);
 	}
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// 뉴 아이디 중복확인 - db에서 select
+	public int checkDuplicateNewUserId(String newUserId) {
+		return userMapper.selectDuplicateCount(newUserId);
+	}
+	
 	// 아이디 변경 - db에서 update / 0828
 	public int updateId(String newUserId, int userOriginId) {
 		return userMapper.updateId(newUserId, userOriginId);
+	}
+	
+	// 비밀번호 변경 - db에서 update / 0828
+	public int updatePassword(String hashedNewUserPassword, int userOriginId) {
+		return userMapper.updatePassword(hashedNewUserPassword, userOriginId);
+	}
+	
+	// 닉네임 변경 - db에서 update / 0828
+	public int updateNickName(String newUserNickName, int userOriginId) {
+		return userMapper.updateNickName(newUserNickName, userOriginId);
 	}
 }

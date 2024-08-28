@@ -45,4 +45,10 @@ public interface ReviewMapper {
 	
 	// 현재 로그인 되어있는 유저가 남긴 리뷰 정보들 가져오기 - db에서 select / 0827
 	public List<Review> selectReviewInfoByUserOriginId(int userOriginId);
+	
+	// 특정 영화의 리뷰 리스트 페이지에서 바뀐 닉네임이 안뜨는 관계로 review테이블에서도 newUserNickName으로 바꿔주는 작업 / 0828
+	public int updateNickName(
+			@Param("newUserNickName") String newUserNickName, 
+			@Param("userOriginId") int userOriginId
+			);
 }

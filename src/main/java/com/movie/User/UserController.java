@@ -53,7 +53,7 @@ public class UserController {
 		
 		// 현재 로그인 되어있는 유저의 전체 별점 평균 가져오기 / 0826
 		Double avgPoint = (double) starBO.getAvgPointByUser(userOriginId);
-		 
+		
 		// 현재 로그인 되어있는 유저가 별점을 매긴 영화의 총 개수 가져오기 / 0827
 		int totalStarCount = starBO.getTotalStarCountByUserOriginId(userOriginId);
 		

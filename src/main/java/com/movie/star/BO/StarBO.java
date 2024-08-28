@@ -79,7 +79,13 @@ public class StarBO {
 	
 	// 현재 로그인 된 유저가 매긴 전체 별점 평균 0826
 	public Integer getAvgPointByUser(int userOriginId) {
-		return starMapper.selectAvgPointByUser(userOriginId);
+		Integer AvgPoint = starMapper.selectAvgPointByUser(userOriginId);
+		if (AvgPoint == null) {
+			AvgPoint = 0;
+		} else {
+			AvgPoint = starMapper.selectAvgPointByUser(userOriginId);
+		}
+		return AvgPoint;
 	}
 	
 	// 현재 로그인 된 유저가 별점을 매긴 영화의 고유idovieId) 목록 - db에서 list select / 0826

@@ -13,7 +13,7 @@
 					<!-- 닉네임 -->
 					<h1 class="font-weight-bold ml-4 mt-3" th:text="${session.userNickName}">닉네임</h1>
 					<!-- 설정 -->
-					<a href="#" class="modify-Btn" th:if="${session.userOriginId != null}" th:data-review-user-id="${session.userOriginId}" data-toggle="modal" data-target="#modal">
+					<a href="#" class="modify-Btn" th:if="${session.userOriginId != null}" data-toggle="modal" data-target="#modal">
 						<img alt="설정modal" width="40" class="ml-3 mt-3" src="/image/setting-icon.png">
 					</a>
 				</div>

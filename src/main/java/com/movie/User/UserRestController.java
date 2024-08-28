@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.movie.Review.BO.ReviewBO;
 import com.movie.User.BO.UserBO;
 import com.movie.User.domain.User;
 import com.movie.common.EncryptUtils;
@@ -22,6 +23,9 @@ public class UserRestController {
 
 	@Autowired
 	private UserBO userBO;
+	
+	@Autowired
+	private ReviewBO reviewBO;
 	
 	// 아이디 중복확인 API
 	// http://localhost/user/id-duplicate-check
@@ -97,17 +101,39 @@ public class UserRestController {
 		return result;
 	}
 	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// 아이디 변경 중복확인 API
+	// /user/check-duplicate-new-id
+	@PostMapping("/check-duplicate-new-id")
+	public Map<String, Object> checkDuplicateNewId(
+			@RequestParam("newUserId") String newUserId) {
+		// 뉴아이디 중복확인 - db에서 select 
+		int duplicate = userBO.checkDuplicateNewUserId(newUserId);
+		
+		// 응답 JSON
+		Map<String, Object> result = new HashMap<>();
+		if (duplicate == 1) { // 중복이라는 소리
+			result.put("code", 500);
+			result.put("message", "중복입니다.");
+		} else { // 중복이 아니라는 소리
+			result.put("code", 200);
+			result.put("message", "중복이 아닙니다.");
+		}
+		return result;
+	}
+	
 	// 아이디 변경 API
 	// /user/id-update
 	@PostMapping("/id-update")
 	public Map<String, Object> IdUpdate(
-			@RequestParam("userId") String userId, HttpSession session) {
+			@RequestParam("newUserId") String newUserId, HttpSession session) {
 		
 		// 현재 로그인 되어있는 유저의 고유 pk id 가져오기 - userOriginId 
 		int userOriginId = (int) session.getAttribute("userOriginId");
 		
 		// 아이디 변경 - db에서 update
-		int updateId = userBO.updateId(userId, userOriginId);
+		int updateId = userBO.updateId(newUserId, userOriginId);
 		
 		// 응답 JSON
 		Map<String, Object> result = new HashMap<>();
@@ -117,6 +143,58 @@ public class UserRestController {
 		} else { // 에러
 			result.put("code", 500);
 			result.put("error_message", "아이디 변경 실패");
+		}
+		return result;
+	}
+	
+	// 비밀번호 변경 API
+	// /user/password-update
+	@PostMapping("/password-update")
+	public Map<String, Object> PasswordUpdate(
+			@RequestParam("newUserPassword") String newUserPassword, HttpSession session) {
+		
+		// session에서 userOriginId 꺼내오기
+		int userOriginId = (int) session.getAttribute("userOriginId");
+		
+		// 뉴 비밀번호 암호화하기
+		String hashedNewUserPassword = EncryptUtils.md5(newUserPassword);
+		
+		// 비밀번호 변경 - db에서 update
+		int updatePassword = userBO.updatePassword(hashedNewUserPassword, userOriginId);
+		
+		// 응답 JSON
+		Map<String, Object> result = new HashMap<>();
+		if (updatePassword == 1) { // 비밀번호 변경 성공
+			result.put("code", 200);
+			result.put("message", "비밀번호 변경 성공.");
+		} else {
+			result.put("code", 500);
+			result.put("error_message", "비밀번호 변경 실패");
+		}
+		return result;
+		
+	}
+	
+	// 닉네임 변경 API
+	// /user/nickName-update
+	@PostMapping("/nickName-update")
+	public Map<String, Object> NickNameUpdate(
+			@RequestParam("newUserNickName") String newUserNickName, HttpSession session) {
+		// 현재 로그인 되어있는 유저의 고유 id pk 추출
+		int userOriginId = (int) session.getAttribute("userOriginId");
+		
+		// 닉네임 변경 - user와 review에서 모두
+		int updateNickName = userBO.updateNickName(newUserNickName, userOriginId); // user에서 변경
+		reviewBO.updateNickName(newUserNickName, userOriginId); // review에서 변경
+	
+		// 응답 JSON
+		Map<String, Object> result = new HashMap<>();
+		if (updateNickName == 1) { // 닉네임 변경 성공
+			result.put("code", 200);
+			result.put("message", "닉네임 변경 성공.");
+		} else { // 닉네임 변경 실패
+			result.put("code", 500);
+			result.put("error_message", "닉네임 변경 실패.");
 		}
 		return result;
 	}

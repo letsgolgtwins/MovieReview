@@ -53,5 +53,10 @@ public class ReviewBO {
 	public List<Review> getReviewInfoByUserOriginId(int userOriginId) {
 		return reviewMapper.selectReviewInfoByUserOriginId(userOriginId);
 	}
+	
+	// 특정 영화의 리뷰 리스트 페이지에서 바뀐 닉네임이 안뜨는 관계로 review테이블에서도 newUserNickName으로 바꿔주는 작업 / 0828
+	public void updateNickName(String newUserNickName, int userOriginId) {
+		reviewMapper.updateNickName(newUserNickName, userOriginId);
+	}
 
 }
