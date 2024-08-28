@@ -24,4 +24,10 @@ public interface UserMapper {
 			@Param("userId") String userId, 
 			@Param("userPassword") String userPassword
 			);
+	
+	// 아이디 변경 - db에서 update / 0828
+	public int updateId(
+			@Param("newUserId") String newUserId, 
+			@Param("userOriginId") int userOriginId
+			);
 }

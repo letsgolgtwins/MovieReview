@@ -51,4 +51,14 @@
 		AND
 			`userPassword` = #{userPassword}
 	</select>
+	
+	<!-- 아이디 변경 - db에서 update / 0828 -->
+	<update id="updateId" parameterType="map">
+		UPDATE `user`
+		SET
+			`userId` = #{newUserId}
+			, `updatedAt` = NOW()
+		WHERE
+			`id` = #{userOriginId}
+	</update>
 </mapper>

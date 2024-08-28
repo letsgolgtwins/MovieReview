@@ -26,4 +26,9 @@ public class UserBO {
 	public User getUserByUserIdAndUserPassword(String userId, String userPassword) {
 		return userMapper.selectUserByUserIdAndUserPassword(userId, userPassword);
 	}
+	
+	// 아이디 변경 - db에서 update / 0828
+	public int updateId(String newUserId, int userOriginId) {
+		return userMapper.updateId(newUserId, userOriginId);
+	}
 }

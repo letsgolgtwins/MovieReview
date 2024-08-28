@@ -96,4 +96,29 @@ public class UserRestController {
 		}
 		return result;
 	}
+	
+	// 아이디 변경 API
+	// /user/id-update
+	@PostMapping("/id-update")
+	public Map<String, Object> IdUpdate(
+			@RequestParam("userId") String userId, HttpSession session) {
+		
+		// 현재 로그인 되어있는 유저의 고유 pk id 가져오기 - userOriginId 
+		int userOriginId = (int) session.getAttribute("userOriginId");
+		
+		// 아이디 변경 - db에서 update
+		int updateId = userBO.updateId(userId, userOriginId);
+		
+		// 응답 JSON
+		Map<String, Object> result = new HashMap<>();
+		if (updateId == 1) { // 아이디 변경 성공
+			result.put("code", 200);
+			result.put("message", "아이디 변경 성공");
+		} else { // 에러
+			result.put("code", 500);
+			result.put("error_message", "아이디 변경 실패");
+		}
+		return result;
+	}
+	
 }
