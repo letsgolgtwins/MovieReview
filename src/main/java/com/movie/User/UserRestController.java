@@ -142,7 +142,7 @@ public class UserRestController {
 		// 응답 JSON
 		Map<String, Object> result = new HashMap<>();
 		if (updateId == 1) { // 아이디 변경 성공
-			// 세션에 저장된 닉네임 정보 업데이트 (0829 오전 추가)
+			// 세션에 저장된 아이디 정보 업데이트 (0829 오전 추가)
 	        session.setAttribute("userId", newUserId);
 			
 			result.put("code", 200);
