@@ -72,4 +72,7 @@ public interface StarMapper {
 		
 	// 현재 로그인 되어있는 유저가 별점을 매긴 영화의 총 개수 가져오기 - db에서 count select / 내가 남긴 평가 12 이걸 위해서 / 0827
 	public int selectTotalStarCountByUserOriginId(int userOriginId);
+
+	// 회원 탈퇴 > 그 유저가 매긴 별점 모두 지우기 - db에서 delete / 0829
+	public int deleteAllStar(int userOriginId);
 }

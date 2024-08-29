@@ -97,4 +97,9 @@ public class StarBO {
 	public int getTotalStarCountByUserOriginId(int userOriginId) {
 		return starMapper.selectTotalStarCountByUserOriginId(userOriginId);
 	}
+	
+	// 회원 탈퇴 > 그 유저가 매긴 별점 모두 지우기 - db에서 delete / 0829
+	public int deleteAllStar(int userOriginId) {
+		return starMapper.deleteAllStar(userOriginId);
+	}
 }

@@ -90,4 +90,12 @@
 		WHERE
 			`id` = #{userOriginId}
 	</update>
+	
+	<!-- 회원 탈퇴하기 - db에서 delete / 0829 -->
+	<delete id="deleteUser" parameterType="int">
+		DELETE FROM 
+			`user`
+		WHERE
+			`id` = #{userOriginId}
+	</delete>
 </mapper>

@@ -147,4 +147,12 @@
 		WHERE
 			`userId` = #{userOriginId}
 	</select>
+	
+	<!-- 회원 탈퇴 > 그 유저가 매긴 별점 모두 지우기 - db에서 delete / 0829 -->
+	<delete id="deleteAllStar" parameterType="int">
+		DELETE FROM
+			`star`
+		WHERE
+			`userId` = #{userOriginId}
+	</delete>
 </mapper>

@@ -14,7 +14,7 @@
 				
 				<!-- 아이디 변경 -->
 				<h3 class="font-weight-bold text-white mt-4 ml-4">아이디 변경</h3> 
-				<input type="text" name="OriginUserId" id="OriginUserId" class="form-control mt-2 ml-4 col-5" placeholder="기존 아이디"> <!-- th:text="${session.userId}" 넣어줄 것 -->
+				<input type="text" name="OriginUserId" id="OriginUserId" class="form-control font-weight-bold mt-2 ml-4 col-5" th:value="${session.userId}" placeholder="기존 아이디"> <!-- th:value="${session.userId}" 넣어줄 것 -->
 				<form action="/user/id-update" method="post">
 					<div class="d-flex">
 						<input type="text" name="newUserId" id="newUserId" class="form-control mt-2 ml-4 col-5" placeholder="새로운 아이디">
@@ -41,7 +41,7 @@
 				
 				<!-- 닉네임 변경 -->
 				<h3 class="font-weight-bold text-white mt-5 ml-4">닉네임 변경</h3> 
-				<input type="text" name="OriginUserNickName" id="OriginUserNickName" class="form-control mt-2 ml-4 col-5" placeholder="기존 닉네임"> <!-- th:text="${session.userNickName}" 넣어줄 것 -->
+				<input type="text" name="OriginUserNickName" id="OriginUserNickName" class="form-control font-weight-bold mt-2 ml-4 col-5" th:value="${session.userNickName}" placeholder="기존 닉네임"> <!-- th:value="${session.userNickName}" 넣어줄 것 -->
 				<form action="/user/nickName-update" method="post">
 					<div class="d-flex">
 						<input type="text" name="newUserNickName" id="newUserNickName" class="form-control mt-2 ml-4 col-5" placeholder="새로운 닉네임">
@@ -219,10 +219,30 @@
 			}); // modifyUserNickNameBtn 닉네임 변경 버튼 클릭 이벤트 끝.
 			
 			// modal > deleteAll 탈퇴하기 메뉴 클릭 이벤트
-			$("#deleteAll").on('click', function() {
+			$("#deleteAll").on('click', function(e) {
+				e.preventDefault();
 				//alert("중간점검");
-				// 여기서부터 다시 하면 됨
 				
+				// validation 필요없음
+				
+				$.ajax({
+					// request
+					type: "post"
+					, url: "/user/withdraw"
+		
+					// response
+					, success:function(data) {
+						if (data.code == 200) { // 회원탈퇴 성공
+							alert("회원탈퇴가 되었습니다.");
+							location.href = "/user/sign-in-view"; // 로그인 페이지로 이동
+						} else if (data.code == 500) { // 회원탈퇴 실패
+							alert(data.error_message);
+						}
+					}
+					, error:function(error) {
+						alert("서버상의 에러입니다.");
+					}
+				}); // AJAX 끝.
 			}); // modal > deleteAll 탈퇴하기 메뉴 클릭 이벤트 끝.
 			
 		}); // ready 함수 끝.

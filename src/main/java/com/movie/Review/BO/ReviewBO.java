@@ -58,5 +58,10 @@ public class ReviewBO {
 	public void updateNickName(String newUserNickName, int userOriginId) {
 		reviewMapper.updateNickName(newUserNickName, userOriginId);
 	}
+	
+	// 회원 탈퇴 > 그 유저가 쓴 리뷰 모두 지우기 - db에서 delete / 0829
+	public int deleteAllByUserOriginId(int userOriginId) {
+		return reviewMapper.deleteAllByUserOriginId(userOriginId);
+	}
 
 }

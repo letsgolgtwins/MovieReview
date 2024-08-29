@@ -48,4 +48,9 @@ public class UserBO {
 	public int updateNickName(String newUserNickName, int userOriginId) {
 		return userMapper.updateNickName(newUserNickName, userOriginId);
 	}
+	
+	// 회원 탈퇴 - db에서 delete / 0829
+	public int deleteUser(int userOriginId) {
+		return userMapper.deleteUser(userOriginId);
+	}
 }

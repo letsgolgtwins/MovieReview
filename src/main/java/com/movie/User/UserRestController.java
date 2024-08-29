@@ -13,6 +13,7 @@ import com.movie.Review.BO.ReviewBO;
 import com.movie.User.BO.UserBO;
 import com.movie.User.domain.User;
 import com.movie.common.EncryptUtils;
+import com.movie.star.BO.StarBO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -26,6 +27,9 @@ public class UserRestController {
 	
 	@Autowired
 	private ReviewBO reviewBO;
+	
+	@Autowired
+	private StarBO starBO;
 	
 	// 아이디 중복확인 API
 	// http://localhost/user/id-duplicate-check
@@ -195,6 +199,30 @@ public class UserRestController {
 		} else { // 닉네임 변경 실패
 			result.put("code", 500);
 			result.put("error_message", "닉네임 변경 실패.");
+		}
+		return result;
+	}
+	
+	// 회원 탈퇴하기 API
+	// /user/withdraw
+	@PostMapping("/withdraw")
+	public Map<String, Object> Withdraw(HttpSession session) {
+		// session에서 userOriginId 가져오기
+		int userOriginId = (int) session.getAttribute("userOriginId");
+		
+		// 탈퇴하기 - user, review, star 에서 모두 지우기
+		int withdraw1 = userBO.deleteUser(userOriginId); // user 테이블에서 유저 정보 삭제
+		int withdraw2 = reviewBO.deleteAllByUserOriginId(userOriginId); // review 테이블에서 유저가 쓴 리뷰들 모두 삭제
+		int withdraw3 = starBO.deleteAllStar(userOriginId); // star 테이블에서 유저가 매긴 별점들 모두 삭제
+		
+		// 응답 JSON
+		Map<String, Object> result = new HashMap<>();
+		if (withdraw1 + withdraw2 + withdraw3 == 3) { // 회원 탈퇴 성공
+			result.put("code", 200);
+			result.put("message", "회원 탈퇴 성공.");
+		} else { // 회원 탈퇴 실패 혹은 불완전한 회원 탈퇴
+			result.put("code", 500);
+			result.put("error_message", "회원 탈퇴 실패.");
 		}
 		return result;
 	}

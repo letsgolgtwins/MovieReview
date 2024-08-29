@@ -47,4 +47,7 @@ public interface UserMapper {
 			@Param("newUserNickName") String newUserNickName, 
 			@Param("userOriginId") int userOriginId
 			);
+	
+	// 회원 탈퇴 - db에서 delete / 0829
+	public int deleteUser(int userOriginId);
 }
