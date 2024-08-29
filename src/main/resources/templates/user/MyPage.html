@@ -9,15 +9,19 @@
 		
 		<div class="d-flex justify-content-center">
 			<div id="profileBox">
+				<!-- 닉네임과 설정 modal -->
 				<div class="d-flex row-4">
 					<!-- 닉네임 -->
-					<h1 class="font-weight-bold ml-4 mt-3" th:text="${session.userNickName}">닉네임</h1>
+					<h2 class="font-weight-bold ml-4 mt-3" th:text="${session.userNickName}">닉네임</h2>
 					<!-- 설정 -->
 					<a href="#" class="modify-Btn" th:if="${session.userOriginId != null}" data-toggle="modal" data-target="#modal">
 						<img alt="설정modal" width="40" class="ml-3 mt-3" src="/image/setting-icon.png">
 					</a>
 				</div>
-				<h3 class="font-weight-bold ml-4 mt-4" th:text="${session.userId}">계정(이메일)</h3>
+				<!-- 이름 -->
+				<h3 class="font-weight-bold ml-4 mt-2" th:text=${session.userName}></h3>
+				<!-- 아이디(이메일 계정) -->
+				<h3 class="font-weight-bold ml-4 mt-2" th:text="${session.userId}">계정(이메일)</h3>
 				<hr>
 				<div class="d-flex pt-3">
 					<div class="starByUser col-6">

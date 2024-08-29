@@ -73,7 +73,7 @@ public class MovieController {
 		
 		// 0809 오후 추가 - 영화별 평점 가져오기
 		Double AvgPoint = (Double) starBO.getPointByMovieId(movieId);
-		
+
 		// 0812 오후 추가 - 영화별 몇명이나 별점 매겼나 가져오기
 		Integer starCount = (Integer) starBO.getCountByMovieId(movieId);
 		
@@ -84,6 +84,9 @@ public class MovieController {
 			AvgPoint = starBO.getPointByMovieId(movieId);
 		}
 		
+		// 0829 오후 추가 - 영화별 평점인데 소수점 둘째자리에서 반올림한 결과로 나타내기
+		Double roundedAvgPoint = (double) Math.round(AvgPoint * 10) / 10; 
+
 		// 0812 오후 추가 - 별점을 몇 명이나 매겼나
 		if (starCount == null) {
 			starCount = 0;
@@ -94,7 +97,8 @@ public class MovieController {
 		// model에 담기
 		model.addAttribute("movieInfo", movie);
 		model.addAttribute("starInfo", star); // 0809 오전 추가
-		model.addAttribute("pointAvg", AvgPoint); // 0809 오후 추가
+		//model.addAttribute("pointAvg", AvgPoint); // 0809 오후 추가
+		model.addAttribute("pointAvg", roundedAvgPoint); // 0829 오후 추가 > 이걸로 변경 (3.2777점 보단 3.3 점이 나으니까)
 		model.addAttribute("starCount", starCount); // 0812 오후 추가
 		
 		// 상세 페이지로 이동

@@ -39,6 +39,11 @@ public class UserBO {
 		return userMapper.updateId(newUserId, userOriginId);
 	}
 	
+	// 기존 비밀번호가 일치하는가 - db에서 select / 0829 추가
+	public int correctCheckUserPassword(String hashedOriginPassword, int userOriginId) {
+		return userMapper.correctCheckUserPassword(hashedOriginPassword, userOriginId);
+	}
+	
 	// 비밀번호 변경 - db에서 update / 0828
 	public int updatePassword(String hashedNewUserPassword, int userOriginId) {
 		return userMapper.updatePassword(hashedNewUserPassword, userOriginId);

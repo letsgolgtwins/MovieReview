@@ -36,6 +36,12 @@ public interface UserMapper {
 			@Param("userOriginId") int userOriginId
 			);
 	
+	// 기존 비밀번호가 일치하는가 - db에서 select / 0829 추가
+	public int correctCheckUserPassword(
+			@Param("hashedOriginPassword") String userPhashedOriginPasswordassword,
+			@Param("userOriginId") int userOriginId
+			);
+	
 	// 비밀번호 변경 - db에서 update / 0828
 	public int updatePassword(
 			@Param("hashedNewUserPassword") String hashedNewUserPassword, 

@@ -29,8 +29,8 @@
 
 				<!-- 비밀번호 변경 -->
 				<h3 class="font-weight-bold text-white mt-5 ml-4">비밀번호 변경</h3>
-				<input type="password" name="originPassword" id="originPassword" class="form-control mt-2 ml-4 col-5" placeholder="기존 비밀번호">
 				<form action="/user/password-update" method="post">
+				<input type="password" name="originPassword" id="originPassword" class="form-control mt-2 ml-4 col-5" placeholder="기존 비밀번호">
 					<div class="d-flex">
 						<input type="password" name="newUserPassword" id="newUserPassword" class="form-control mt-2 ml-4 col-5" placeholder="새로운 비밀번호">
 						<input type="password" name="newPasswordCheck" id="newPasswordCheck" class="form-control mt-2 ml-3 col-5" placeholder="새로운 비밀번호 확인">
@@ -165,13 +165,14 @@
 				
 				// validation
 				let newUserPassword = $("#newUserPassword").val().trim();
+				let originPassword = $("#originPassword").val().trim(); // 0829 추가				
 				//alert(newUserPassword);
-				
+						
 				$.ajax({
 					// request
 					type: "post"
 					, url: "/user/password-update"
-					, data: {"newUserPassword":newUserPassword}
+					, data: {"newUserPassword":newUserPassword, "originPassword":originPassword} // originPassword는 0829에 추가
 				
 					// response
 					, success:function(data) {
