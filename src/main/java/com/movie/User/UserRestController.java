@@ -158,7 +158,10 @@ public class UserRestController {
 	// /user/password-update
 	@PostMapping("/password-update")
 	public Map<String, Object> PasswordUpdate(
-			@RequestParam("newUserPassword") String newUserPassword, HttpSession session, @RequestParam("originPassword") String originPassword) {
+			@RequestParam("newUserPassword") String newUserPassword, 
+			HttpSession session, 
+			@RequestParam("originPassword") String originPassword,
+			@RequestParam("newPasswordCheck") String newPasswordCheck) {
 		
 		// session에서 userOriginId 꺼내오기
 		int userOriginId = (int) session.getAttribute("userOriginId");
@@ -176,7 +179,7 @@ public class UserRestController {
 		// int updatePassword = userBO.updatePassword(hashedNewUserPassword, userOriginId);
 		int updatePassword = 0;
 		
-		// 기존 비밀번호 일치 결과에 따라 변경 or 안됨
+		// 기존 비밀번호 일치 결과와 새로 입력한 비밀번호 확인 여부에 따라 변경 or 안됨
 		if (correctCheck == 1) { // 기존 비밀번호와 일치 / 0829 추가
 			updatePassword = userBO.updatePassword(hashedNewUserPassword, userOriginId); // 비밀번호 변경 - db에서 update
 		} else { // 기존 비밀번호 불일치 / 0829 추가

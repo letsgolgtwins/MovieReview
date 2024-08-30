@@ -166,13 +166,14 @@
 				// validation
 				let newUserPassword = $("#newUserPassword").val().trim();
 				let originPassword = $("#originPassword").val().trim(); // 0829 추가				
+				let newPasswordCheck = $("#newPasswordCheck").val().trim(); // 0830 추가
 				//alert(newUserPassword);
 						
 				$.ajax({
-					// request
+					// request 
 					type: "post"
 					, url: "/user/password-update"
-					, data: {"newUserPassword":newUserPassword, "originPassword":originPassword} // originPassword는 0829에 추가
+					, data: {"newUserPassword":newUserPassword, "originPassword":originPassword, "newPasswordCheck":newPasswordCheck} // originPassword는 0829에 추가, newPasswordCheck는 0830 추가
 				
 					// response
 					, success:function(data) {
