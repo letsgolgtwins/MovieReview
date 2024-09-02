@@ -249,10 +249,16 @@ public class UserRestController {
 		
 		// 응답 JSON
 		Map<String, Object> result = new HashMap<>();
-		if (withdraw1 + withdraw2 + withdraw3 == 3) { // 회원 탈퇴 성공
+
+		// 근데 유저가 작성한 리뷰나 매긴 별점이 없을 수도 있다는 걸 간과했다. / 0902
+		if (withdraw1 == 1) { // user 테이블에서 user정보 삭제 성공
+			reviewBO.deleteAllByUserOriginId(userOriginId); // review 테이블에서 유저가 쓴 리뷰들 모두 삭제
+			starBO.deleteAllStar(userOriginId); // star 테이블에서 유저가 매긴 별점들 모두 삭제
+			// 탈퇴 성공 응답 JSON 값 할당
 			result.put("code", 200);
 			result.put("message", "회원 탈퇴 성공.");
-		} else { // 회원 탈퇴 실패 혹은 불완전한 회원 탈퇴
+		} else {
+			// 탈퇴 실패 응답 JSON 값 할당
 			result.put("code", 500);
 			result.put("error_message", "회원 탈퇴 실패.");
 		}
