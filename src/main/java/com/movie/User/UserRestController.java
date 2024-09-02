@@ -175,19 +175,21 @@ public class UserRestController {
 		// 응답 JSON
 		Map<String, Object> result = new HashMap<>();
 
-		// 기존 비밀번호 불일치시 
+		// 조건1) 기존 비밀번호 불일치시 
 		if (correctCheck != 1) {
 			result.put("code", 500);
 		    result.put("error_message", "기존 비밀번호가 일치하지 않습니다.");
 		    return result;
 		}
 		
-		// 새 비번1과 새 비번2가 불일치시
+		// 조건2) 새 비번1과 새 비번2가 불일치시
 		if (!newUserPassword.equals(newPasswordCheck)) { 
 	        result.put("code", 500);
 	        result.put("error_message", "새 비밀번호가 일치하지 않습니다.");
 	        return result;
 	    }
+		
+		// 위의 두 조건을 통과했다는 건 모두 만족한다는 소리이므로 이제 비밀번호 변경 수행
 		
 		// 뉴 비밀번호 암호화하기
 		String hashedNewUserPassword = EncryptUtils.md5(newUserPassword);
