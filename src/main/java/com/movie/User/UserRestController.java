@@ -172,22 +172,29 @@ public class UserRestController {
 		// 내가 뷰 화면에서 입력한 기존 비밀번호가 정말 기존 비밀번호와 일치하는가 / 0829 추가
 		int correctCheck = userBO.correctCheckUserPassword(hashedOriginPassword, userOriginId);
 
+		// 응답 JSON
+		Map<String, Object> result = new HashMap<>();
+
+		// 기존 비밀번호 불일치시 
+		if (correctCheck != 1) {
+			result.put("code", 500);
+		    result.put("error_message", "기존 비밀번호가 일치하지 않습니다.");
+		    return result;
+		}
+		
+		// 새 비번1과 새 비번2가 불일치시
+		if (!newUserPassword.equals(newPasswordCheck)) { 
+	        result.put("code", 500);
+	        result.put("error_message", "새 비밀번호가 일치하지 않습니다.");
+	        return result;
+	    }
+		
 		// 뉴 비밀번호 암호화하기
 		String hashedNewUserPassword = EncryptUtils.md5(newUserPassword);
 		
 		// 비밀번호 변경 - db에서 update
-		// int updatePassword = userBO.updatePassword(hashedNewUserPassword, userOriginId);
-		int updatePassword = 0;
-		
-		// 기존 비밀번호 일치 결과와 새로 입력한 비밀번호 확인 여부에 따라 변경 or 안됨
-		if (correctCheck == 1) { // 기존 비밀번호와 일치 / 0829 추가
-			updatePassword = userBO.updatePassword(hashedNewUserPassword, userOriginId); // 비밀번호 변경 - db에서 update
-		} else { // 기존 비밀번호 불일치 / 0829 추가
-			updatePassword = 0; // 기존 비밀번호 불일치 관계로 비밀번호 변경 불가 / 0829 추가
-		}
-		
-		// 응답 JSON
-		Map<String, Object> result = new HashMap<>();
+		int updatePassword = userBO.updatePassword(hashedNewUserPassword, userOriginId);
+
 		if (updatePassword == 1) { // 비밀번호 변경 성공
 			result.put("code", 200);
 			result.put("message", "비밀번호 변경 성공.");
